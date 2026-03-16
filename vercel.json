@@ -9,10 +9,5 @@
       "source": "/dashboard(.*)",
       "destination": "/backend/server.js"
     }
-  ],
-  "functions": {
-    "backend/server.js": {
-      "runtime": "@vercel/node"
-    }
-  }
+  ]
 }
