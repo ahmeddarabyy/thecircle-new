@@ -241,9 +241,30 @@
                 <a href="gallery.html">المعرض</a>
                 <a href="insights.html">المدونة</a>
             </div>
-            <div class="nav-actions"><a href="../blog-dedicated-desks-focus.html" class="lang-toggle" style="margin-left: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">English</a> <a href="book-a-space.html" class="btn btn-nav-cta">احجز مساحتك</a></div>
+            <div class="nav-actions" class="desktop-only"><a href="../blog-dedicated-desks-focus.html" class="lang-toggle" style="margin-left: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">English</a> <a href="schedule-a-tour.html" class="btn btn-nav-cta">حدد موعد للزيارة</a></div>
+        
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay (Arabic) -->
+    <div id="mobile-nav" class="mobile-nav-overlay" dir="rtl">
+        <div class="mobile-nav-links">
+            <a href="about.html">من نحن</a>
+            <a href="locations.html">مواقعنا</a>
+            <a href="services.html">خدماتنا</a>
+            <a href="gallery.html">الصور</a>
+            <a href="insights.html">المقالات</a>
+            <div style="margin-top: 24px;"></div>
+            <a href="../index.html" style="color: #00674F;">English</a>
+            <a href="schedule-a-tour.html" class="btn btn-primary" style="font-size: 1rem; padding: 12px 32px; margin-top: 16px;">حدد موعد للزيارة</a>
+        </div>
+    </div>
+
     <main>
         <section class="article-hero">
             <div class="container">

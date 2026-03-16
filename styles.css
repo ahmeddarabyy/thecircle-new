@@ -18,8 +18,8 @@
     
     /* Spacing & Layout */
     --max-width: 1440px;
-    --max-width-narrow: 980px;
-    --padding-x: 5%;
+    --max-width-narrow: 1240px;
+    --padding-x: 40px;
     
     /* Aesthetics */
     --radius-lg: 20px;
@@ -280,7 +280,7 @@ h1, h2, h3, h4 {
     border-radius: 980px;
     box-shadow: 0 12px 48px rgba(0,0,0,0.06);
     z-index: 9999;
-    transition: var(--transition-base);
+    transition: transform 0.4s cubic-bezier(0.25, 0.1, 0.25, 1), background-color 0.4s ease;
 }
 
 .nav-container {
@@ -1550,4 +1550,274 @@ cite {
 
 .faq-item.active .faq-question {
     color: #00674F;
+}
+
+/* =========================================================================
+   MOBILE & TABLET OPTIMIZATIONS
+   ========================================================================= */
+
+/* Hamburger Menu Base Styles */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 10000;
+}
+
+.mobile-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--color-dark-grey);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.98);
+    z-index: 9998;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+}
+
+.mobile-nav-links a {
+    font-size: 1.5rem;
+    color: var(--color-dark-grey);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+/* Hamburger animation */
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 767px) {
+    .mobile-menu-btn {
+        display: block;
+    }
+    .nav-actions {
+        display: none !important; /* Hide desktop CTA */
+    }
+    
+    /* Layout Overhauls for Mobile */
+    section {
+        padding: 60px 0 !important;
+    }
+    
+    .hero-overlay {
+        padding-top: 15vh !important;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+        margin-bottom: 20px !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem !important;
+        margin-bottom: 30px !important;
+    }
+
+    .hero-ctas {
+        flex-direction: column;
+        width: 100%;
+        gap: 16px !important;
+    }
+    
+    .hero-ctas .btn {
+        width: 100%;
+    }
+    
+    .container, .container-narrow {
+        padding: 0 20px !important;
+    }
+    
+    .trust-header {
+        padding-top: 40px !important;
+    }
+    
+    .tracklight-container {
+        display: none !important; /* Tracklight effect usually breaks on narrow aspect ratios */
+    }
+    
+    .trust-seo-split {
+        grid-template-columns: 1fr !important;
+        gap: 32px !important;
+        padding: 0 !important;
+        margin-top: 40px !important;
+    }
+    
+    .trust-seo-split h3 {
+        font-size: 1.8rem !important;
+    }
+    
+    .location-cards {
+        gap: 32px !important;
+    }
+    
+    .card-image {
+        height: 250px !important;
+        width: 100% !important;
+        border-radius: 20px !important;
+        margin: 0 !important;
+    }
+    
+    .card-content {
+        padding: 32px 20px !important;
+    }
+    
+    .editorial-grid {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+        margin: 60px auto !important;
+    }
+    
+    .story-title {
+        font-size: clamp(2.5rem, 8vw, 4rem) !important;
+    }
+    
+    .story-lead-text {
+        font-size: 1.5rem !important;
+        margin-bottom: 32px !important;
+    }
+    
+    .story-hero-content {
+        padding: 0 20px !important;
+    }
+    
+    .services-grid {
+        gap: 16px !important;
+    }
+    
+    .service-img-wrapper {
+        height: 160px !important;
+        width: 100% !important;
+        margin: 0 !important;
+        border-radius: 16px !important;
+    }
+    
+    .service-info {
+        padding: 24px 16px !important;
+    }
+    
+    .gallery-grid .gallery-item {
+        grid-column: span 12 !important;
+        height: 40vh !important;
+    }
+
+    .faq-hero {
+        padding: 120px 0 60px !important;
+    }
+
+    .faq-container {
+        margin: 40px auto 60px !important;
+    }
+    
+    .footer-main-container {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+    
+    .service-detail-hero {
+        padding-top: 120px !important;
+        min-height: auto !important;
+    }
+    
+    .service-split-title {
+        font-size: clamp(2.5rem, 8vw, 3rem) !important;
+    }
+}
+
+/* Tablet Optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .nav-actions .btn-nav-cta {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .nav-links {
+        gap: 16px !important;
+    }
+    
+    .hero-title {
+        font-size: clamp(3rem, 5vw, 4.5rem) !important;
+    }
+    
+    .trust-seo-split {
+        grid-template-columns: 1fr !important;
+        gap: 40px !important;
+    }
+    
+    .location-cards {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .card-image {
+        height: 350px !important;
+    }
+    
+    .editorial-grid {
+        grid-template-columns: 1fr !important;
+        gap: 60px !important;
+    }
+    
+    .story-title {
+        font-size: clamp(3rem, 6vw, 5rem) !important;
+    }
+    
+    .footer-main-container {
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+
+/* Touch Device Fixes */
+@media (hover: none) and (pointer: coarse) {
+    .card:hover,
+    .service-card:hover,
+    .feature-item:hover,
+    .blog-card:hover {
+        transform: none !important;
+    }
+    
+    .card:hover::after,
+    .service-card:hover::after,
+    .blog-card:hover::after {
+        opacity: 0 !important;
+    }
+    
+    .card, .service-card, .blog-card {
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06); /* Enable a light permanent shadow for touch */
+    }
 }
