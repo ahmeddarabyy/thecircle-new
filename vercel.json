@@ -1,5 +1,22 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/pages/booking.html",
+      "destination": "/book-a-space.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/about.html",
+      "destination": "/about.html",
+      "permanent": true
+    },
+    {
+      "source": "/pages/faq.html",
+      "destination": "/faq.html",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/api/(.*)",
