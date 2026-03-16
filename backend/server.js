@@ -209,6 +209,55 @@ app.post('/api/admin/login', async (req, res) => {
   }
 });
 
+app.get('/api/admin/stats', requireAuth, async (req, res) => {
+  try {
+    const bookings = await supabaseRequest('website_bookings', 'GET');
+    const stats = {
+      total: bookings.length,
+      pending: bookings.filter(b => b.status === 'pending').length,
+      confirmed: bookings.filter(b => b.status === 'confirmed').length,
+      today: bookings.filter(b => b.date === new Date().toISOString().split('T')[0]).length
+    };
+    res.json(stats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/admin/bookings', requireAuth, async (req, res) => {
+  try {
+    const { status, branch, date } = req.query;
+    let query = '?order=created_at.desc';
+    if (status) query += `&status=eq.${status}`;
+    if (branch) query += `&branch=eq.${branch}`;
+    if (date) query += `&date=eq.${date}`;
+    const bookings = await supabaseRequest('website_bookings', 'GET', null, query);
+    res.json({ bookings });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.patch('/api/admin/bookings/:id', requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await supabaseRequest('website_bookings', 'PATCH', req.body, `?id=eq.${id}`);
+    res.json({ success: true, booking: result[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete('/api/admin/bookings/:id', requireAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    await supabaseRequest('website_bookings', 'DELETE', null, `?id=eq.${id}`);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get(/^\/dashboard/, (req, res) => res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
 
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
