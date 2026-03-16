@@ -270,7 +270,9 @@ async function syncToInternalSystem(bookingId) {
 }
 
 // ─── DB Setup ────────────────────────────────────────────────────────────────
-const db = new Database(path.join(__dirname, 'bookings.db'));
+console.log(`📂 Initializing database at: ${path.join(__dirname, 'bookings.db')}...`);
+const db = new Database(path.join(__dirname, 'bookings.db'), { verbose: console.log });
+console.log('✅ SQLite Database ready.');
 
 db.exec(`
   CREATE TABLE IF NOT EXISTS bookings (
@@ -319,6 +321,9 @@ if (!adminExists) {
 }
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
+app.get('/', (req, res) => res.send('The Circle API is running'));
+app.get('/api/health', (req, res) => res.json({ status: 'ok', database: 'open', time: new Date().toISOString() }));
+
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
