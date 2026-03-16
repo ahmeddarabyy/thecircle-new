@@ -473,3 +473,5 @@ app.listen(PORT, () => {
   console.log(`📊 Admin dashboard at http://localhost:${PORT}/dashboard`);
   console.log(`🔑 Login: admin / thecircle2026\n`);
 });
+
+module.exports = app;
