@@ -413,7 +413,19 @@ app.delete('/api/admin/bookings/:id', requireAuth, async (req, res) => {
   }
 });
 
-app.get(/^\/dashboard/, (req, res) => res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
+// ─── Admin Dashboard (Protected with Basic Auth) ───────────────────────────
+app.get(/^\/dashboard/, (req, res) => {
+  const auth = { login: 'admin', password: 'thecircle2026' };
+  const b64auth = (req.headers.authorization || '').split(' ')[1] || '';
+  const [login, password] = Buffer.from(b64auth, 'base64').toString().split(':');
+
+  if (login === auth.login && password === auth.password) {
+    return res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
+  }
+
+  res.set('WWW-Authenticate', 'Basic realm="The Circle Admin"');
+  res.status(401).send('Authentication required.');
+});
 
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, '0.0.0.0', () => {
