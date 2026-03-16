@@ -142,9 +142,43 @@
             position: relative;
             overflow: hidden;
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding-top: 25vh
+            padding-top: 120px
+        }
+
+        @media (max-width: 767px) {
+            .hero-overlay {
+                align-items: center;
+                padding-top: 80px;
+            }
+
+            .hero-title {
+                font-size: clamp(2.2rem, 8vw, 3.2rem);
+                margin-bottom: 16px;
+                line-height: 1.1;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+                margin-bottom: 28px;
+                max-width: 100%;
+            }
+
+            .hero-ctas {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .hero-ctas .btn {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .nav-actions {
+                display: none;
+            }
         }
 
         .hero-image-bg {

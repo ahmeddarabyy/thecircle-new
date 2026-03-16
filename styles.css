@@ -1632,44 +1632,53 @@ cite {
     }
     
     /* Layout Overhauls for Mobile */
-    section {
+    section:not(.hero-overlay) {
         padding: 60px 0 !important;
     }
     
+    /* Hero: center content vertically, push text below nav pill */
     .hero-overlay {
-        padding-top: 15vh !important;
+        align-items: center !important;
+        padding-top: 80px !important;
+        padding-bottom: 0 !important;
     }
 
     .hero-title {
-        font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
-        margin-bottom: 20px !important;
+        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
+        margin-bottom: 16px !important;
+        line-height: 1.1 !important;
     }
 
     .hero-subtitle {
-        font-size: 1.1rem !important;
-        margin-bottom: 30px !important;
+        font-size: 1rem !important;
+        margin-bottom: 28px !important;
+        max-width: 100% !important;
     }
 
     .hero-ctas {
         flex-direction: column;
         width: 100%;
-        gap: 16px !important;
+        gap: 12px !important;
     }
     
     .hero-ctas .btn {
         width: 100%;
+        max-width: 320px;
     }
     
     .container, .container-narrow {
         padding: 0 20px !important;
     }
     
+    /* Spotlight: shrink to fit mobile width instead of hiding */
     .trust-header {
-        padding-top: 40px !important;
+        padding-top: 60px !important;
     }
     
     .tracklight-container {
-        display: none !important; /* Tracklight effect usually breaks on narrow aspect ratios */
+        display: block !important;
+        max-width: 320px !important;
+        height: 80px !important;
     }
     
     .trust-seo-split {
