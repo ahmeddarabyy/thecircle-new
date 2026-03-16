@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 const JWT_SECRET = 'thecircle_admin_secret_2026';
 
 // ─── Email Setup ──────────────────────────────────────────────────────────────
