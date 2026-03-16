@@ -4,26 +4,27 @@
 <head>
     <link rel="icon" type="image/png" href="assets/logo.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coworking Space in Alexandria | The Circle</title>
-    <meta name="description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <title>Alexandria's workspace for teams & growing businesses| Coworking | The Circle</title>
+    <meta name="description"
+        content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
     <link rel="canonical" href="https://circleworkspace.com/">
     <meta name="robots" content="index, follow">
 
     <!-- Social Media Meta Tags (Open Graph & Twitter) -->
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
 
     <!-- Structured Data (JSON-LD) -->
-    
 
-    
+
+
 
     <!-- Preload only above-the-fold critical assets -->
     <link rel="preload" as="image" href="assets/hero-office.webp" fetchpriority="high">
@@ -160,7 +161,7 @@
         }
 
         .link-light {
-            color: rgba(255,255,255,0.85)
+            color: rgba(255, 255, 255, 0.85)
         }
 
         .hero-ctas {
@@ -189,15 +190,21 @@
             }
 
             .hero-title {
-                font-size: clamp(2.2rem, 8vw, 3.2rem);
-                margin-bottom: 16px;
-                line-height: 1.1;
+                font-size: clamp(2rem, 7vw, 2.8rem);
+                margin-bottom: 20px;
+                line-height: 1.15;
             }
 
             .hero-subtitle {
                 font-size: 1rem;
-                margin-bottom: 28px;
+                margin-bottom: 32px;
                 max-width: 100%;
+                line-height: 1.5;
+                padding: 0 10px;
+            }
+
+            .hero-content-overlay {
+                padding: 0 20px;
             }
 
             .hero-ctas {
@@ -325,7 +332,7 @@
                 gap: 16px
             }
         }
-    
+
         .mobile-menu-btn {
             display: none;
             background: none;
@@ -380,30 +387,40 @@
             text-decoration: none;
         }
 
-        .mobile-nav-links .btn {
-            color: #fff !important;
-            background-color: #000;
+        .mobile-nav-links .btn, 
+        .mobile-nav-links .btn-primary {
+            color: #ffffff !important;
+            background-color: #000000 !important;
         }
 
         /* Hamburger animation */
         .mobile-menu-btn.active span:nth-child(1) {
             transform: translateY(7px) rotate(45deg);
         }
+
         .mobile-menu-btn.active span:nth-child(2) {
             opacity: 0;
         }
+
         .mobile-menu-btn.active span:nth-child(3) {
             transform: translateY(-7px) rotate(-45deg);
         }
 
         @media (max-width: 767px) {
-            .mobile-menu-btn { display: block; }
-            .nav-actions { display: none !important; }
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-actions {
+                display: none !important;
+            }
+
             .hero-ctas {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
             }
+
             .hero-ctas .btn-primary-glass,
             .hero-ctas .btn-link {
                 width: 100%;
@@ -411,7 +428,6 @@
                 justify-content: center;
             }
         }
-        
     </style>
 
     <!-- Full stylesheet loads async — doesn't block first paint -->
@@ -420,7 +436,7 @@
         <link rel="stylesheet" href="styles.css">
     </noscript>
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
@@ -587,7 +603,8 @@
 </script>
     <meta property="og:type" content="website">
     <meta property="og:title" content="Coworking Space in Alexandria | The Circle">
-    <meta property="og:description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <meta property="og:description"
+        content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
     <meta property="og:url" content="https://circleworkspace.com/index.html">
     <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
     <meta property="og:image:width" content="1200">
@@ -595,7 +612,8 @@
     <meta property="og:site_name" content="The Circle Workspace">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Coworking Space in Alexandria | The Circle">
-    <meta name="twitter:description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <meta name="twitter:description"
+        content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
     <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
     <meta name="twitter:site" content="@circleworkspace">
     <link rel="alternate" hreflang="en" href="https://circleworkspace.com/index.html">
@@ -618,10 +636,13 @@
                 <a href="insights.html">Insights</a>
             </div>
             <div class="nav-actions" class="desktop-only">
-                <a href="ar/index.html" class="lang-toggle" style="margin-right: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">عربي</a> <a href="book-a-space.html" class="btn btn-nav-cta">Book a space</a>
+                <a href="ar/index.html" class="lang-toggle"
+                    style="margin-right: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">عربي</a>
+                <a href="book-a-space.html" class="btn btn-nav-cta">Book a space</a>
             </div>
-        
-            <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
+
+            <button class="mobile-menu-btn" aria-label="Toggle Menu"
+                onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -639,7 +660,8 @@
             <a href="insights.html">Insights</a>
             <div style="margin-top: 24px;"></div>
             <a href="ar/index.html" style="color: #00674F;">عربي</a>
-            <a href="book-a-space.html" class="btn btn-primary" style="font-size: 1rem; padding: 12px 32px; margin-top: 16px;">Book a space</a>
+            <a href="book-a-space.html" class="btn btn-primary"
+                style="font-size: 1rem; padding: 12px 32px; margin-top: 16px;">Book a space</a>
         </div>
     </div>
 
@@ -648,8 +670,9 @@
         <!-- Overlay Text Hero Layout -->
         <section class="hero-overlay">
             <div class="hero-image-bg">
-                <img class="hero-main-img" src="assets/hero-office.webp" alt="Premium Private Offices and Coworking space in Alexandria - The Circle Workspace" fetchpriority="high"
-                    decoding="async">
+                <img class="hero-main-img" src="assets/hero-office.webp"
+                    alt="Premium Private Offices and Coworking space in Alexandria - The Circle Workspace"
+                    fetchpriority="high" decoding="async">
                 <div class="hero-bg-shade"></div>
             </div>
 
@@ -714,20 +737,36 @@
                 </div>
 
                 <!-- Refined SEO Content Integration -->
-                <div class="trust-seo-split mt-xl" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; text-align: left; max-width: 1000px; margin: 60px auto 0; padding: 0 20px;">
+                <div class="trust-seo-split mt-xl"
+                    style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; text-align: left; max-width: 1000px; margin: 60px auto 0; padding: 0 20px;">
                     <div>
-                        <h3 style="font-size: 2.2rem; font-weight: 400; color: #1d1d1f; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px;">The new standard for work in <span class="text-emerald text-italic">Alexandria.</span></h3>
-                        <div class="trust-image-inline" style="border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-soft);">
-                            <img src="assets/TheCirclePrivateRoomsKafrAbdo.webp" alt="Premium Private Offices at The Circle - Kafr Abdo, Alexandria Workspace"
+                        <h3
+                            style="font-size: 2.2rem; font-weight: 400; color: #1d1d1f; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px;">
+                            The new standard for work in <span class="text-emerald text-italic">Alexandria.</span></h3>
+                        <div class="trust-image-inline"
+                            style="border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-soft);">
+                            <img src="assets/TheCirclePrivateRoomsKafrAbdo.webp"
+                                alt="Premium Private Offices at The Circle - Kafr Abdo, Alexandria Workspace"
                                 style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
                         </div>
                     </div>
-                    <div style="font-size: 1.1rem; line-height: 1.7; color: #86868b; font-weight: 300; display: flex; flex-direction: column; justify-content: center;">
+                    <div
+                        style="font-size: 1.1rem; line-height: 1.7; color: #86868b; font-weight: 300; display: flex; flex-direction: column; justify-content: center;">
                         <p style="margin-bottom: 24px;">
-                            Alexandria is rapidly evolving as a hub for startups, remote teams, and global companies establishing their Egyptian footprint. The Circle provides premium, flexible workspace solutions—from <strong style="color: #1d1d1f;">private offices</strong> and <strong style="color: #1d1d1f;">dedicated coworking desks</strong> to high-end <strong style="color: #1d1d1f;">meeting rooms</strong> in the city's most prestigious districts.
+                            Alexandria is rapidly evolving as a hub for startups, remote teams, and global companies
+                            establishing their Egyptian footprint. The Circle provides premium, flexible workspace
+                            solutions—from <strong style="color: #1d1d1f;">private offices</strong> and <strong
+                                style="color: #1d1d1f;">dedicated coworking desks</strong> to high-end <strong
+                                style="color: #1d1d1f;">meeting rooms</strong> in the city's most prestigious districts.
                         </p>
                         <p>
-                            With heritage-inspired locations in <a href="kafr-abdo-branch.html" style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Kafr Abdo</a> and <a href="roushdy-branch.html" style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Roushdy</a>, we enable businesses to scale instantly without the friction of traditional leases. Every space is engineered for performance, blending world-class infrastructure with an atmosphere that reflects your professional ambition.
+                            With heritage-inspired locations in <a href="kafr-abdo-branch.html"
+                                style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Kafr
+                                Abdo</a> and <a href="roushdy-branch.html"
+                                style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Roushdy</a>,
+                            we enable businesses to scale instantly without the friction of traditional leases. Every
+                            space is engineered for performance, blending world-class infrastructure with an atmosphere
+                            that reflects your professional ambition.
                         </p>
                     </div>
                 </div>
@@ -738,7 +777,8 @@
         <section id="locations" class="locations section-grey fade-up">
             <div class="container">
                 <div class="section-header text-center">
-                    <h2 class="section-title" style="font-weight: 400;">Two iconic <span class="text-italic text-emerald">spaces</span>.<br>
+                    <h2 class="section-title" style="font-weight: 400;">Two iconic <span
+                            class="text-italic text-emerald">spaces</span>.<br>
                         <span class="shelf-wrapper">
                             One powerful <span class="text-italic text-brown">network</span>.
                             <svg class="shelf-svg" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -755,11 +795,14 @@
                     <!-- Kafr Abdo Location -->
                     <a href="kafr-abdo-branch.html" class="card location-card fade-up">
                         <div class="card-image">
-                            <img src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle Coworking space and Private Offices in Kafr Abdo, Alexandria"
+                            <img src="assets/thecircle-kafrabdo-branch.webp"
+                                alt="The Circle Coworking space and Private Offices in Kafr Abdo, Alexandria"
                                 loading="lazy" decoding="async">
                         </div>
                         <div class="card-content">
-                            <span style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium workspace in Alexandria, Egypt</span>
+                            <span
+                                style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium
+                                workspace in Alexandria, Egypt</span>
                             <h3 class="card-title">Kafr Abdo Location</h3>
                             <p class="card-story" style="margin-bottom: 12px;">Located inside a historic villa built in
                                 the early 1900s by English architects, our Kafr Abdo workspace blends Alexandria's
@@ -796,11 +839,14 @@
                     <!-- Roushdy Location -->
                     <a href="roushdy-branch.html" class="card location-card fade-up delay-1">
                         <div class="card-image">
-                            <img src="assets/TheCircleRoushdy1.JPG" alt="The Circle Coworking space and Private Offices in Roushdy, Alexandria Workspace" loading="lazy"
-                                decoding="async">
+                            <img src="assets/TheCircleRoushdy1.JPG"
+                                alt="The Circle Coworking space and Private Offices in Roushdy, Alexandria Workspace"
+                                loading="lazy" decoding="async">
                         </div>
                         <div class="card-content">
-                            <span style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium workspace in Alexandria, Egypt</span>
+                            <span
+                                style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium
+                                workspace in Alexandria, Egypt</span>
                             <h3 class="card-title">Roushdy Location</h3>
                             <p class="card-story" style="margin-bottom: 12px;">Located on Syria Street in the heart of
                                 Roushdy, this is the headquarters of The Circle and the place where our community first
@@ -838,13 +884,15 @@
         <!-- Services Section -->
         <section id="services" class="services section-light fade-up">
             <div class="container text-center">
-                <h2 class="section-title" style="font-weight: 400;"><span class="text-italic text-emerald">The right space.</span><br>Right when you need it.</h2>
+                <h2 class="section-title" style="font-weight: 400;"><span class="text-italic text-emerald">The right
+                        space.</span><br>Right when you need it.</h2>
 
                 <div class="services-grid mt-xl">
                     <!-- Private Offices -->
                     <a href="private-offices.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/private_office_thecircle_SyriaStreet.webp" alt="Furnished Private Offices in Roushdy, Alexandria - The Circle Workspace"
+                            <img src="assets/private_office_thecircle_SyriaStreet.webp"
+                                alt="Furnished Private Offices in Roushdy, Alexandria - The Circle Workspace"
                                 loading="lazy" decoding="async">
                         </div>
                         <div class="service-info">
@@ -858,7 +906,9 @@
                     <!-- Back Office -->
                     <a href="back-offices.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/TheCircleRoushdy1.JPG" alt="Back Office Workspace in Roushdy, Alexandria for companies" loading="lazy" decoding="async">
+                            <img src="assets/TheCircleRoushdy1.JPG"
+                                alt="Back Office Workspace in Roushdy, Alexandria for companies" loading="lazy"
+                                decoding="async">
                         </div>
                         <div class="service-info">
                             <h3>Back Office</h3>
@@ -871,7 +921,8 @@
                     <!-- Private Suites -->
                     <a href="private-suites.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/private_suites_thecircle_kafrabdo.webp" alt="Corporate Private Offices and Suites in Kafr Abdo, Alexandria" loading="lazy"
+                            <img src="assets/private_suites_thecircle_kafrabdo.webp"
+                                alt="Corporate Private Offices and Suites in Kafr Abdo, Alexandria" loading="lazy"
                                 decoding="async">
                         </div>
                         <div class="service-info">
@@ -885,7 +936,8 @@
                     <!-- Dedicated Desks -->
                     <a href="dedicated-desks.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/thecircle_space_kafrabdo2.webp" alt="Dedicated Desk Coworking space in Kafr Abdo, Alexandria Workspace" loading="lazy"
+                            <img src="assets/thecircle_space_kafrabdo2.webp"
+                                alt="Dedicated Desk Coworking space in Kafr Abdo, Alexandria Workspace" loading="lazy"
                                 decoding="async">
                         </div>
                         <div class="service-info">
@@ -899,7 +951,8 @@
                     <!-- Shared Spaces -->
                     <a href="shared-spaces.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/thecircle_syriastreet_sharedspaces.webp" alt="Shared Coworking space in Roushdy, Alexandria - Alexandria Egypt" loading="lazy"
+                            <img src="assets/thecircle_syriastreet_sharedspaces.webp"
+                                alt="Shared Coworking space in Roushdy, Alexandria - Alexandria Egypt" loading="lazy"
                                 decoding="async">
                         </div>
                         <div class="service-info">
@@ -913,7 +966,8 @@
                     <!-- Meeting Rooms -->
                     <a href="meeting-rooms.html" class="service-card fade-up">
                         <div class="service-img-wrapper">
-                            <img src="assets/thecircle-kafrabdo-branch.webp" alt="Professional Meeting Rooms and Workspace Alexandria" loading="lazy"
+                            <img src="assets/thecircle-kafrabdo-branch.webp"
+                                alt="Professional Meeting Rooms and Workspace Alexandria" loading="lazy"
                                 decoding="async">
                         </div>
                         <div class="service-info">
@@ -932,8 +986,10 @@
                 <h2 class="section-title-sm">Trusted by leading teams in Alexandria.</h2>
 
                 <div class="logo-cloud mt-lg">
-                    <img src="assets/customerlogo1.svg" alt="Company using Coworking space Alexandria" class="customer-logo">
-                    <img src="assets/customerlogo2.png" alt="Business partner at The Circle Workspace" class="customer-logo">
+                    <img src="assets/customerlogo1.svg" alt="Company using Coworking space Alexandria"
+                        class="customer-logo">
+                    <img src="assets/customerlogo2.png" alt="Business partner at The Circle Workspace"
+                        class="customer-logo">
                     <img src="assets/customerlogo3.svg" alt="Tech team in Alexandria Workspace" class="customer-logo">
                 </div>
 
@@ -944,16 +1000,20 @@
         <section id="gallery" class="gallery section-light fade-up">
             <div class="container">
                 <div class="section-header text-center">
-                    <h2 class="section-title" style="font-weight: 400;">Explore the <span class="text-italic">space.</span></h2>
+                    <h2 class="section-title" style="font-weight: 400;">Explore the <span
+                            class="text-italic">space.</span></h2>
                 </div>
                 <!-- Gallery grid with lazy-loading img tags (CSS backgrounds cannot be lazy-loaded) -->
                 <div class="gallery-grid mt-lg">
                     <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo1.webp"
-                            alt="Interior of Kafr Abdo, Alexandria Coworking space" loading="lazy" decoding="async"></div>
+                            alt="Interior of Kafr Abdo, Alexandria Coworking space" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo2.webp"
-                            alt="Private offices in Kafr Abdo, Alexandria Workspace" loading="lazy" decoding="async"></div>
+                            alt="Private offices in Kafr Abdo, Alexandria Workspace" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo3.webp"
-                            alt="Alexandria Workspace and Coworking space Gallery" loading="lazy" decoding="async"></div>
+                            alt="Alexandria Workspace and Coworking space Gallery" loading="lazy" decoding="async">
+                    </div>
                     <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo4.webp"
                             alt="Modern Coworking space in Kafr Abdo, Alexandria" loading="lazy" decoding="async"></div>
                 </div>
@@ -1137,7 +1197,8 @@
         </div>
         <div class="container">
             <div class="footer-copyright">
-                <img src="assets/logocircletransparentwhite.png" alt="The Circle Coworking space Alexandria Egypt" class="footer-logo-tiny">
+                <img src="assets/logocircletransparentwhite.png" alt="The Circle Coworking space Alexandria Egypt"
+                    class="footer-logo-tiny">
                 <p>&copy; 2026 The Circle Coworking Space Alexandria. All rights reserved.</p>
             </div>
         </div>

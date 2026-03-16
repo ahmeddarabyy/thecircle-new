@@ -1612,9 +1612,10 @@ cite {
     text-decoration: none;
 }
 
-.mobile-nav-links .btn {
-    color: var(--color-white) !important;
-    background-color: var(--color-black) !important;
+.mobile-nav-links .btn,
+.mobile-nav-links .btn-primary {
+    color: #ffffff !important;
+    background-color: #000000 !important;
 }
 
 /* Hamburger animation */
@@ -1645,19 +1646,22 @@ cite {
     .hero-overlay {
         align-items: center !important;
         padding-top: 80px !important;
-        padding-bottom: 0 !important;
+        padding-bottom: 20px !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
     }
 
     .hero-title {
-        font-size: clamp(2.2rem, 8vw, 3.2rem) !important;
-        margin-bottom: 16px !important;
-        line-height: 1.1 !important;
+        font-size: clamp(2rem, 7vw, 2.8rem) !important;
+        margin-bottom: 20px !important;
+        line-height: 1.15 !important;
     }
 
     .hero-subtitle {
         font-size: 1rem !important;
-        margin-bottom: 28px !important;
+        margin-bottom: 32px !important;
         max-width: 100% !important;
+        line-height: 1.5 !important;
     }
 
     .hero-ctas {
