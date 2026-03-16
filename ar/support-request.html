@@ -516,7 +516,7 @@
             btn.disabled = true;
 
             try {
-                const response = await fetch(getApiBase() + '/support', {
+                const response = await fetch(API_BASE + '/support', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
