@@ -468,9 +468,9 @@ app.get(/^\/dashboard/, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🟢 The Circle Booking Server running at http://localhost:${PORT}`);
-  console.log(`📊 Admin dashboard at http://localhost:${PORT}/dashboard`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`\n🟢 The Circle Booking Server running at Port: ${PORT}`);
+  console.log(`📊 Admin dashboard at /dashboard`);
   console.log(`🔑 Login: admin / thecircle2026\n`);
 });
 
