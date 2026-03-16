@@ -54,28 +54,126 @@ const transporter = nodemailer.createTransport({
 });
 
 async function sendBookingConfirmation(payload) {
+  const isMeeting = payload.type === 'meeting';
+  const branchName = payload.branch === 'kafr-abdo' ? 'The Circle Kafr Abdo' : 'The Circle Roushdy';
   const branchAddress = payload.branch === 'kafr-abdo' 
     ? 'Villa 15, Ali Zou El Fekar st, Kafr Abdo' 
     : '15 Syria st, 1st Floor, Roushdy';
+  const mapsLink = payload.branch === 'kafr-abdo'
+    ? 'https://maps.google.com/?q=The+Circle+Kafr+Abdo+Alexandria'
+    : 'https://maps.google.com/?q=The+Circle+Roushdy+Alexandria';
   
   const mailOptions = {
     from: process.env.SMTP_FROM,
     to: payload.email,
     subject: `Your space is ready - The Circle`,
     html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
-        <h2 style="color: #00674F;">Booking Confirmed!</h2>
-        <p>Hi ${payload.name}, thanks for booking with The Circle.</p>
-        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
-          <p><strong>Branch:</strong> ${payload.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy'}</p>
-          <p><strong>Address:</strong> ${branchAddress}</p>
-          <p><strong>Date:</strong> ${payload.date}</p>
-          <p><strong>Time:</strong> ${payload.start_time} - ${payload.end_time}</p>
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <style>
+          body { margin: 0; padding: 0; background-color: #ffffff; }
+          .wrapper { width: 100%; table-layout: fixed; background-color: #ffffff; padding-bottom: 60px; }
+          .main { background-color: #ffffff; margin: 0 auto; width: 100%; max-width: 600px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #1d1d1f; }
+          .header { padding: 40px 20px; text-align: center; }
+          .hero { padding: 0 40px 40px 40px; text-align: center; }
+          .hero h1 { font-size: 32px; font-weight: 600; margin: 0 0 12px 0; letter-spacing: -0.03em; color: #000; }
+          .hero p { font-size: 18px; color: #86868b; margin: 0; font-weight: 400; }
+          .card { background: #F5F5F7; border-radius: 28px; padding: 40px; margin: 0 20px 32px 20px; }
+          .card-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; color: #00674F; margin-bottom: 24px; display: block; }
+          .detail-item { margin-bottom: 20px; }
+          .detail-label { font-size: 13px; color: #86868b; margin-bottom: 4px; display: block; }
+          .detail-value { font-size: 17px; font-weight: 500; color: #1d1d1f; display: block; }
+          .footer { padding: 40px 20px; text-align: center; border-top: 1px solid #F2F2F7; }
+          .address-text { font-size: 12px; color: #86868b; margin-top: 24px; line-height: 1.5; }
+          .btn-maps { display: inline-block; padding: 12px 24px; background: #000; color: #fff !important; text-decoration: none; border-radius: 50px; font-size: 14px; font-weight: 500; margin-top: 12px; }
+          .btn-wa { display: inline-block; padding: 14px 40px; background: #00674F; color: #FFFFFF !important; text-decoration: none; border-radius: 50px; font-weight: 500; margin-top: 12px; font-size: 15px; }
+        </style>
+      </head>
+      <body>
+        <div class="wrapper">
+          <div class="main">
+            <div class="header">
+              <img src="cid:logo" alt="The Circle" width="50" height="50">
+            </div>
+            
+            <div class="hero">
+              <h1>Confirmed.</h1>
+              <p>Everything is set for your visit to ${payload.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy'}.</p>
+            </div>
+
+            <div class="card">
+              <span class="card-title">Reservation Details</span>
+              
+              <div class="detail-item">
+                <span class="detail-label">Location</span>
+                <span class="detail-value">${branchName}</span>
+                <a href="${mapsLink}" class="btn-maps">Open in Google Maps</a>
+              </div>
+
+              <div class="detail-item">
+                <span class="detail-label">Date</span>
+                <span class="detail-value">${payload.date}</span>
+              </div>
+
+              ${isMeeting ? `
+              <div class="detail-item">
+                <span class="detail-label">Assigned Time Slot</span>
+                <span class="detail-value">${payload.start_time} — ${payload.end_time}</span>
+              </div>
+              ` : `
+              <div class="detail-item">
+                <span class="detail-label">Access Type</span>
+                <span class="detail-value">Full Day Pass</span>
+              </div>
+              `}
+            </div>
+
+            <div style="padding: 0 40px 40px 40px; text-align: center;">
+              <p style="font-size: 15px; color: #86868b; margin-bottom: 24px;">Need help or have questions? Our team is available on WhatsApp.</p>
+              <a href="https://wa.me/201034708850" class="btn-wa">Chat on WhatsApp</a>
+            </div>
+
+            <div class="footer">
+              <div style="margin-bottom: 24px;">
+                <a href="https://www.instagram.com/circleworkspace/" style="display: inline-block; margin: 0 12px; text-decoration: none;">
+                  <img src="cid:ig" alt="Instagram" width="20" height="20" style="display: inline-block; border: 0;">
+                </a>
+                <a href="https://www.facebook.com/thecircleworkspace" style="display: inline-block; margin: 0 12px; text-decoration: none;">
+                  <img src="cid:fb" alt="Facebook" width="20" height="20" style="display: inline-block; border: 0;">
+                </a>
+                <a href="https://www.linkedin.com/company/circleworkspace" style="display: inline-block; margin: 0 12px; text-decoration: none;">
+                  <img src="cid:li" alt="LinkedIn" width="20" height="20" style="display: inline-block; border: 0;">
+                </a>
+                <a href="https://www.tiktok.com/@circleworkspace" style="display: inline-block; margin: 0 12px; text-decoration: none;">
+                  <img src="cid:tt" alt="TikTok" width="20" height="20" style="display: inline-block; border: 0;">
+                </a>
+                <a href="https://wa.me/201034708850" style="display: inline-block; margin: 0 12px; text-decoration: none;">
+                  <img src="cid:wa" alt="WhatsApp" width="20" height="20" style="display: inline-block; border: 0;">
+                </a>
+              </div>
+              <p class="address-text">
+                <strong>The Circle Coworking Space Alexandria</strong><br>
+                ${branchAddress}<br><br>
+                © 2026 The Circle. All rights reserved.
+              </p>
+            </div>
+          </div>
         </div>
-        <p style="font-size: 12px; color: #666; margin-top: 20px;">If you need to change your booking, please reply to this email.</p>
-      </div>
-    `
+      </body>
+      </html>
+    `,
+    attachments: [
+      { filename: 'logo.png', path: path.join(__dirname, 'assets/logo.png'), cid: 'logo' },
+      { filename: 'ig.png',   path: path.join(__dirname, 'assets/ig_black.png'), cid: 'ig' },
+      { filename: 'fb.png',   path: path.join(__dirname, 'assets/fb_black.png'), cid: 'fb' },
+      { filename: 'li.png',   path: path.join(__dirname, 'assets/li_black.png'), cid: 'li' },
+      { filename: 'tt.png',   path: path.join(__dirname, 'assets/tt_black.png'), cid: 'tt' },
+      { filename: 'wa.png',   path: path.join(__dirname, 'assets/wa_black.png'), cid: 'wa' }
+    ]
   };
+
   try { 
     const info = await transporter.sendMail(mailOptions); 
     console.log('User confirmation sent:', info.messageId);
@@ -87,19 +185,26 @@ async function sendBookingConfirmation(payload) {
 }
 
 async function sendTeamNotification(payload) {
+  const isMeeting = payload.type === 'meeting';
+  const branchName = payload.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy';
+  
   const mailOptions = {
     from: process.env.SMTP_FROM,
     to: 'contact@circleworkspace.com',
-    subject: `🚨 NEW BOOKING: ${payload.name}`,
+    subject: `🚨 NEW BOOKING: ${payload.name} - ${branchName}`,
     html: `
-      <div style="font-family: sans-serif; padding: 20px;">
-        <h3>New Website Booking</h3>
-        <p><strong>Name:</strong> ${payload.name}</p>
-        <p><strong>Email:</strong> ${payload.email}</p>
-        <p><strong>Phone:</strong> ${payload.phone}</p>
-        <p><strong>Branch:</strong> ${payload.branch}</p>
-        <p><strong>Date:</strong> ${payload.date}</p>
-        <p><strong>Time:</strong> ${payload.start_time} - ${payload.end_time}</p>
+      <div style="font-family: -apple-system, sans-serif; padding: 30px; border: 1px solid #F2F2F7; border-radius: 20px; max-width: 500px;">
+        <h2 style="color: #00674F; margin-top: 0;">New Website Booking</h2>
+        <p style="color: #86868b;">A new booking has been received from the website.</p>
+        <div style="background: #F5F5F7; padding: 20px; border-radius: 12px; margin: 20px 0;">
+          <p style="margin: 5px 0;"><strong>Customer:</strong> ${payload.name}</p>
+          <p style="margin: 5px 0;"><strong>Email:</strong> ${payload.email}</p>
+          <p style="margin: 5px 0;"><strong>Phone:</strong> ${payload.phone}</p>
+          <p style="margin: 5px 0;"><strong>Branch:</strong> ${branchName}</p>
+          <p style="margin: 5px 0;"><strong>Type:</strong> ${isMeeting ? 'Meeting Room' : 'Shared Space'}</p>
+          <p style="margin: 5px 0;"><strong>Date:</strong> ${payload.date}</p>
+          ${isMeeting ? `<p style="margin: 5px 0;"><strong>Time:</strong> ${payload.start_time} - ${payload.end_time}</p>` : ''}
+        </div>
       </div>
     `
   };
@@ -119,11 +224,19 @@ async function sendSupportTeamNotification(payload) {
     to: 'contact@circleworkspace.com',
     subject: `🚨 NEW SUPPORT REQUEST: ${payload.subject}`,
     html: `
-      <div style="font-family: sans-serif; padding: 20px;">
-        <h3>New Support Request</h3>
-        <p><strong>From:</strong> ${payload.firstName} ${payload.lastName}</p>
-        <p><strong>Subject:</strong> ${payload.subject}</p>
-        <p><strong>Message:</strong> ${payload.message}</p>
+      <div style="font-family: -apple-system, sans-serif; padding: 30px; border: 1px solid #F2F2F7; border-radius: 20px; max-width: 500px;">
+        <h2 style="color: #00674F; margin-top: 0;">New Support Request</h2>
+        <p style="color: #86868b;">A new support request has been received from the website.</p>
+        <div style="background: #F5F5F7; padding: 20px; border-radius: 12px; margin: 20px 0;">
+          <p style="margin: 5px 0;"><strong>Customer:</strong> ${payload.firstName} ${payload.lastName}</p>
+          <p style="margin: 5px 0;"><strong>Email:</strong> ${payload.email}</p>
+          <p style="margin: 5px 0;"><strong>Phone:</strong> ${payload.phone || 'N/A'}</p>
+          <p style="margin: 5px 0;"><strong>Branch:</strong> ${payload.location}</p>
+          <p style="margin: 5px 0;"><strong>Category:</strong> ${payload.category}</p>
+          <p style="margin: 5px 0;"><strong>Subject:</strong> ${payload.subject}</p>
+          <p style="margin: 20px 0 5px 0;"><strong>Details:</strong></p>
+          <p style="margin: 0; font-style: italic;">"${payload.message}"</p>
+        </div>
       </div>
     `
   };
