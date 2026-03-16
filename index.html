@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coworking Space in Alexandria | The Circle</title>
+    <meta name="description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <link rel="canonical" href="https://circleworkspace.com/">
+    <meta name="robots" content="index, follow">
+
+    <!-- Social Media Meta Tags (Open Graph & Twitter) -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    <!-- Structured Data (JSON-LD) -->
+    
+
+    
+
+    <!-- Preload only above-the-fold critical assets -->
+    <link rel="preload" as="image" href="assets/hero-office.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/logo.png">
+
+    <!-- Critical CSS — inline so the hero renders immediately without waiting for stylesheet download -->
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        :root {
+            --color-white: #ffffff;
+            --color-black: #000000;
+            --color-dark-grey: #1d1d1f;
+            --color-light-grey: #f5f5f7;
+            --max-width: 1440px;
+            --max-width-narrow: 1240px;
+            --padding-x: 40px;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --radius-xl: 32px;
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06)
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: var(--font-family);
+            color: var(--color-dark-grey);
+            background: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--padding-x)
+        }
+
+        .navbar {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 92%;
+            max-width: var(--max-width-narrow);
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.96);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 980px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.06);
+            z-index: 9999
+        }
+
+        .nav-container {
+            max-width: var(--max-width-narrow);
+            margin: 0 auto;
+            padding: 0 var(--padding-x);
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .logo {
+            font-weight: 600;
+            display: flex;
+            align-items: center
+        }
+
+        .logo img {
+            height: 61px;
+            width: auto
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-family);
+            padding: 12px 24px;
+            border-radius: 980px
+        }
+
+        .btn-nav-cta {
+            background-color: #000;
+            color: #fff;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 600
+        }
+
+        .hero-overlay {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 25vh
+        }
+
+        .hero-image-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1
+        }
+
+        .hero-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: translateZ(0);
+            backface-visibility: hidden
+        }
+
+        .hero-bg-shade {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 100%)
+        }
+
+        .hero-content-overlay {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 100%
+        }
+
+        .hero-text-box {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 7vw, 6.5rem);
+            line-height: 1.05;
+            margin-bottom: 32px;
+            font-weight: 300;
+            letter-spacing: -0.04em;
+            color: var(--color-dark-grey)
+        }
+
+        .hero-overlay .hero-title {
+            line-height: 1.0;
+            font-weight: 600;
+            letter-spacing: -0.025em
+        }
+
+        .text-white {
+            color: #fff !important
+        }
+
+        .text-italic {
+            font-style: italic
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+            line-height: 1.5
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap
+        }
+
+        .btn-primary-glass {
+            background-color: #fff;
+            color: #000
+        }
+
+        .nav-links {
+            display: none
+        }
+
+        @media(min-width:768px) {
+            .nav-links {
+                display: flex;
+                gap: 32px
+            }
+
+            .nav-links a {
+                font-size: 0.8rem;
+                color: var(--color-dark-grey);
+                opacity: 0.8
+            }
+
+            .nav-actions {
+                display: flex;
+                align-items: center;
+                gap: 16px
+            }
+        }
+    </style>
+
+    <!-- Full stylesheet loads async — doesn't block first paint -->
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="styles.css">
+    </noscript>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://circleworkspace.com/#organization",
+      "name": "The Circle Workspace",
+      "url": "https://circleworkspace.com",
+      "logo": "https://circleworkspace.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/thecircleworkspace",
+        "https://www.instagram.com/circleworkspace/",
+        "https://www.linkedin.com/company/circleworkspace",
+        "https://www.tiktok.com/@circleworkspace"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201034708850",
+        "contactType": "customer service",
+        "areaServed": "EG",
+        "availableLanguage": [
+          "English",
+          "Arabic"
+        ]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://circleworkspace.com/#website",
+      "url": "https://circleworkspace.com",
+      "name": "The Circle Workspace",
+      "description": "Premium coworking space and private offices in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.",
+      "publisher": {
+        "@id": "https://circleworkspace.com/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://circleworkspace.com/?s={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "name": "The Circle - Kafr Abdo Branch",
+      "description": "Premium coworking space and private offices in Kafr Abdo, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp"
+      ],
+      "url": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Villa 15, Ali Zou El Fekar st",
+        "addressLocality": "Kafr Abdo",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2291,
+        "longitude": 29.9575
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$",
+      "currenciesAccepted": "EGP",
+      "paymentAccepted": "Cash, Credit Card, Bank Transfer"
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/roushdy-branch.html",
+      "name": "The Circle - Roushdy Branch",
+      "description": "Premium coworking space and private offices in Roushdy, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/TheCircleRoushdy1.JPG"
+      ],
+      "url": "https://circleworkspace.com/roushdy-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "15 Syria st, First floor",
+        "addressLocality": "Roushdy",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2333,
+        "longitude": 29.9533
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$",
+      "currenciesAccepted": "EGP",
+      "paymentAccepted": "Cash, Credit Card, Bank Transfer"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://circleworkspace.com/index.html",
+      "url": "https://circleworkspace.com/index.html",
+      "name": "Private Offices &amp; Meeting Rooms | Kafr Abdo and Roushdy Branches | Alexandria, Egypt | The Circle",
+      "description": "Premium private offices and coworking space at our Kafr Abdo and Roushdy branches in Alexandria, Egypt. The Circle offers meeting rooms, hot desks, and furnished offices for teams.",
+      "isPartOf": {
+        "@id": "https://circleworkspace.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://circleworkspace.com/"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Coworking Space in Alexandria | The Circle">
+    <meta property="og:description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <meta property="og:url" content="https://circleworkspace.com/index.html">
+    <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="The Circle Workspace">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Coworking Space in Alexandria | The Circle">
+    <meta name="twitter:description" content="Premium private offices, dedicated desks, and meeting rooms in Alexandria, Egypt. Two locations in Kafr Abdo and Roushdy.">
+    <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta name="twitter:site" content="@circleworkspace">
+    <link rel="alternate" hreflang="en" href="https://circleworkspace.com/index.html">
+    <link rel="alternate" hreflang="ar" href="https://circleworkspace.com/ar/index.html">
+    <link rel="alternate" hreflang="x-default" href="https://circleworkspace.com/index.html">
+</head>
+
+<body>
+    <!-- Apple-style minimal navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.png" alt="The Circle Workspace Coworking Space Alexandria">
+            </a>
+            <div class="nav-links">
+                <a href="about.html">About Us</a>
+                <a href="locations.html">Locations</a>
+                <a href="services.html">Services</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="insights.html">Insights</a>
+            </div>
+            <div class="nav-actions">
+                <a href="ar/index.html" class="lang-toggle" style="margin-right: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">عربي</a> <a href="book-a-space.html" class="btn btn-nav-cta">Book a space</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Overlay Text Hero Layout -->
+        <section class="hero-overlay">
+            <div class="hero-image-bg">
+                <img src="assets/hero-office.webp" alt="Premium Private Offices and Coworking space in Alexandria - The Circle Workspace" fetchpriority="high"
+                    decoding="async">
+                <div class="hero-bg-shade"></div>
+            </div>
+
+            <div class="container hero-content-overlay fade-up">
+                <div class="hero-text-box">
+                    <h1 class="hero-title text-white">Private Offices & Shared Workspaces in Alexandria.</h1>
+                    <p class="hero-subtitle text-white">Flexible workspaces for remote teams, startups, and
+                        professionals in Alexandria, Egypt.</p>
+                    <div class="hero-ctas">
+                        <a href="book-a-space.html" class="btn btn-primary-glass btn-large">Book a space</a>
+                        <a href="schedule-a-tour.html" class="btn btn-link link-light btn-large">Schedule a Tour <span
+                                class="arrow">›</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Section - Centered Layout -->
+        <section class="trust section-light text-center fade-up">
+            <div class="container container-centered">
+                <div class="trust-header">
+                    <div class="tracklight-container">
+                        <svg viewBox="0 0 600 120" class="tracklight-svg" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <!-- Track -->
+                            <path d="M100 20 L500 20" stroke="#d2d2d7" stroke-width="1.5" stroke-linecap="round" />
+
+                            <!-- Light Fixture centered over 'business' -->
+                            <g transform="translate(450, 20)">
+                                <!-- Connection arm -->
+                                <rect x="-1" y="0" width="2" height="10" fill="#333" />
+                                <!-- Body -->
+                                <rect x="-8" y="10" width="16" height="20" rx="2" fill="#333" />
+                                <!-- Lens -->
+                                <path d="M-8 30 Q0 35 8 30" fill="#111" />
+
+                                <!-- Symmetrical Warm Beam -->
+                                <path d="M0 30 L-80 120 L80 120 Z" fill="url(#natural-beam-grad)" opacity="0.6" />
+                            </g>
+
+                            <defs>
+                                <linearGradient id="natural-beam-grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#FFD700" stop-opacity="0.9" />
+                                    <stop offset="30%" stop-color="#FFD700" stop-opacity="0.5" />
+                                    <stop offset="100%" stop-color="#FFD700" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <h2 class="section-title">Built for <span class="highlighted-word">business.</span></h2>
+                </div>
+                <p class="section-subtitle">We serve the professionals shaping the future of work with flexible,
+                    high-end environments.</p>
+
+                <div class="trust-pills mt-lg">
+                    <span class="pill">Remote teams</span>
+                    <span class="pill">Outsourced companies</span>
+                    <span class="pill">Freelancers</span>
+                    <span class="pill">Startups</span>
+                    <span class="pill">Corporate satellite teams</span>
+                </div>
+
+                <!-- Refined SEO Content Integration -->
+                <div class="trust-seo-split mt-xl" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; text-align: left; max-width: 1000px; margin: 60px auto 0; padding: 0 20px;">
+                    <div>
+                        <h3 style="font-size: 2.2rem; font-weight: 400; color: #1d1d1f; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 32px;">The new standard for work in <span class="text-emerald text-italic">Alexandria.</span></h3>
+                        <div class="trust-image-inline" style="border-radius: 24px; overflow: hidden; box-shadow: var(--shadow-soft);">
+                            <img src="assets/TheCirclePrivateRoomsKafrAbdo.webp" alt="Premium Private Offices at The Circle - Kafr Abdo, Alexandria Workspace"
+                                style="width: 100%; height: auto; display: block;" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    <div style="font-size: 1.1rem; line-height: 1.7; color: #86868b; font-weight: 300; display: flex; flex-direction: column; justify-content: center;">
+                        <p style="margin-bottom: 24px;">
+                            Alexandria is rapidly evolving as a hub for startups, remote teams, and global companies establishing their Egyptian footprint. The Circle provides premium, flexible workspace solutions—from <strong style="color: #1d1d1f;">private offices</strong> and <strong style="color: #1d1d1f;">dedicated coworking desks</strong> to high-end <strong style="color: #1d1d1f;">meeting rooms</strong> in the city's most prestigious districts.
+                        </p>
+                        <p>
+                            With heritage-inspired locations in <a href="kafr-abdo-branch.html" style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Kafr Abdo</a> and <a href="roushdy-branch.html" style="color: #00674F; font-weight: 500; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">Roushdy</a>, we enable businesses to scale instantly without the friction of traditional leases. Every space is engineered for performance, blending world-class infrastructure with an atmosphere that reflects your professional ambition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Locations Section -->
+        <section id="locations" class="locations section-grey fade-up">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title" style="font-weight: 400;">Two iconic <span class="text-italic text-emerald">spaces</span>.<br>
+                        <span class="shelf-wrapper">
+                            One powerful <span class="text-italic text-brown">network</span>.
+                            <svg class="shelf-svg" viewBox="0 0 300 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Metal Brackets -->
+                                <path d="M60 5 V25 L85 5" stroke="#333" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M240 5 V25 L215 5" stroke="#333" stroke-width="1.5" stroke-linecap="round" />
+                                <!-- Shelf Board -->
+                                <rect x="30" y="0" width="240" height="5" rx="1.5" fill="#5D4037" />
+                            </svg>
+                        </span>
+                    </h2>
+                </div>
+                <div class="location-cards mt-xl">
+                    <!-- Kafr Abdo Location -->
+                    <a href="kafr-abdo-branch.html" class="card location-card fade-up">
+                        <div class="card-image">
+                            <img src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle Coworking space and Private Offices in Kafr Abdo, Alexandria"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <div class="card-content">
+                            <span style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium workspace in Alexandria, Egypt</span>
+                            <h3 class="card-title">Kafr Abdo Location</h3>
+                            <p class="card-story" style="margin-bottom: 12px;">Located inside a historic villa built in
+                                the early 1900s by English architects, our Kafr Abdo workspace blends Alexandria's
+                                architectural heritage with modern workspaces.</p>
+
+                            <div style="margin-bottom: 24px;">
+                                <p
+                                    style="font-size: 0.95rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 4px;">
+                                    Villa 15, Ali Zou El Fekar st, Kafr Abdo</p>
+                                <object><a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank"
+                                        style="color: #00674F; font-size: 0.9rem; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                        View on Google Maps
+                                    </a></object>
+                            </div>
+
+                            <ul class="card-highlights">
+                                <li>Standalone villa</li>
+                                <li>24/7 access</li>
+                                <li>Quiet neighborhood</li>
+                                <li>Private garden workspace</li>
+                            </ul>
+
+                            <span class="btn-link mt-auto">Explore Kafr Abdo Location <span
+                                    class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Roushdy Location -->
+                    <a href="roushdy-branch.html" class="card location-card fade-up delay-1">
+                        <div class="card-image">
+                            <img src="assets/TheCircleRoushdy1.JPG" alt="The Circle Coworking space and Private Offices in Roushdy, Alexandria Workspace" loading="lazy"
+                                decoding="async">
+                        </div>
+                        <div class="card-content">
+                            <span style="display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #00674F; font-weight: 600; margin-bottom: 8px;">Premium workspace in Alexandria, Egypt</span>
+                            <h3 class="card-title">Roushdy Location</h3>
+                            <p class="card-story" style="margin-bottom: 12px;">Located on Syria Street in the heart of
+                                Roushdy, this is the headquarters of The Circle and the place where our community first
+                                started.</p>
+
+                            <div style="margin-bottom: 24px;">
+                                <p
+                                    style="font-size: 0.95rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 4px;">
+                                    15 Syria st, First floor, Roushdy</p>
+                                <object><a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank"
+                                        style="color: #00674F; font-size: 0.9rem; text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 4px;">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                        View on Google Maps
+                                    </a></object>
+                            </div>
+
+                            <ul class="card-highlights">
+                                <li>Premium business district</li>
+                                <li>Close to transport</li>
+                                <li>Built for growing teams</li>
+                            </ul>
+
+                            <span class="btn-link mt-auto">Explore Roushdy Location <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services section-light fade-up">
+            <div class="container text-center">
+                <h2 class="section-title" style="font-weight: 400;"><span class="text-italic text-emerald">The right space.</span><br>Right when you need it.</h2>
+
+                <div class="services-grid mt-xl">
+                    <!-- Private Offices -->
+                    <a href="private-offices.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/private_office_thecircle_SyriaStreet.webp" alt="Furnished Private Offices in Roushdy, Alexandria - The Circle Workspace"
+                                loading="lazy" decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Private Offices</h3>
+                            <p class="service-description">Suiteable for small teams and professionals who want a
+                                focused, quiet environment.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Back Office -->
+                    <a href="back-offices.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/TheCircleRoushdy1.JPG" alt="Back Office Workspace in Roushdy, Alexandria for companies" loading="lazy" decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Back Office</h3>
+                            <p class="service-description">Dedicated to teams who want to setup their back office in
+                                Alexandria.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Private Suites -->
+                    <a href="private-suites.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/private_suites_thecircle_kafrabdo.webp" alt="Corporate Private Offices and Suites in Kafr Abdo, Alexandria" loading="lazy"
+                                decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Private Suites</h3>
+                            <p class="service-description">Suitable for large corporations who want to have an extension
+                                office in alexandria with a large team 20+.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Dedicated Desks -->
+                    <a href="dedicated-desks.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/thecircle_space_kafrabdo2.webp" alt="Dedicated Desk Coworking space in Kafr Abdo, Alexandria Workspace" loading="lazy"
+                                decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Dedicated Desks</h3>
+                            <p class="service-description">For freelancers and solo workers who are looking for a
+                                monthly membership for a fixed desk to setup their workstation.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Shared Spaces -->
+                    <a href="shared-spaces.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/thecircle_syriastreet_sharedspaces.webp" alt="Shared Coworking space in Roushdy, Alexandria - Alexandria Egypt" loading="lazy"
+                                decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Shared Spaces</h3>
+                            <p class="service-description">For freelancers or students who are looking for shared spaces
+                                for daily use.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Meeting Rooms -->
+                    <a href="meeting-rooms.html" class="service-card fade-up">
+                        <div class="service-img-wrapper">
+                            <img src="assets/thecircle-kafrabdo-branch.webp" alt="Professional Meeting Rooms and Workspace Alexandria" loading="lazy"
+                                decoding="async">
+                        </div>
+                        <div class="service-info">
+                            <h3>Meeting Rooms</h3>
+                            <p class="service-description">For teams who are looking to host meetings.</p>
+                            <span class="btn-link mt-auto">Explore more <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Proof -->
+        <section class="social-proof section-dark text-center fade-up">
+            <div class="container-narrow">
+                <h2 class="section-title-sm">Trusted by leading teams in Alexandria.</h2>
+
+                <div class="logo-cloud mt-lg">
+                    <img src="assets/customerlogo1.svg" alt="Company using Coworking space Alexandria" class="customer-logo">
+                    <img src="assets/customerlogo2.png" alt="Business partner at The Circle Workspace" class="customer-logo">
+                    <img src="assets/customerlogo3.svg" alt="Tech team in Alexandria Workspace" class="customer-logo">
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery section-light fade-up">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title" style="font-weight: 400;">Explore the <span class="text-italic">space.</span></h2>
+                </div>
+                <!-- Gallery grid with lazy-loading img tags (CSS backgrounds cannot be lazy-loaded) -->
+                <div class="gallery-grid mt-lg">
+                    <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo1.webp"
+                            alt="Interior of Kafr Abdo, Alexandria Coworking space" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo2.webp"
+                            alt="Private offices in Kafr Abdo, Alexandria Workspace" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo3.webp"
+                            alt="Alexandria Workspace and Coworking space Gallery" loading="lazy" decoding="async"></div>
+                    <div class="gallery-item"><img src="assets/thecircle_space_kafrabdo4.webp"
+                            alt="Modern Coworking space in Kafr Abdo, Alexandria" loading="lazy" decoding="async"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog / Insights -->
+        <section id="insights" class="insights section-grey fade-up">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Insights.</h2>
+                </div>
+
+                <div class="blog-grid mt-lg">
+                    <a href="blog-back-offices-alexandria.html" class="blog-card block-link">
+                        <div class="blog-card-cover" style="background: #E8F3F0;">
+                            <!-- Abstract Building/Office Vector -->
+                            <!-- Premium Geometric Abstraction: Architecture/Back Offices -->
+                            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="300" cy="90" r="120" fill="#00674F" opacity="0.05" />
+                                <rect x="140" y="40" width="80" height="100" rx="8" fill="#00674F" />
+                                <rect x="180" y="60" width="80" height="100" rx="8" fill="#2E8671" opacity="0.7" />
+                                <rect x="210" y="80" width="80" height="100" rx="8" fill="#A8D5C9" opacity="0.5" />
+                                <circle cx="100" cy="50" r="30" fill="#E4C19A" opacity="0.3" />
+                            </svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <h4>Why companies open back offices in Alexandria</h4>
+                            <span class="btn-link mt-auto">Read article <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <a href="blog-cost-office-space.html" class="blog-card block-link">
+                        <div class="blog-card-cover" style="background: #F4EFEA;">
+                            <!-- Abstract Cost/Chart Vector -->
+                            <!-- Premium Geometric Abstraction: Value/Cost -->
+                            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="200" cy="90" r="60" stroke="#00674F" stroke-width="20" opacity="0.1" />
+                                <path d="M120 140 L 280 140" stroke="#333" stroke-width="1" opacity="0.1" />
+                                <rect x="140" y="100" width="30" height="40" rx="15" fill="#E4C19A" />
+                                <rect x="185" y="70" width="30" height="70" rx="15" fill="#A8D5C9" />
+                                <rect x="230" y="40" width="30" height="100" rx="15" fill="#00674F" />
+                                <circle cx="320" cy="60" r="40" fill="#00674F" opacity="0.03" />
+                            </svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <h4>Cost of office space in Alexandria</h4>
+                            <span class="btn-link mt-auto">Read article <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <a href="blog-remote-work-culture.html" class="blog-card block-link">
+                        <div class="blog-card-cover" style="background: #E8F0F3;">
+                            <!-- Abstract Desk/Laptop Vector -->
+                            <!-- Premium Geometric Abstraction: Connectivity/Culture -->
+                            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="200" cy="90" r="40" fill="#00674F" opacity="0.8" />
+                                <circle cx="140" cy="70" r="30" fill="#A8D5C9" opacity="0.6" />
+                                <circle cx="260" cy="110" r="35" fill="#2E8671" opacity="0.5" />
+                                <path d="M140 70 Q 200 40 260 110" stroke="#00674F" stroke-width="1.5"
+                                    stroke-dasharray="4 4" opacity="0.3" />
+                                <circle cx="80" cy="120" r="50" fill="#E4C19A" opacity="0.1" />
+                            </svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <h4>Remote work culture in Egypt</h4>
+                            <span class="btn-link mt-auto">Read article <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+
+                    <a href="blog-alexandria-neighborhoods.html" class="blog-card block-link">
+                        <div class="blog-card-cover" style="background: #F3ECE8;">
+                            <!-- Abstract Map/Paths Vector -->
+                            <!-- Premium Geometric Abstraction: Neighborhoods/Network -->
+                            <svg viewBox="0 0 400 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="200" cy="90" r="20" fill="#00674F" />
+                                <circle cx="130" cy="50" r="12" fill="#2E8671" opacity="0.6" />
+                                <circle cx="270" cy="60" r="15" fill="#A8D5C9" opacity="0.5" />
+                                <circle cx="150" cy="130" r="10" fill="#E4C19A" opacity="0.8" />
+                                <circle cx="250" cy="120" r="12" fill="#00674F" opacity="0.3" />
+                                <path d="M130 50 L 200 90 L 270 60" stroke="#00674F" stroke-width="1" opacity="0.2" />
+                                <path d="M150 130 L 200 90 L 250 120" stroke="#00674F" stroke-width="1" opacity="0.2" />
+                            </svg>
+                        </div>
+                        <div class="blog-card-content">
+                            <h4>Best neighborhoods to work in Alexandria</h4>
+                            <span class="btn-link mt-auto">Read article <span class="arrow">›</span></span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Main Dark Footer -->
+    <footer class="footer-main">
+        <div class="container footer-main-container">
+            <div class="footer-col-brand">
+                <h4 class="footer-heading">Addresses</h4>
+                <div class="footer-contact-info">
+                    <p style="margin-bottom: 4px;"><strong style="color: #fff; font-weight: 500;">Kafr
+                            Abdo:</strong><br>Villa 15, Ali Zou El Fekar st.</p>
+                    <a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank" class="footer-map-link">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Get Directions
+                    </a>
+
+                    <p style="margin-bottom: 4px;"><strong
+                            style="color: #fff; font-weight: 500;">Roushdy:</strong><br>15 Syria st, 1st Floor</p>
+                    <a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank" class="footer-map-link"
+                        style="margin-bottom: 24px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        Get Directions
+                    </a>
+
+                    <p style="margin-bottom: 4px;"><strong style="color: #fff; font-weight: 500;">Email:</strong>
+                        contact@circleworkspace.com</p>
+                    <p><strong style="color: #fff; font-weight: 500;">Phone:</strong> +20 10 34708850</p>
+                </div>
+            </div>
+
+            <div class="footer-col-links">
+                <h4 class="footer-heading">Company</h4>
+                <a href="about.html">About Us</a>
+                <a href="locations.html">Locations</a>
+                <a href="faq.html">FAQ</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="insights.html">Insights</a>
+                <a href="support-request.html">Support Request</a>
+            </div>
+
+            <div class="footer-col-links">
+                <h4 class="footer-heading">Services</h4>
+                <a href="private-offices.html">Private Offices</a>
+                <a href="private-suites.html">Private Suites</a>
+                <a href="dedicated-desks.html">Dedicated Desks</a>
+                <a href="shared-spaces.html">Shared Spaces</a>
+                <a href="meeting-rooms.html">Meeting Rooms</a>
+                <a href="back-offices.html">Back Offices</a>
+            </div>
+
+            <div class="footer-col-links">
+                <h4 class="footer-heading">Social</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/circleworkspace/" class="social-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/company/circleworkspace" class="social-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.tiktok.com/@circleworkspace" class="social-icon" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.9-.32-1.9-.23-2.74.12-.69.29-1.27.87-1.62 1.54-.33.63-.44 1.36-.4 2.07.12 2.12 2.45 3.5 4.3 2.43.91-.52 1.48-1.47 1.63-2.5.06-2.58.01-5.16.03-7.74.02-5.45-.01-10.89.02-16.34z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="footer-copyright">
+                <img src="assets/logocircletransparentwhite.png" alt="The Circle Coworking space Alexandria Egypt" class="footer-logo-tiny">
+                <p>&copy; 2026 The Circle Coworking Space Alexandria. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

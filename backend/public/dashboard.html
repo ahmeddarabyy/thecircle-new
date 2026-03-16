@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Circle — Bookings Dashboard</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --emerald: #00674F; --emerald-light: rgba(0,103,79,0.08);
+    --dark: #111; --mid: #555; --muted: #86868b;
+    --bg: #f5f5f7; --card: #fff; --border: #e5e5ea;
+    --pending: #f59e0b; --confirmed: #00674F; --cancelled: #ef4444;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif; background: var(--bg); color: var(--dark); min-height: 100vh; -webkit-font-smoothing: antialiased; }
+
+  /* LOGIN */
+  #loginScreen { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+  .login-card { background: var(--card); border-radius: 24px; padding: 48px 40px; width: 100%; max-width: 400px; box-shadow: 0 25px 60px rgba(0,0,0,0.1); }
+  .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+  .login-logo-mark { width: 36px; height: 36px; background: var(--emerald); border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .login-logo-mark svg { width: 20px; height: 20px; stroke: #fff; }
+  .login-logo span { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.02em; }
+  .login-card h1 { font-size: 1.6rem; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 6px; }
+  .login-card p { font-size: 0.9rem; color: var(--muted); margin-bottom: 32px; }
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 0.82rem; font-weight: 500; color: var(--mid); margin-bottom: 6px; }
+  .field input { width: 100%; padding: 13px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-size: 1rem; font-family: inherit; outline: none; transition: border-color 0.2s; }
+  .field input:focus { border-color: var(--emerald); }
+  .login-btn { width: 100%; padding: 14px; background: var(--dark); color: #fff; border: none; border-radius: 12px; font-size: 1rem; font-weight: 500; font-family: inherit; cursor: pointer; margin-top: 8px; transition: background 0.2s; }
+  .login-btn:hover { background: #333; }
+  .login-error { padding: 12px 16px; background: rgba(239,68,68,0.08); color: #ef4444; border-radius: 10px; font-size: 0.9rem; margin-top: 12px; display: none; }
+
+  /* DASHBOARD */
+  #dashboard { display: none; }
+  .sidebar { position: fixed; top: 0; left: 0; bottom: 0; width: 240px; background: var(--dark); padding: 28px 20px; display: flex; flex-direction: column; z-index: 100; }
+  .sidebar-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
+  .sidebar-logo-mark { width: 32px; height: 32px; background: var(--emerald); border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+  .sidebar-logo-mark svg { width: 16px; height: 16px; stroke: #fff; }
+  .sidebar-logo span { color: #fff; font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
+  .sidebar-nav { flex: 1; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; color: rgba(255,255,255,0.6); font-size: 0.9rem; cursor: pointer; margin-bottom: 4px; transition: all 0.2s; }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.08); color: #fff; }
+  .nav-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .sidebar-footer { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+  .logout-btn { display: flex; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 0.85rem; cursor: pointer; padding: 8px 12px; border-radius: 8px; transition: color 0.2s; }
+  .logout-btn:hover { color: #fff; }
+  .logout-btn svg { width: 15px; height: 15px; }
+
+  .main { margin-left: 240px; padding: 40px; min-height: 100vh; }
+  .page-header { margin-bottom: 32px; }
+  .page-header h1 { font-size: 1.8rem; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 4px; }
+  .page-header p { font-size: 0.9rem; color: var(--muted); }
+
+  /* Stats */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .stat-card { background: var(--card); border-radius: 16px; padding: 24px; border: 1px solid var(--border); }
+  .stat-label { font-size: 0.8rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .stat-value { font-size: 2rem; font-weight: 300; letter-spacing: -0.04em; }
+  .stat-card:nth-child(2) .stat-value { color: var(--pending); }
+  .stat-card:nth-child(3) .stat-value { color: var(--emerald); }
+
+  /* Filters */
+  .filters { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+  .filter-select { padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 980px; font-size: 0.85rem; font-family: inherit; background: var(--card); color: var(--dark); outline: none; cursor: pointer; }
+  .filter-select:focus { border-color: var(--emerald); }
+  .refresh-btn { display: flex; align-items: center; gap: 6px; padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 980px; font-size: 0.85rem; font-family: inherit; background: var(--card); cursor: pointer; transition: all 0.2s; }
+  .refresh-btn:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+  .refresh-btn svg { width: 13px; height: 13px; }
+
+  /* Table */
+  .table-card { background: var(--card); border-radius: 20px; border: 1px solid var(--border); overflow: hidden; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead th { background: var(--bg); padding: 12px 20px; text-align: left; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:hover { background: var(--bg); }
+  tbody td { padding: 16px 20px; vertical-align: middle; }
+  .booking-name { font-weight: 500; }
+  .booking-contact { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 40px; font-size: 0.75rem; font-weight: 600; }
+  .badge-pending  { background: rgba(245,158,11,0.1); color: var(--pending); }
+  .badge-confirmed{ background: rgba(0,103,79,0.1);  color: var(--emerald); }
+  .badge-cancelled{ background: rgba(239,68,68,0.1); color: var(--cancelled); }
+
+  .action-btns { display: flex; gap: 6px; }
+  .action-btn { padding: 5px 12px; border-radius: 8px; font-size: 0.78rem; font-weight: 500; font-family: inherit; cursor: pointer; border: 1.5px solid var(--border); background: var(--card); transition: all 0.15s; }
+  .action-btn:hover { transform: translateY(-1px); }
+  .btn-confirm { border-color: var(--emerald); color: var(--emerald); }
+  .btn-confirm:hover { background: var(--emerald); color: #fff; }
+  .btn-cancel  { border-color: #e5e5ea; color: var(--muted); }
+  .btn-cancel:hover  { background: var(--cancelled); color: #fff; border-color: var(--cancelled); }
+  .btn-delete  { border-color: #e5e5ea; color: var(--muted); }
+  .btn-delete:hover  { background: #111; color: #fff; border-color: #111; }
+
+  .empty-state { padding: 60px 20px; text-align: center; color: var(--muted); }
+  .empty-state svg { width: 40px; height: 40px; margin: 0 auto 12px; opacity: 0.3; }
+
+  /* Calendar view tab */
+  .tabs { display: flex; gap: 4px; background: var(--bg); padding: 4px; border-radius: 12px; margin-bottom: 24px; width: fit-content; }
+  .tab { padding: 8px 20px; border-radius: 9px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; color: var(--muted); border: none; background: none; font-family: inherit; }
+  .tab.active { background: var(--card); color: var(--dark); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+  .time-line { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; }
+  .time-line svg { width: 12px; height: 12px; color: var(--muted); flex-shrink: 0; }
+
+  @media (max-width: 1100px) { .stats-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 700px) { .sidebar { display: none; } .main { margin-left: 0; padding: 20px; } .stats-grid { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-mark"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l5 3"/></svg></div>
+      <span>The Circle</span>
+    </div>
+    <h1>Admin Sign In</h1>
+    <p>Bookings management dashboard</p>
+    <div class="field"><label>Username</label><input type="text" id="loginUser" placeholder="admin" autocomplete="username"></div>
+    <div class="field"><label>Password</label><input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="login-btn" onclick="doLogin()" id="loginBtn">Sign In</button>
+    <div class="login-error" id="loginError">Invalid username or password</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark"><svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l5 3"/></svg></div>
+      <span>The Circle</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-item active" onclick="showTab('bookings')">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Bookings
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="logout-btn" onclick="logout()">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        Sign out
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="page-header">
+      <h1>Bookings</h1>
+      <p id="lastUpdated">Loading…</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Total Bookings</div><div class="stat-value" id="statTotal">—</div></div>
+      <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value" id="statPending">—</div></div>
+      <div class="stat-card"><div class="stat-label">Confirmed</div><div class="stat-value" id="statConfirmed">—</div></div>
+      <div class="stat-card"><div class="stat-label">Today</div><div class="stat-value" id="statToday">—</div></div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <select class="filter-select" id="filterStatus" onchange="loadBookings()">
+        <option value="">All Statuses</option>
+        <option value="pending">Pending</option>
+        <option value="confirmed">Confirmed</option>
+        <option value="cancelled">Cancelled</option>
+      </select>
+      <select class="filter-select" id="filterBranch" onchange="loadBookings()">
+        <option value="">All Branches</option>
+        <option value="kafr-abdo">Kafr Abdo</option>
+        <option value="roushdy">Roushdy</option>
+      </select>
+      <input type="date" class="filter-select" id="filterDate" onchange="loadBookings()">
+      <button class="refresh-btn" onclick="loadAll()">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        Refresh
+      </button>
+    </div>
+
+    <!-- Table -->
+    <div class="table-card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Guest</th>
+              <th>Branch</th>
+              <th>Date</th>
+              <th>Time Slot</th>
+              <th>Attendees</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsBody">
+            <tr><td colspan="8"><div class="empty-state">Loading…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const API = 'http://localhost:3001/api';
+let token = localStorage.getItem('tc_token');
+
+// Auto-show dashboard if token exists
+if (token) tryInit();
+
+// Enter key on login
+document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+async function doLogin() {
+  const btn = document.getElementById('loginBtn');
+  const errEl = document.getElementById('loginError');
+  btn.textContent = 'Signing in…'; btn.disabled = true;
+  errEl.style.display = 'none';
+  try {
+    const res = await fetch(`${API}/admin/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: document.getElementById('loginUser').value,
+        password: document.getElementById('loginPass').value
+      })
+    });
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    token = data.token;
+    localStorage.setItem('tc_token', token);
+    initDashboard();
+  } catch (e) {
+    errEl.textContent = e.message || 'Login failed';
+    errEl.style.display = 'block';
+  } finally {
+    btn.textContent = 'Sign In'; btn.disabled = false;
+  }
+}
+
+async function tryInit() {
+  // Quick validation
+  try {
+    const res = await fetch(`${API}/admin/stats`, { headers: { Authorization: `Bearer ${token}` } });
+    if (res.ok) { initDashboard(); return; }
+  } catch {}
+  token = null; localStorage.removeItem('tc_token');
+}
+
+function initDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadAll();
+}
+
+async function loadAll() {
+  loadStats();
+  loadBookings();
+}
+
+async function loadStats() {
+  try {
+    const res = await fetch(`${API}/admin/stats`, { headers: { Authorization: `Bearer ${token}` } });
+    const { total, pending, confirmed, today } = await res.json();
+    document.getElementById('statTotal').textContent     = total;
+    document.getElementById('statPending').textContent   = pending;
+    document.getElementById('statConfirmed').textContent = confirmed;
+    document.getElementById('statToday').textContent     = today;
+    document.getElementById('lastUpdated').textContent   = 'Last updated: ' + new Date().toLocaleTimeString();
+  } catch {}
+}
+
+async function loadBookings() {
+  const params = new URLSearchParams();
+  const status = document.getElementById('filterStatus').value;
+  const branch = document.getElementById('filterBranch').value;
+  const date   = document.getElementById('filterDate').value;
+  if (status) params.append('status', status);
+  if (branch) params.append('branch', branch);
+  if (date)   params.append('date', date);
+
+  const tbody = document.getElementById('bookingsBody');
+  tbody.innerHTML = '<tr><td colspan="8"><div class="empty-state">Loading…</div></td></tr>';
+  try {
+    const res = await fetch(`${API}/admin/bookings?${params}`, { headers: { Authorization: `Bearer ${token}` } });
+    const { bookings } = await res.json();
+    if (!bookings.length) {
+      tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>No bookings found</div></td></tr>`;
+      return;
+    }
+    tbody.innerHTML = bookings.map(b => `
+      <tr>
+        <td style="color:var(--muted);font-size:0.8rem">#${b.id}</td>
+        <td>
+          <div class="booking-name">${esc(b.name)}</div>
+          <div class="booking-contact">${esc(b.email)} · ${esc(b.phone)}</div>
+          ${b.notes ? `<div class="booking-contact" style="margin-top:4px;font-style:italic">"${esc(b.notes)}"</div>` : ''}
+        </td>
+        <td>${b.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy'}</td>
+        <td>${formatDate(b.date)}</td>
+        <td>
+          <div class="time-line">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            ${formatTime(b.start_time)} – ${formatTime(b.end_time)}
+          </div>
+        </td>
+        <td>${b.attendees}</td>
+        <td><span class="badge badge-${b.status}">${cap(b.status)}</span></td>
+        <td>
+          <div class="action-btns">
+            ${b.status !== 'confirmed' ? `<button class="action-btn btn-confirm" onclick="updateStatus(${b.id},'confirmed')">Confirm</button>` : ''}
+            ${b.status !== 'cancelled' ? `<button class="action-btn btn-cancel"  onclick="updateStatus(${b.id},'cancelled')">Cancel</button>` : ''}
+            <button class="action-btn btn-delete" onclick="deleteBooking(${b.id})">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  } catch(e) { tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state">Error loading bookings</div></td></tr>`; }
+}
+
+async function updateStatus(id, status) {
+  await fetch(`${API}/admin/bookings/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify({ status })
+  });
+  loadAll();
+}
+
+async function deleteBooking(id) {
+  if (!confirm('Permanently delete this booking?')) return;
+  await fetch(`${API}/admin/bookings/${id}`, { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } });
+  loadAll();
+}
+
+function logout() {
+  localStorage.removeItem('tc_token');
+  token = null;
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function formatDate(d) {
+  const dt = new Date(d + 'T00:00:00');
+  return dt.toLocaleDateString('en-GB', { weekday:'short', day:'numeric', month:'short', year:'numeric' });
+}
+function formatTime(t) {
+  if (!t) return '—';
+  if (t.toLowerCase().includes('am') || t.toLowerCase().includes('pm')) return t;
+  const parts = t.split(':');
+  if (parts.length < 2) return t;
+  let h = parseInt(parts[0]);
+  const m = parts[1];
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${h}:${m} ${ampm}`;
+}
+function showTab(name) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// Auto refresh every 60s
+setInterval(() => { if (token) loadAll(); }, 60000);
+</script>
+</body>
+</html>

@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>احجز مساحة عمل في الإسكندرية | ذا سيركل</title>
+    <meta name="description" content="احجز مساحتك المثالية في الإسكندرية، مصر. مكاتب خاصة، مكاتب مخصصة، وقاعات اجتماعات متاحة الآن.">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        :root {
+            --step-transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --color-emerald: #00674F;
+        }
+
+        .booking-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding-top: 80px;
+        }
+
+        @media (min-width: 900px) {
+            .booking-page {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .booking-left {
+            position: relative;
+            min-height: 300px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 900px) {
+            .booking-left {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 80px);
+            }
+        }
+
+        .booking-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            position: absolute;
+            inset: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .booking-left img.hidden {
+            opacity: 0;
+        }
+
+        .booking-left-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 48px;
+        }
+
+        .booking-right {
+            background: var(--color-white);
+            padding: 60px 40px;
+            overflow-x: hidden;
+        }
+
+        .booking-container {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Steps System */
+        .step-content {
+            display: none;
+            animation: slideIn var(--step-transition) forwards;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .booking-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--color-emerald);
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .booking-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 32px;
+        }
+
+        /* Selection Cards */
+        .selection-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .selection-card {
+            border: 2px solid #f2f2fd;
+            border-radius: 18px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #fafafc;
+            text-align: center;
+        }
+
+        .selection-card:hover {
+            border-color: #d1d1d6;
+            background: #fff;
+            transform: translateY(-2px);
+        }
+
+        .selection-card.selected {
+            border-color: var(--color-emerald);
+            background: rgba(0, 103, 79, 0.02);
+            box-shadow: 0 4px 20px rgba(0, 103, 79, 0.08);
+        }
+
+        .selection-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .selection-card p {
+            font-size: 0.85rem;
+            color: #86868b;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #e5e5ea;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #f5f5f7;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-emerald);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(0, 103, 79, 0.1);
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: #f5f5f7;
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .summary-total {
+            border-top: 1px solid #e5e5ea;
+            margin-top: 16px;
+            padding-top: 16px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Buttons */
+        .footer-nav {
+            display: flex;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .btn-booking {
+            flex: 1;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-next {
+            background: var(--color-dark-grey);
+            color: #fff;
+        }
+
+        .btn-prev {
+            background: #f5f5f7;
+            color: var(--color-dark-grey);
+        }
+
+        .btn-next:hover {
+            background: #000;
+        }
+
+        .btn-prev:hover {
+            background: #e5e5ea;
+        }
+
+        .btn-disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Icon Wrapper */
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 16px;
+            background: var(--color-white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Booking Notice - Rent Specific */
+        .booking-notice {
+            margin-top: 64px;
+            padding: 40px;
+            background: var(--color-emerald);
+            border-radius: 24px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-notice::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .booking-notice p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .booking-notice strong {
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .btn-tour-secondary {
+            display: inline-block;
+            padding: 16px 32px;
+            background: #fff;
+            border-radius: 50px;
+            color: var(--color-dark-grey);
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .btn-tour-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            background: #f5f5f7;
+        }
+
+        /* ── Mini Calendar ───────────────────────────────── */
+        .mini-calendar {
+            background: #f5f5f7;
+            border-radius: 16px;
+            padding: 16px;
+            user-select: none;
+        }
+
+        .cal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .cal-month-label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+        }
+
+        .cal-nav {
+            background: #fff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            color: #333;
+        }
+
+        .cal-nav:hover {
+            background: #e5e5ea;
+        }
+
+        .cal-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            margin-bottom: 6px;
+        }
+
+        .cal-weekdays span {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #86868b;
+            padding: 4px 0;
+        }
+
+        .cal-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 3px;
+        }
+
+        .cal-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.15s;
+            border: none;
+            background: none;
+            font-family: inherit;
+            color: #111;
+        }
+
+        .cal-day:hover:not(.disabled):not(.today-selected) {
+            background: #e5e5ea;
+        }
+
+        .cal-day.today {
+            font-weight: 600;
+            color: var(--color-emerald);
+        }
+
+        .cal-day.selected {
+            background: #111;
+            color: #fff !important;
+            border-radius: 50%;
+        }
+
+        .cal-day.disabled {
+            color: #c7c7cc;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        .cal-day.empty {
+            pointer-events: none;
+        }
+
+        /* ── Time Picker ─────────────────────────────────── */
+        .time-range-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .time-picker-wrap {
+            flex: 1;
+        }
+
+        .time-sub-label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: #86868b;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .time-range-sep {
+            font-size: 1.2rem;
+            color: #c7c7cc;
+            padding-top: 24px;
+        }
+
+        .time-scroll-picker {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            max-height: 160px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #f5f5f7;
+            border-radius: 14px;
+            scrollbar-width: thin;
+        }
+
+        .time-slot-btn {
+            padding: 6px 12px;
+            border-radius: 980px;
+            border: 1.5px solid transparent;
+            background: #fff;
+            font-size: 0.8rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+            color: #333;
+        }
+
+        .time-slot-btn:hover {
+            border-color: #d1d1d6;
+        }
+
+        .time-slot-btn.selected {
+            background: #111;
+            color: #fff;
+            border-color: #111;
+        }
+
+        .time-slot-btn.booked {
+            background: #f5f5f7;
+            color: #c7c7cc;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+    </style>
+    <link rel="canonical" href="https://circleworkspace.com/ar/book-a-space.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Structured Data (JSON-LD) -->
+    
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://circleworkspace.com/#organization",
+      "name": "The Circle Workspace",
+      "url": "https://circleworkspace.com",
+      "logo": "https://circleworkspace.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/thecircleworkspace",
+        "https://www.instagram.com/circleworkspace/",
+        "https://www.linkedin.com/company/circleworkspace",
+        "https://www.tiktok.com/@circleworkspace"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201034708850",
+        "contactType": "customer service",
+        "areaServed": "EG",
+        "availableLanguage": [
+          "English",
+          "Arabic"
+        ]
+      }
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "name": "The Circle - Kafr Abdo Branch",
+      "description": "Premium coworking space and private offices in Kafr Abdo, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp"
+      ],
+      "url": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Villa 15, Ali Zou El Fekar st",
+        "addressLocality": "Kafr Abdo",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2291,
+        "longitude": 29.9575
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$"
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/roushdy-branch.html",
+      "name": "The Circle - Roushdy Branch",
+      "description": "Premium coworking space and private offices in Roushdy, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/TheCircleRoushdy1.JPG"
+      ],
+      "url": "https://circleworkspace.com/roushdy-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "15 Syria st, First floor",
+        "addressLocality": "Roushdy",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2333,
+        "longitude": 29.9533
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://circleworkspace.com/ar/book-a-space.html",
+      "url": "https://circleworkspace.com/ar/book-a-space.html",
+      "name": "حجز مساحة عمل في الإسكندرية | مكاتب مشتركة وقاعات اجتماعات",
+      "description": "احجز مساحات العمل المشترك، المكاتب اليومية، وقاعات الاجتماعات في الإسكندرية مصر. اختر بين فيلا كفر عبده أو مقر رشدي واحجز مكتبك عبر الإنترنت.",
+      "isPartOf": {
+        "@id": "https://circleworkspace.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://circleworkspace.com/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "احجز مساحتك",
+          "item": "https://circleworkspace.com/ar/book-a-space.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="احجز مساحة عمل في الإسكندرية | ذا سيركل">
+    <meta property="og:description" content="احجز مساحتك المثالية في الإسكندرية، مصر. مكاتب خاصة، مكاتب مخصصة، وقاعات اجتماعات متاحة الآن.">
+    <meta property="og:url" content="https://circleworkspace.com/ar/book-a-space.html">
+    <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="The Circle Workspace">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="احجز مساحة عمل في الإسكندرية | ذا سيركل">
+    <meta name="twitter:description" content="احجز مساحتك المثالية في الإسكندرية، مصر. مكاتب خاصة، مكاتب مخصصة، وقاعات اجتماعات متاحة الآن.">
+    <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta name="twitter:site" content="@circleworkspace">
+    <link rel="alternate" hreflang="en" href="https://circleworkspace.com/book-a-space.html">
+    <link rel="alternate" hreflang="ar" href="https://circleworkspace.com/ar/book-a-space.html">
+    <link rel="alternate" hreflang="x-default" href="https://circleworkspace.com/book-a-space.html">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Cairo', system-ui, -apple-system, sans-serif; text-align: right; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cairo', sans-serif; }
+        .hero-title { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; }
+        .section-title { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 700; }
+        .nav-links { margin-left: 0; margin-right: auto; }
+        .feature-item, .service-info, .card-content, .text-center { text-align: right !important; }
+        .btn-link .arrow, .link-light .arrow { display: inline-block; transform: scaleX(-1); margin-left: 0; margin-right: 8px; }
+        .container-centered { text-align: right !important; align-items: flex-end; }
+        .footer-col-brand, .footer-col-links, .social-proof, .section-header { text-align: right; }
+        .nav-actions { margin-left: 0; }
+        .hero-ctas { justify-content: flex-end; }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="../assets/logo.png" alt="The Circle Logo">
+            </a>
+            <div class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="locations.html">الفروع</a>
+                <a href="services.html">الخدمات</a>
+                <a href="gallery.html">المعرض</a>
+                <a href="insights.html">المدونة</a>
+            </div>
+            <div class="nav-actions">
+                <a href="../book-a-space.html" class="lang-toggle" style="margin-left: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">English</a> <a href="book-a-space.html" class="btn btn-nav-cta">احجز مساحتك</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="booking-page">
+        <div class="booking-left" id="heroImageContainer">
+            <img src="../assets/thecircle-kafrabdo-branch.webp"
+                alt="Reserve coworking space and meeting rooms at The Circle Alexandria Egypt" class="active-img"
+                id="heroImage">
+            <img src="../assets/thecircle_syriastreet_sharedspaces.webp"
+                alt="Book hot desks and shared workspaces in Roushdy Alexandria" class="hidden" id="heroImageSecondary">
+            <div class="booking-left-overlay">
+                <div style="color: #fff;">
+                    <span
+                        style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.2em; opacity: 0.8;">احجز مكانك</span>
+                    <h2 style="font-size: 2.5rem; font-weight: 300; margin-top: 10px;">المساحة المناسبة.<br>الآن.
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-right">
+            <div class="booking-container">
+                <!-- Progress Indicator -->
+                <div id="bookingSteps">
+                    <!-- Step 1: Branch Selection -->
+                    <div class="step-content active" data-step="1">
+                        <span class="booking-eyebrow">الخطوة 1 من 4</span>
+                        <h1 class="visually-hidden" style="display: none;">حجز مساحات العمل في الإسكندرية | مكاتب وقاعات اجتماعات</h1>
+                        <p
+                            style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 400; letter-spacing: -0.02em; margin-bottom: 32px; color: var(--color-dark-grey); line-height: 1.2;">
+                            اختر الفرع واحجز مساحة عملك فوراً.</p>
+                        <div class="selection-grid">
+                            <div class="selection-card" data-value="kafr-abdo" onclick="selectCardRow(this, 'branch')">
+                                <div class="card-icon">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path d="M3 21h18M3 7l9-4 9 4M4 7v14M20 7v14M10 21V11h4v10" />
+                                    </svg>
+                                </div>
+                                <h3>كفر عبده</h3>
+                                <p>فيلا 15، شارع علي ذو الفقار</p>
+                            </div>
+                            <div class="selection-card" data-value="roushdy" onclick="selectCardRow(this, 'branch')">
+                                <div class="card-icon">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path d="M21 21H3m15 0V10M6 21V4m6 17V10m0 0l3-4m-3 4l-3-4" />
+                                    </svg>
+                                </div>
+                                <h3>رشدي</h3>
+                                <p>15 شارع سوريا، طابق 1</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Space Type -->
+                    <div class="step-content" data-step="2">
+                        <span class="booking-eyebrow">الخطوة 2 من 4</span>
+                        <h2 class="booking-title">ما هو نوع المساحة؟</h2>
+                        <div class="selection-grid">
+                            <div class="selection-card" data-value="shared" onclick="selectCardRow(this, 'spaceType')">
+                                <div class="card-icon">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2m8-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm6 10v-2a4 4 0 0 0-3-3.87m-4-12a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                </div>
+                                <h3>مساحة مشتركة</h3>
+                                <p>مكاتب مرنة ومجتمع تفاعلي</p>
+                            </div>
+                            <div class="selection-card" data-value="meeting" onclick="selectCardRow(this, 'spaceType')">
+                                <div class="card-icon">
+                                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <path
+                                            d="M17 11V7a5 5 0 0 0-10 0v4m-2 0h14a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-6a2 2 0 0 1 2-2z" />
+                                    </svg>
+                                </div>
+                                <h3>قاعة اجتماعات</h3>
+                                <p>غرف هادئة بالساعة</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Config -->
+                    <div class="step-content" data-step="3">
+                        <span class="booking-eyebrow">الخطوة 3 من 4</span>
+                        <h2 class="booking-title" id="configTitle">إعدادات الحجز</h2>
+
+                        <!-- Shared configuration: Select Date -->
+                        <div class="form-group">
+                            <label class="form-label">اختر التاريخ</label>
+                            <div class="mini-calendar" id="miniCalendar">
+                                <div class="cal-header">
+                                    <button type="button" class="cal-nav" onclick="changeMonth(-1)">‹</button>
+                                    <span class="cal-month-label" id="calMonthLabel"></span>
+                                    <button type="button" class="cal-nav" onclick="changeMonth(1)">›</button>
+                                </div>
+                                <div class="cal-weekdays">
+                                    <span>أح</span><span>إث</span><span>ثل</span><span>أر</span><span>خم</span><span>جم</span><span>سب</span>
+                                </div>
+                                <div class="cal-days" id="calDays"></div>
+                            </div>
+                            <p class="cal-selected-label" id="calSelectedLabel"
+                                style="font-size:0.85rem;color:#86868b;margin-top:8px;">No date selected</p>
+                        </div>
+
+                        <div id="sharedConfig" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">Select Pass Type</label>
+                                <select class="form-control" id="passType" onchange="calculatePrice()">
+                                    <option value="day">Day Pass (150 EGP)</option>
+                                    <option value="shift">Shift Pass (100 EGP)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Number of People</label>
+                                <input type="number" class="form-control" id="peopleCount" value="1" min="1"
+                                    onchange="calculatePrice()">
+                            </div>
+                        </div>
+
+                        <div id="meetingConfig" style="display: none;">
+                            <!-- Time Range -->
+                            <div class="form-group" id="timePickerGroup" style="display:none;">
+                                <label class="form-label">Select Time Window</label>
+                                <div class="time-range-row">
+                                    <div class="time-picker-wrap">
+                                        <label class="time-sub-label">وقت البدء</label>
+                                        <div class="time-scroll-picker" id="startTimePicker"></div>
+                                    </div>
+                                    <div class="time-range-sep">→</div>
+                                    <div class="time-picker-wrap">
+                                        <label class="time-sub-label">وقت الانتهاء</label>
+                                        <div class="time-scroll-picker" id="endTimePicker"></div>
+                                    </div>
+                                </div>
+                                <p id="timeError" style="font-size:0.82rem;color:#ef4444;margin-top:8px;display:none;">
+                                    وقت الانتهاء يجب أن يكون بعد وقت البدء.</p>
+                                <p id="availabilityNote" style="font-size:0.82rem;color:#86868b;margin-top:8px;"></p>
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="summary-box">
+                            <div class="summary-line">
+                                <span id="summaryDesc">مساحة مشتركة · اختر الوقت</span>
+                                <span id="summaryRate">—</span>
+                            </div>
+                            <div class="summary-line" id="guestLine" style="display: none;">
+                                <span>عدد الأفراد</span>
+                                <span id="guestCount">× 1</span>
+                            </div>
+                            <div class="summary-line summary-total">
+                                <span>الإجمالي</span>
+                                <span id="totalPrice">—</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Contact -->
+                    <div class="step-content" data-step="4">
+                        <span class="booking-eyebrow">الخطوة الأخيرة</span>
+                        <h2 class="booking-title">بيانات التواصل</h2>
+
+                        <div class="form-group">
+                            <label class="form-label">الاسم بالكامل</label>
+                            <input type="text" class="form-control" id="userName" placeholder="الاسم هنا">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">البريد الإلكتروني</label>
+                            <input type="email" class="form-control" id="userEmail" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">رقم الموبايل</label>
+                            <input type="tel" class="form-control" id="userPhone" placeholder="+20 10...">
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Success -->
+                    <div class="step-content" data-step="5">
+                        <div style="text-align: center; padding: 40px 0;">
+                            <div
+                                style="width: 80px; height: 80px; background: #e5ffed; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px;">
+                                <svg width="40" height="40" fill="none" stroke="#00d14b" stroke-width="3"
+                                    viewBox="0 0 24 24">
+                                    <path d="M20 6L9 17l-5-5" />
+                                </svg>
+                            </div>
+                            <h2 style="font-weight: 400; margin-bottom: 12px;">تم استلام الحجز!</h2>
+                            <p style="color: #86868b; margin-bottom: 40px;">تم استلام حجزك. سيقوم فريقنا بالتأكيد خلال ساعتين.</p>
+
+                            <!-- Premium Confirmation Mockup -->
+                            <div class="confirmation-container"
+                                style="display: flex; flex-direction: column; gap: 20px; max-width: 440px; margin: 0 auto 40px;">
+                                <!-- Email Mockup -->
+                                <div class="confirmation-mockup"
+                                    style="text-align: left; background: #fff; border-radius: 20px; padding: 24px; border: 1px solid #e5e5ea; box-shadow: 0 10px 30px rgba(0,0,0,0.05); position: relative; z-index: 2;">
+                                    <div
+                                        style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid #f2f2f7;">
+                                        <div
+                                            style="width: 32px; height: 32px; background: #00674F; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; color: #fff; font-weight: 600;">
+                                            C</div>
+                                        <div style="flex: 1;">
+                                            <div
+                                                style="font-size: 0.75rem; color: #86868b; display: flex; justify-content: space-between;">
+                                                <span>From: contact@circleworkspace.com</span>
+                                                <span>الآن</span>
+                                            </div>
+                                            <div style="font-size: 0.9rem; font-weight: 600; color: #1d1d1f;">تأكيد الحجز</div>
+                                        </div>
+                                    </div>
+                                    <div style="font-size: 0.9rem; line-height: 1.5; color: #1d1d1f;">
+                                        <p style="margin-bottom: 12px;">مرحباً <span id="confName">Aly</span>،</p>
+                                        <p style="margin-bottom: 16px;">هذا لتأكيد حجزك في <strong>The
+                                                Circle <span id="confBranch">كفر عبده</span></strong>.</p>
+                                        <div
+                                            style="background: #f5f5f7; padding: 14px; border-radius: 12px; margin-bottom: 10px;">
+                                            <div style="font-size: 0.75rem; color: #86868b; margin-bottom: 2px;">
+                                                مجدول لـ</div>
+                                            <div id="confDateTime" style="font-weight: 600; font-size: 0.85rem;">الأحد،
+                                                15 مارس • 10:00 صباحًا</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a href="index.html" class="btn btn-nav-cta"
+                                style="padding: 16px 48px; font-size: 1rem;">العودة للرئيسية</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-nav" id="bookingNav">
+                        <button class="btn-booking btn-prev" onclick="changeStep(-1)" id="prevBtn"
+                            style="visibility: hidden;">رجوع</button>
+                        <button class="btn-booking btn-next" onclick="changeStep(1)" id="nextBtn"
+                            disabled>متابعة</button>
+                    </div>
+                </div>
+
+                <!-- Office Guidance Note -->
+                <div class="booking-notice">
+                    <p>هل تبحث عن <strong>تأجير</strong> مكتب خاص أو <strong>استئجار</strong> جناح مخصص لفريقك؟</p>
+                    <a href="schedule-a-tour.html" class="btn-tour-secondary">احجز جولة →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="section-light fade-up" style="padding: 100px 24px; border-top: 1px solid rgba(0,0,0,0.05);">
+        <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+            <h2 class="section-title" style="margin-bottom: 24px;">مساحات عمل مشتركة في <span
+                    class="text-italic text-emerald">الإسكندرية</span></h2>
+            <div style="font-size: 1.1rem; color: #86868b; line-height: 1.7; margin-bottom: 64px;">
+                <p style="margin-bottom: 16px;">
+                    تقدم The Circle مساحات عمل مشتركة مرنة في الإسكندرية مصممة لـ <a href="back-offices.html"
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">الفرق
+                        البعيدة</a>،
+                    <a href="shared-spaces.html"
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">المستقلين</a>،
+                    والشركات التي تسعى لتأسيس وجود لها في مصر.
+                </p>
+                <p>
+                    اختر بين فيلا <a href="kafr-abdo-branch.html"
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">كفر
+                        عبده</a> التاريخية أو مقرنا الرئيسي في <a href="roushdy-branch.html"
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">رشدي</a>
+                    الواقع في شارع سوريا. يوفر كلا الموقعين إنترنت سريع،
+                    <a href="meeting-rooms.html"
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">قاعات
+                        اجتماعات</a> احترافية، ومساحات عمل مشتركة مريحة.
+                </p>
+            </div>
+
+            <h3
+                style="font-size: 1.5rem; color: var(--color-dark-grey); margin-bottom: 20px; font-weight: 500; letter-spacing: -0.02em;">
+                الأسئلة الشائعة</h3>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <div
+                    style="background: #fff; padding: 24px 30px; border-radius: var(--radius-lg); border: 2px solid #f2f2f7;">
+                    <h4
+                        style="font-size: 1.1rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">
+                        هل أحتاج إلى حجز مكتبي مسبقًا؟</h4>
+                    <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">بينما نرحب بالزوار دون حجز في مساحاتنا بالإسكندرية حسب التوفر، نوصي بشدة بحجز مكتبك عبر الإنترنت من خلال هذه الصفحة لضمان توفر مساحة عملك قبل وصولك.</p>
+                </div>
+                <div
+                    style="background: #fff; padding: 24px 30px; border-radius: var(--radius-lg); border: 2px solid #f2f2f7;">
+                    <h4
+                        style="font-size: 1.1rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">
+                        هل تشمل قاعات الاجتماعات الاشتراكات اليومية للمساحات المشتركة؟</h4>
+                    <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">يتم حجز قاعات الاجتماعات بشكل منفصل لضمان فترات خاصة وغير منقطعة للفرق. يمكنك حجز فترات بالساعة بأمان عن طريق اختيار "قاعة اجتماعات" كنوع مساحتك في بوابة الحجز أعلاه.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+        let currentStep = 1;
+        const bookingData = {
+            branch: null,
+            spaceType: null,
+            config: {},
+            date: null,
+            startTime: null,
+            endTime: null,
+            total: 0
+        };
+
+        // ── Calendar ──────────────────────────────────────────────
+        let calYear, calMonth;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        function initCalendar() {
+            if (bookingData.date) {
+                const d = new Date(bookingData.date + 'T00:00:00');
+                calYear = d.getFullYear();
+                calMonth = d.getMonth();
+            } else {
+                calYear = today.getFullYear();
+                calMonth = today.getMonth();
+            }
+            renderCalendar();
+        }
+
+        function changeMonth(dir) {
+            calMonth += dir;
+            if (calMonth > 11) { calMonth = 0; calYear++; }
+            if (calMonth < 0) { calMonth = 11; calYear--; }
+            renderCalendar();
+        }
+
+        function renderCalendar() {
+            const label = new Date(calYear, calMonth, 1)
+                .toLocaleDateString('ar-EG', { month: 'long', year: 'numeric' });
+            document.getElementById('calMonthLabel').textContent = label;
+
+            const firstDay = new Date(calYear, calMonth, 1).getDay();
+            const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+            const container = document.getElementById('calDays');
+            container.innerHTML = '';
+
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                const blank = document.createElement('div');
+                blank.className = 'cal-day empty';
+                container.appendChild(blank);
+            }
+
+            for (let d = 1; d <= daysInMonth; d++) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = d;
+                const thisDate = new Date(calYear, calMonth, d);
+                const dateStr = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+
+                btn.className = 'cal-day';
+                if (thisDate < today) btn.classList.add('disabled');
+                if (thisDate.toDateString() === today.toDateString()) btn.classList.add('today');
+                if (bookingData.date === dateStr) btn.classList.add('selected');
+
+                btn.onclick = () => selectDate(dateStr, btn, d);
+                container.appendChild(btn);
+            }
+        }
+
+        function selectDate(dateStr, btn, day) {
+            bookingData.date = dateStr;
+            bookingData.startTime = null;
+            bookingData.endTime = null;
+
+            document.querySelectorAll('.cal-day').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+
+            const dt = new Date(dateStr + 'T00:00:00');
+            document.getElementById('calSelectedLabel').textContent =
+                dt.toLocaleDateString('ar-EG', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+            document.getElementById('timePickerGroup').style.display = 'block';
+            loadAvailabilityAndRenderTimes();
+            validateStep();
+        }
+
+        // ── Time Picker ───────────────────────────────────────────
+        const OPEN_HOUR = 9;   // 9 AM
+        const CLOSE_HOUR = 20; // 8 PM
+
+        function to12h(time24) {
+            const [h, m] = time24.split(':').map(Number);
+            const period = h >= 12 ? 'PM' : 'AM';
+            const h12 = h % 12 || 12;
+            return `${h12}:${String(m).padStart(2, '0')} ${period}`;
+        }
+
+        function generateTimeSlots() {
+            const slots = [];
+            for (let h = OPEN_HOUR; h <= CLOSE_HOUR; h++) {
+                const v1 = `${String(h).padStart(2, '0')}:00`;
+                slots.push({ value: v1, label: to12h(v1) });
+                if (h < CLOSE_HOUR) {
+                    const v2 = `${String(h).padStart(2, '0')}:30`;
+                    slots.push({ value: v2, label: to12h(v2) });
+                }
+            }
+            return slots;
+        }
+
+        let bookedSlots = []; // [{start_time, end_time}] from API
+
+        async function loadAvailabilityAndRenderTimes() {
+            document.getElementById('availabilityNote').textContent = 'Checking availability…';
+            try {
+                const res = await fetch(`${API_BASE}/availability?branch=${bookingData.branch}&date=${bookingData.date}`);
+                const data = await res.json();
+                bookedSlots = data.booked || [];
+            } catch {
+                bookedSlots = [];
+            }
+            const note = bookedSlots.length
+                ? `هناك ${bookedSlots.length} حجز بالفعل في هذا التاريخ.`
+                : 'جميع المواعيد متاحة في هذا التاريخ.';
+            document.getElementById('availabilityNote').textContent = note;
+            renderTimePicker('startTimePicker', 'start');
+            renderTimePicker('endTimePicker', 'end');
+        }
+
+        function isSlotBooked(time, type) {
+            // A time overlaps a booking if it falls within [start, end)
+            return bookedSlots.some(b => {
+                if (type === 'start') return time >= b.start_time && time < b.end_time;
+                if (type === 'end') return time > b.start_time && time <= b.end_time;
+                return false;
+            });
+        }
+
+        function renderTimePicker(containerId, type) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            const slots = generateTimeSlots();
+            slots.forEach(({ value, label }) => {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.textContent = label;          // display: 12h
+                btn.dataset.value = value;         // store: 24h for comparisons
+                btn.className = 'time-slot-btn';
+                const booked = isSlotBooked(value, type);
+                if (booked) { btn.classList.add('booked'); btn.disabled = true; }
+                const stored = type === 'start' ? bookingData.startTime : bookingData.endTime;
+                if (stored === value) btn.classList.add('selected');
+                btn.onclick = () => selectTime(value, label, type);
+                container.appendChild(btn);
+            });
+        }
+
+        function selectTime(value, label, type) {
+            if (type === 'start') {
+                bookingData.startTime = value;
+                bookingData.startTimeLabel = label;
+                document.querySelectorAll('#startTimePicker .time-slot-btn')
+                    .forEach(b => b.classList.toggle('selected', b.dataset.value === value));
+                // If end time is now invalid, clear it
+                if (bookingData.endTime && bookingData.endTime <= value) {
+                    bookingData.endTime = null;
+                    bookingData.endTimeLabel = null;
+                    document.querySelectorAll('#endTimePicker .time-slot-btn')
+                        .forEach(b => b.classList.remove('selected'));
+                }
+            } else {
+                bookingData.endTime = value;
+                bookingData.endTimeLabel = label;
+                document.querySelectorAll('#endTimePicker .time-slot-btn')
+                    .forEach(b => b.classList.toggle('selected', b.dataset.value === value));
+            }
+            validateTimeRange();
+            updateMeetingSummary();
+            validateStep();
+        }
+
+        function validateTimeRange() {
+            const err = document.getElementById('timeError');
+            if (bookingData.startTime && bookingData.endTime) {
+                // Just ensure end is strictly after start (30-min increments means any gap is valid)
+                if (bookingData.endTime <= bookingData.startTime) {
+                    err.textContent = 'وقت الانتهاء يجب أن يكون بعد وقت البدء.';
+                    err.style.display = 'block';
+                    bookingData.endTime = null;
+                    bookingData.endTimeLabel = null;
+                    return false;
+                }
+                err.style.display = 'none';
+                return true;
+            }
+            err.style.display = 'none';
+            return false;
+        }
+
+        function resetMeetingSummary() {
+            const rate = bookingData.branch === 'kafr-abdo' ? 250 : 200;
+            document.getElementById('summaryDesc').textContent = 'قاعة اجتماعات · اختر الوقت';
+            document.getElementById('summaryRate').textContent = `${rate} ج.م/ساعة`;
+            document.getElementById('totalPrice').textContent = '—';
+            document.getElementById('guestLine').style.display = 'none';
+        }
+
+        function updateMeetingSummary() {
+            if (!bookingData.startTime || !bookingData.endTime) return;
+            const [sh, sm] = bookingData.startTime.split(':').map(Number);
+            const [eh, em] = bookingData.endTime.split(':').map(Number);
+            const mins = (eh * 60 + em) - (sh * 60 + sm);
+            const blocks = Math.ceil(mins / 30);          // number of 30-min blocks
+            const ratePerHr = bookingData.branch === 'kafr-abdo' ? 250 : 200;
+            const ratePerBlock = ratePerHr / 2;           // 125 or 100 per 30 min
+            const total = blocks * ratePerBlock;
+            bookingData.total = total;
+
+            // Format duration nicely: e.g. "1h 30m" or "30m" or "2h"
+            const totalHrs = Math.floor(mins / 60);
+            const remMins = mins % 60;
+            const durLabel = totalHrs > 0 && remMins > 0 ? `${totalHrs}h ${remMins}m`
+                : totalHrs > 0 ? `${totalHrs}h`
+                    : `${remMins}m`;
+
+            const startLabel = bookingData.startTimeLabel || to12h(bookingData.startTime);
+            const endLabel = bookingData.endTimeLabel || to12h(bookingData.endTime);
+            document.getElementById('summaryDesc').textContent = `قاعة اجتماعات (${durLabel}) · ${startLabel} – ${endLabel}`;
+            document.getElementById('summaryRate').textContent = `${ratePerHr} ج.م/ساعة`;
+            document.getElementById('totalPrice').textContent = `${total} ج.م`;
+        }
+
+        const imageMap = {
+            1: "assets/thecircle-kafrabdo-branch.webp",
+            2: {
+                default: "assets/thecircle_space_kafrabdo1.webp",
+                shared: "assets/thecircle_syriastreet_sharedspaces.webp",
+                meeting: "assets/TheCirclePrivateRoomsKafrAbdo.webp"
+            },
+            3: {
+                shared: "assets/thecircle_space_kafrabdo1.webp",
+                meeting: "assets/TheCirclePrivateRoomsKafrAbdo.webp"
+            },
+            4: "assets/thecircle_space_kafrabdo2.webp",
+            5: "assets/thecircle_space_kafrabdo1.webp"
+        };
+
+        const prices = {
+            shared: {
+                day: 150,
+                shift: 100
+            },
+            meeting: {
+                'kafr-abdo': { 1: 250, 5: 1000, 8: 1500 },
+                'roushdy': { 1: 200, 5: 800, 8: 1100 }
+            }
+        };
+
+        function selectCardRow(el, type) {
+            const siblings = el.parentElement.querySelectorAll('.selection-card');
+            siblings.forEach(s => s.classList.remove('selected'));
+            el.classList.add('selected');
+
+            bookingData[type] = el.dataset.value;
+            validateStep();
+        }
+
+        function validateStep() {
+            const nextBtn = document.getElementById('nextBtn');
+            let isValid = false;
+
+            if (currentStep === 1 && bookingData.branch) isValid = true;
+            if (currentStep === 2 && bookingData.spaceType) isValid = true;
+            if (currentStep === 3) {
+                if (bookingData.spaceType === 'shared') {
+                    // Shared: need date
+                    isValid = !!bookingData.date;
+                } else {
+                    // Meeting: need date + valid start + valid end
+                    isValid = !!(bookingData.date && bookingData.startTime && bookingData.endTime);
+                }
+            }
+            if (currentStep === 4) {
+                const name = document.getElementById('userName').value;
+                const phone = document.getElementById('userPhone').value;
+                const email = document.getElementById('userEmail').value;
+                if (name && phone && email) isValid = true;
+            }
+
+            nextBtn.disabled = !isValid;
+        }
+
+        async function changeStep(dir) {
+            if (currentStep === 4 && dir === 1) {
+                await submitBooking();
+                return;
+            }
+            currentStep += dir;
+            updateHeroImage();
+            renderStep();
+        }
+
+        async function submitBooking() {
+            const btn = document.getElementById('nextBtn');
+            btn.textContent = 'جاري الإرسال...';
+            btn.disabled = true;
+
+            const payload = {
+                name: document.getElementById('userName').value,
+                email: document.getElementById('userEmail').value,
+                phone: document.getElementById('userPhone').value,
+                branch: bookingData.branch,
+                type: bookingData.spaceType,
+                date: bookingData.date || '',
+                start_time: bookingData.startTime || '',
+                end_time: bookingData.endTime || '',
+                attendees: 1,
+                notes: ''
+            };
+
+            // For shared space, use selected date and a placeholder slot
+            if (bookingData.spaceType === 'shared') {
+                payload.date = bookingData.date || today.toISOString().split('T')[0];
+                payload.start_time = '09:00';
+                payload.end_time = '17:00';
+                payload.notes = document.getElementById('passType')?.value === 'shift' ? 'Shift Pass' : 'Day Pass';
+            }
+
+            try {
+                const res = await fetch(`${API_BASE}/bookings`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error || 'Booking failed');
+                currentStep = 5;
+                renderStep();
+
+                // Update Confirmation Mockup with real data
+                document.getElementById('confName').textContent = payload.name;
+                document.getElementById('confBranch').textContent = payload.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy';
+
+                if (bookingData.spaceType === 'meeting') {
+                    const dt = new Date(bookingData.date + 'T00:00:00');
+                    const dateFmt = dt.toLocaleDateString('ar-EG', { weekday: 'long', month: 'long', day: 'numeric' });
+                    const dateShort = dt.toLocaleDateString('ar-EG', { month: 'short', day: 'numeric' });
+                    document.getElementById('confDateTime').textContent = `${dateFmt} • ${bookingData.startTimeLabel} – ${bookingData.endTimeLabel}`;
+                    if (document.getElementById('confDateShort')) {
+                        document.getElementById('confDateShort').textContent = dateShort;
+                    }
+                } else {
+                    document.getElementById('confDateTime').textContent = `اليوم • دخول طوال اليوم`;
+                    if (document.getElementById('confDateShort')) {
+                        document.getElementById('confDateShort').textContent = 'اليوم';
+                    }
+                }
+            } catch (err) {
+                alert('⚠️ ' + err.message);
+                btn.textContent = 'Confirm Booking';
+                btn.disabled = false;
+            }
+        }
+
+        function updateHeroImage() {
+            const primary = document.getElementById('heroImage');
+            const secondary = document.getElementById('heroImageSecondary');
+
+            let newSrc = imageMap[currentStep];
+            if (typeof newSrc === 'object') {
+                newSrc = newSrc[bookingData.spaceType] || newSrc.default;
+            }
+
+            if (primary.src.includes(newSrc)) return;
+
+            // Simple cross-fade
+            secondary.src = newSrc;
+            secondary.classList.remove('hidden');
+            primary.classList.add('hidden');
+
+            setTimeout(() => {
+                primary.src = newSrc;
+                primary.classList.remove('hidden');
+                secondary.classList.add('hidden');
+            }, 800);
+        }
+
+        function renderStep() {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.step-content[data-step="${currentStep}"]`).classList.add('active');
+
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const bookingNav = document.getElementById('bookingNav');
+
+            prevBtn.style.visibility = currentStep > 1 && currentStep < 5 ? 'visible' : 'hidden';
+            if (currentStep === 4) nextBtn.textContent = 'تأكيد الحجز';
+            else nextBtn.textContent = 'استمرار';
+
+            if (currentStep === 5) bookingNav.style.display = 'none';
+
+            if (currentStep === 3) {
+                const sharedContent = document.getElementById('sharedConfig');
+                const meetingContent = document.getElementById('meetingConfig');
+
+                // Always init calendar in step 3
+                initCalendar();
+
+                if (bookingData.spaceType === 'shared') {
+                    sharedContent.style.display = 'block';
+                    meetingContent.style.display = 'none';
+                    document.getElementById('guestLine').style.display = 'flex';
+                    calculatePrice();
+                } else {
+                    sharedContent.style.display = 'none';
+                    meetingContent.style.display = 'block';
+                    document.getElementById('guestLine').style.display = 'none';
+                    resetMeetingSummary();
+                }
+            }
+
+            validateStep();
+        }
+
+        function calculatePrice() {
+            let total = 0;
+            let desc = "";
+            let rate = "";
+
+            if (bookingData.spaceType === 'shared') {
+                const type = document.getElementById('passType').value;
+                const count = parseInt(document.getElementById('peopleCount').value) || 1;
+                const unitPrice = prices.shared[type];
+                total = unitPrice * count;
+                desc = type === 'day' ? 'دخول يومي' : 'فترة واحدة';
+                rate = `${unitPrice} ج.م`;
+                document.getElementById('guestCount').textContent = `× ${count}`;
+            } else {
+                const duration = document.getElementById('meetingDuration').value;
+                total = prices.meeting[bookingData.branch][duration];
+                desc = `قاعة اجتماعات (${duration} ساعة)`;
+                rate = `${total} ج.م`;
+            }
+
+            document.getElementById('summaryDesc').textContent = desc;
+            document.getElementById('summaryRate').textContent = rate;
+            document.getElementById('totalPrice').textContent = `${total} ج.م`;
+            bookingData.total = total;
+        }
+
+        // Add event listeners for inputs in step 4
+        ['userName', 'userPhone', 'userEmail'].forEach(id => {
+            document.getElementById(id).addEventListener('input', validateStep);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Tour | Coworking Space in Alexandria | The Circle</title>
+    <meta name="description" content="Book a private tour of The Circle coworking space and private offices in Alexandria. Visit our Kafr Abdo or Roushdy locations.">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ========================
+           Tour Form Page Styles
+           ======================== */
+        .tour-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding-top: 80px; /* nav height offset */
+        }
+
+        @media (min-width: 900px) {
+            .tour-page {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Left: Atmospheric image panel */
+        .tour-left {
+            position: relative;
+            min-height: 400px;
+            overflow: hidden;
+        }
+
+        @media (min-width: 900px) {
+            .tour-left {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 80px);
+                min-height: unset;
+            }
+        }
+
+        .tour-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tour-left-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 56px 48px;
+        }
+
+        .tour-left-copy {
+            color: #fff;
+        }
+
+        .tour-left-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            opacity: 0.75;
+            font-weight: 400;
+            display: block;
+        }
+
+        .tour-left-title {
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: -0.035em;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .tour-left-sub {
+            font-size: 1rem;
+            opacity: 0.75;
+            line-height: 1.6;
+            font-weight: 400;
+            max-width: 400px;
+        }
+
+        /* Right: Form panel */
+        .tour-right {
+            background: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 48px;
+        }
+
+        @media (max-width: 600px) {
+            .tour-right {
+                padding: 48px 24px;
+            }
+        }
+
+        .tour-form-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .tour-form-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #00674F;
+            font-weight: 500;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .tour-form-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            color: var(--color-dark-grey);
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        .tour-form-sub {
+            font-size: 1rem;
+            color: #86868b;
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--color-dark-grey);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #e5e5ea;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            color: var(--color-dark-grey);
+            background: #f5f5f7;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-input:focus {
+            border-color: #00674F;
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(0, 103, 79, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #aeaeb2;
+        }
+
+        /* Select styled to match */
+        select.form-input {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 44px;
+        }
+
+        .btn-tour-submit {
+            width: 100%;
+            padding: 18px 24px;
+            background: var(--color-dark-grey);
+            color: var(--color-white);
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-tour-submit:hover {
+            background: #000;
+            transform: translateY(-1px);
+        }
+
+        .btn-tour-submit:active {
+            transform: translateY(0);
+        }
+
+        /* Required star */
+        .required {
+            color: #00674F;
+            margin-left: 2px;
+        }
+
+        /* Success State */
+        .tour-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 103, 79, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .success-icon svg {
+            color: #00674F;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            color: var(--color-dark-grey);
+            margin-bottom: 14px;
+        }
+
+        .success-body {
+            font-size: 1rem;
+            color: #86868b;
+            line-height: 1.65;
+            max-width: 360px;
+            margin: 0 auto 36px;
+        }
+
+        .btn-back-home {
+            display: inline-block;
+            padding: 14px 28px;
+            border: 1px solid #e5e5ea;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-back-home:hover {
+            background: #f5f5f7;
+            border-color: #d1d1d6;
+        }
+    </style>
+    <link rel="canonical" href="https://circleworkspace.com/schedule-a-tour.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Structured Data (JSON-LD) -->
+    
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://circleworkspace.com/#organization",
+      "name": "The Circle Workspace",
+      "url": "https://circleworkspace.com",
+      "logo": "https://circleworkspace.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/thecircleworkspace",
+        "https://www.instagram.com/circleworkspace/",
+        "https://www.linkedin.com/company/circleworkspace",
+        "https://www.tiktok.com/@circleworkspace"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201034708850",
+        "contactType": "customer service",
+        "areaServed": "EG",
+        "availableLanguage": [
+          "English",
+          "Arabic"
+        ]
+      }
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "name": "The Circle - Kafr Abdo Branch",
+      "description": "Premium coworking space and private offices in Kafr Abdo, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp"
+      ],
+      "url": "https://circleworkspace.com/kafr-abdo-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Villa 15, Ali Zou El Fekar st",
+        "addressLocality": "Kafr Abdo",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2291,
+        "longitude": 29.9575
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$"
+    },
+    {
+      "@type": "CoworkingSpace",
+      "@id": "https://circleworkspace.com/roushdy-branch.html",
+      "name": "The Circle - Roushdy Branch",
+      "description": "Premium coworking space and private offices in Roushdy, Alexandria.",
+      "image": [
+        "https://circleworkspace.com/assets/TheCircleRoushdy1.JPG"
+      ],
+      "url": "https://circleworkspace.com/roushdy-branch.html",
+      "telephone": "+201034708850",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "15 Syria st, First floor",
+        "addressLocality": "Roushdy",
+        "addressRegion": "Alexandria",
+        "addressCountry": "EG"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 31.2333,
+        "longitude": 29.9533
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "ratingCount": "87"
+      },
+      "priceRange": "$$"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://circleworkspace.com/schedule-a-tour.html",
+      "url": "https://circleworkspace.com/schedule-a-tour.html",
+      "name": "Schedule a Tour | Coworking Space in Alexandria | The Circle",
+      "description": "Book a private tour of The Circle coworking space and private offices in Alexandria. Visit our Kafr Abdo or Roushdy locations.",
+      "isPartOf": {
+        "@id": "https://circleworkspace.com/#website"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://circleworkspace.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Schedule A Tour",
+          "item": "https://circleworkspace.com/schedule-a-tour.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Schedule a Tour | Coworking Space in Alexandria | The Circle">
+    <meta property="og:description" content="Book a private tour of The Circle coworking space and private offices in Alexandria. Visit our Kafr Abdo or Roushdy locations.">
+    <meta property="og:url" content="https://circleworkspace.com/schedule-a-tour.html">
+    <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="The Circle Workspace">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Schedule a Tour | Coworking Space in Alexandria | The Circle">
+    <meta name="twitter:description" content="Book a private tour of The Circle coworking space and private offices in Alexandria. Visit our Kafr Abdo or Roushdy locations.">
+    <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta name="twitter:site" content="@circleworkspace">
+    <link rel="alternate" hreflang="en" href="https://circleworkspace.com/schedule-a-tour.html">
+    <link rel="alternate" hreflang="ar" href="https://circleworkspace.com/ar/schedule-a-tour.html">
+    <link rel="alternate" hreflang="x-default" href="https://circleworkspace.com/schedule-a-tour.html">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="The Circle Logo">
+            </a>
+            <div class="nav-links">
+                <a href="about.html">About Us</a>
+                <a href="locations.html">Locations</a>
+                <a href="services.html">Services</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="insights.html">Insights</a>
+            </div>
+            <div class="nav-actions">
+                <a href="ar/schedule-a-tour.html" class="lang-toggle" style="margin-right: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">عربي</a> <a href="book-a-space.html" class="btn btn-nav-cta">Book a space</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="tour-page">
+        <!-- Left atmospheric image panel -->
+        <div class="tour-left">
+            <img src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle coworking space interior in Alexandria">
+            <div class="tour-left-overlay">
+                <div class="tour-left-copy">
+                    <span class="tour-left-eyebrow">The Circle · Alexandria</span>
+                    <h2 class="tour-left-title">Experience the space<br><em style="color: rgba(255,255,255,0.7);">in person</em>.</h2>
+                    <p class="tour-left-sub">We invite you to walk through our Alexandria coworking spaces, meet the community, and discover which workspace fits your ambitions in Kafr Abdo or Roushdy.</p>
+                    <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 10px;">
+                        <a href="mailto:contact@circleworkspace.com" style="color: rgba(255,255,255,0.75); font-size: 0.9rem; text-decoration: none; letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            contact@circleworkspace.com
+                        </a>
+                        <a href="tel:+201034708850" style="color: rgba(255,255,255,0.75); font-size: 0.9rem; text-decoration: none; letter-spacing: 0.01em; display: flex; align-items: center; gap: 8px;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.61 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +20 10 347 08850
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="tour-right">
+            <div class="tour-form-container">
+
+                <!-- Form state -->
+                <div id="formState">
+                    <span class="tour-form-eyebrow">Let's get started</span>
+                    <h1 class="tour-form-title" style="font-size: clamp(1.8rem, 3.5vw, 2.6rem);">Schedule a Tour</h1>
+                    <p class="tour-form-sub">Visit our workspaces in <a href="kafr-abdo-branch.html" style="color: #00674F; text-decoration: underline;">Kafr Abdo</a> or <a href="roushdy-branch.html" style="color: #00674F; text-decoration: underline;">Roushdy</a>, Alexandria.<br>Fill in your details and a member of our team will reach out to confirm your visit.</p>
+
+                    <form id="tourForm" novalidate>
+                        <!-- Formspree hidden config -->
+                        <input type="hidden" name="_subject" value="New Tour Request — The Circle">
+                        <input type="hidden" name="_replyto" id="replyToField" value="">
+
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="fullName" name="name" placeholder="e.g. Ahmed Hassan" required autocomplete="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="companyName">Company Name <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="companyName" name="company" placeholder="e.g. Acme Corp" required autocomplete="organization">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phoneNumber">Phone Number <span class="required">*</span></label>
+                            <input class="form-input" type="tel" id="phoneNumber" name="phone" placeholder="+20 10 0000 0000" required autocomplete="tel">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="emailAddress">Email Address <span class="required">*</span></label>
+                            <input class="form-input" type="email" id="emailAddress" name="email" placeholder="you@company.com" required autocomplete="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="spaceInterest">Space of Interest</label>
+                            <select class="form-input" id="spaceInterest" name="space_interest">
+                                <option value="" disabled selected>Select a space type</option>
+                                <option value="Private Office">Private Office</option>
+                                <option value="Private Suite">Private Suite</option>
+                                <option value="Dedicated Desk">Dedicated Desk</option>
+                                <option value="Shared Space">Shared Space</option>
+                                <option value="Meeting Room">Meeting Room</option>
+                                <option value="Not sure yet">Not sure yet</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-tour-submit" id="submitBtn">Request a Tour &rarr;</button>
+                    </form>
+                </div>
+
+                <!-- Success state (shown after submit) -->
+                <div id="successState" class="tour-success">
+                    <div class="success-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="success-title">You're all set.</h2>
+                    <p class="success-body">Thank you for reaching out. Someone from The Circle team will contact you shortly to confirm your tour and answer any questions.</p>
+                    <a href="index.html" class="btn-back-home">← Back to home</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // FORMSPREE SETUP
+        // 1. Go to https://formspree.io → Sign up free
+        // 2. Create a new form, set email to: contact@circleworkspace.com
+        // 3. Copy your form ID (looks like: xpwzgkbd)
+        // 4. Replace YOUR_FORM_ID below with your actual ID
+        // ============================================================
+        const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mreyqdqe';
+
+        const form = document.getElementById('tourForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name    = document.getElementById('fullName').value.trim();
+            const company = document.getElementById('companyName').value.trim();
+            const phone   = document.getElementById('phoneNumber').value.trim();
+            const email   = document.getElementById('emailAddress').value.trim();
+
+            // Inline validation — highlight empty required fields
+            if (!name || !company || !phone || !email) {
+                document.querySelectorAll('.form-input[required]').forEach(input => {
+                    if (!input.value.trim()) {
+                        input.style.borderColor = '#ff453a';
+                        input.style.boxShadow = '0 0 0 3px rgba(255,69,58,0.1)';
+                        input.addEventListener('input', function() {
+                            if (this.value.trim()) {
+                                this.style.borderColor = '';
+                                this.style.boxShadow = '';
+                            }
+                        }, { once: true });
+                    }
+                });
+                return;
+            }
+
+            // Sync reply-to so Formspree threads correctly
+            document.getElementById('replyToField').value = email;
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+
+            try {
+                const data = new FormData(form);
+                const response = await fetch(FORMSPREE_ENDPOINT, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (err) {
+                // Graceful fallback
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Request a Tour →';
+                alert('Something went wrong. Please email us directly at contact@circleworkspace.com');
+            }
+        });
+
+        function showSuccess() {
+            const formState    = document.getElementById('formState');
+            const successState = document.getElementById('successState');
+
+            formState.style.opacity = '0';
+            formState.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                formState.style.display = 'none';
+                successState.style.display = 'block';
+                successState.style.opacity = '0';
+                successState.style.transition = 'opacity 0.4s ease';
+                requestAnimationFrame(() => { successState.style.opacity = '1'; });
+            }, 300);
+        }
+    </script>
+</body>
+</html>
