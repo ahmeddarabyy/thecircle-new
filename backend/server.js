@@ -468,12 +468,10 @@ app.get(/^\/dashboard/, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  app.listen(PORT, () => {
-    console.log(`\n🟢 The Circle Booking Server running at http://localhost:${PORT}`);
-    console.log(`📊 Admin dashboard at http://localhost:${PORT}/dashboard`);
-    console.log(`🔑 Login: admin / thecircle2026\n`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`\n🟢 The Circle Booking Server running at http://localhost:${PORT}`);
+  console.log(`📊 Admin dashboard at http://localhost:${PORT}/dashboard`);
+  console.log(`🔑 Login: admin / thecircle2026\n`);
+});
 
 module.exports = app;
