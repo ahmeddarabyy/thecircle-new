@@ -17,7 +17,22 @@
             min-height: 100vh;
             display: grid;
             grid-template-columns: 1fr;
-            padding-top: 80px;
+            padding-top: 70px;
+        }
+
+        /* Navbar Mobile Polish */
+        .navbar .logo img {
+            max-height: 40px;
+            width: auto;
+        }
+
+        @media (max-width: 600px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+            .navbar .logo img {
+                max-height: 32px;
+            }
         }
 
         @media (min-width: 900px) {
@@ -1002,7 +1017,15 @@
     </section>
 
     <script>
-        const API_BASE = 'http://localhost:3001/api';
+        const getApiBase = () => {
+            const h = window.location.hostname;
+            const p = window.location.port;
+            if (p === '8000' || h === 'localhost' || h === '127.0.0.1' || h.match(/^192\.168\./) || h.match(/^10\./) || h.match(/^172\.(1[6-9]|2[0-9]|3[0-1])\./)) {
+                return `http://${h}:3001/api`;
+            }
+            return '/api';
+        };
+        const API_BASE = getApiBase();
         let currentStep = 1;
         const bookingData = {
             branch: null,
@@ -1361,7 +1384,7 @@
                     }
                 }
             } catch (err) {
-                alert('⚠️ ' + err.message);
+                console.error('Booking Error:', err); alert('⚠️ ' + (err.message === 'Failed to fetch' ? 'Unable to connect to server. If testing on mobile, ensure your computer is reachable on the network and port 3001 is open.' : err.message));
                 btn.textContent = 'Confirm Booking';
                 btn.disabled = false;
             }
