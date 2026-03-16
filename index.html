@@ -136,6 +136,36 @@
             font-weight: 600
         }
 
+        /* Critical: these must be in inline CSS because styles.css loads lazily */
+        .btn-primary-glass {
+            background-color: #fff;
+            color: #000;
+            font-weight: 600;
+            padding: 14px 28px
+        }
+
+        .btn-link {
+            background: none;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px
+        }
+
+        .link-light {
+            color: rgba(255,255,255,0.85)
+        }
+
+        .hero-ctas {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
         .hero-overlay {
             height: 100vh;
             width: 100%;
@@ -357,11 +387,18 @@
         }
 
         @media (max-width: 767px) {
-            .mobile-menu-btn {
-                display: block;
+            .mobile-menu-btn { display: block; }
+            .nav-actions { display: none !important; }
+            .hero-ctas {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
             }
-            .nav-actions {
-                display: none;
+            .hero-ctas .btn-primary-glass,
+            .hero-ctas .btn-link {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
             }
         }
         
