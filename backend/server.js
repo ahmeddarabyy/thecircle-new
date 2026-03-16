@@ -76,7 +76,14 @@ async function sendBookingConfirmation(payload) {
       </div>
     `
   };
-  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Email failed:', e); }
+  try { 
+    const info = await transporter.sendMail(mailOptions); 
+    console.log('User confirmation sent:', info.messageId);
+    return info;
+  } catch (e) { 
+    console.error('User email failed:', e); 
+    throw e;
+  }
 }
 
 async function sendTeamNotification(payload) {
@@ -96,7 +103,14 @@ async function sendTeamNotification(payload) {
       </div>
     `
   };
-  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Team email failed:', e); }
+  try { 
+    const info = await transporter.sendMail(mailOptions); 
+    console.log('Team notification sent:', info.messageId);
+    return info;
+  } catch (e) { 
+    console.error('Team email failed:', e); 
+    throw e;
+  }
 }
 
 async function sendSupportTeamNotification(payload) {
@@ -113,7 +127,14 @@ async function sendSupportTeamNotification(payload) {
       </div>
     `
   };
-  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Support email failed:', e); }
+  try { 
+    const info = await transporter.sendMail(mailOptions); 
+    console.log('Support team notification sent:', info.messageId);
+    return info;
+  } catch (e) { 
+    console.error('Support email failed:', e); 
+    throw e;
+  }
 }
 
 // ─── Middleware ──────────────────────────────────────────────────────────────
@@ -168,9 +189,15 @@ app.post('/api/bookings', async (req, res) => {
       notes: notes || ''
     });
 
-    // Send notifications
-    sendBookingConfirmation(req.body);
-    sendTeamNotification(req.body);
+    // Send notifications (MUST await in serverless)
+    try {
+      await Promise.all([
+        sendBookingConfirmation(req.body),
+        sendTeamNotification(req.body)
+      ]);
+    } catch (e) {
+      console.error('Notification error:', e);
+    }
 
     res.json({ success: true, booking: result[0] });
   } catch (err) {
@@ -184,7 +211,13 @@ app.post('/api/support', async (req, res) => {
     const result = await supabaseRequest('support_requests', 'POST', {
       first_name: firstName, last_name: lastName, email, phone, location, category, subject, message
     });
-    sendSupportTeamNotification(req.body);
+    
+    try {
+      await sendSupportTeamNotification(req.body);
+    } catch (e) {
+      console.error('Support notification error:', e);
+    }
+    
     res.json({ success: true, request: result[0] });
   } catch (err) {
     res.status(500).json({ error: err.message });
