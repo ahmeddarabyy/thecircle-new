@@ -1,148 +1,139 @@
-console.log('--- STARTING THE CIRCLE API ---');
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-const Database = require('better-sqlite3');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 const JWT_SECRET = 'thecircle_admin_secret_2026';
 
-console.log(`📡 Port detected: ${PORT}`);
+// Supabase configuration from .env
+const SUPABASE_URL = process.env.INTERNAL_SYSTEM_URL;
+const SUPABASE_KEY = process.env.INTERNAL_SYSTEM_KEY;
 
-// Basic routes that don't need DB
-app.get('/', (req, res) => {
-  console.log('👋 Root ping');
-  res.send('The Circle API is ALIVE');
-});
+// ─── Supabase Helper ────────────────────────────────────────────────────────
+async function supabaseRequest(table, method = 'GET', data = null, query = '') {
+  const url = `${SUPABASE_URL}/rest/v1/${table}${query}`;
+  const options = {
+    method,
+    headers: {
+      'apikey': SUPABASE_KEY,
+      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'Content-Type': 'application/json',
+      'Prefer': 'return=representation'
+    }
+  };
+  if (data) options.body = JSON.stringify(data);
+  
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    const err = await response.text();
+    console.error(`Supabase Error [${table}]:`, err);
+    throw new Error(`DB Error: ${response.status}`);
+  }
+  return await response.json();
+}
 
-app.get('/api/health', (req, res) => {
-  res.json({ live: true, timestamp: new Date().toISOString() });
-});
+// ─── Middleware ──────────────────────────────────────────────────────────────
+app.get('/', (req, res) => res.send('The Circle API (Serverless) is Running'));
+app.get('/api/health', (req, res) => res.json({ status: 'ok', engine: 'serverless' }));
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database Handle (Lazy Loaded)
-let _db;
-function getDB() {
-  if (!_db) {
-    try {
-      console.log('📂 Initializing SQL Database...');
-      _db = new Database(path.join(__dirname, 'bookings.db'));
-      _db.exec(`
-        CREATE TABLE IF NOT EXISTS bookings (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          email TEXT NOT NULL,
-          phone TEXT NOT NULL,
-          branch TEXT NOT NULL,
-          type TEXT DEFAULT 'meeting',
-          date TEXT NOT NULL,
-          start_time TEXT NOT NULL,
-          end_time TEXT NOT NULL,
-          attendees INTEGER DEFAULT 1,
-          notes TEXT,
-          status TEXT DEFAULT 'pending',
-          created_at TEXT DEFAULT (datetime('now'))
-        );
-        CREATE TABLE IF NOT EXISTS admins (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          username TEXT UNIQUE NOT NULL,
-          password_hash TEXT NOT NULL
-        );
-        CREATE TABLE IF NOT EXISTS support_requests (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          first_name TEXT NOT NULL,
-          last_name TEXT NOT NULL,
-          email TEXT NOT NULL,
-          phone TEXT,
-          location TEXT NOT NULL,
-          category TEXT NOT NULL,
-          subject TEXT NOT NULL,
-          message TEXT NOT NULL,
-          status TEXT DEFAULT 'pending',
-          created_at TEXT DEFAULT (datetime('now'))
-        );
-      `);
-      
-      const adminExists = _db.prepare("SELECT id FROM admins WHERE username = 'admin'").get();
-      if (!adminExists) {
-        const hash = bcrypt.hashSync('thecircle2026', 10);
-        _db.prepare("INSERT INTO admins (username, password_hash) VALUES (?, ?)").run('admin', hash);
-      }
-      console.log('✅ DB Ready');
-    } catch (err) {
-      console.error('❌ DB CRASH:', err.message);
-      throw err;
-    }
+// Auth middleware
+function requireAuth(req, res, next) {
+  const auth = req.headers['authorization'];
+  if (!auth || !auth.startsWith('Bearer ')) return res.status(401).json({ error: 'Unauthorized' });
+  try {
+    req.admin = jwt.verify(auth.slice(7), JWT_SECRET);
+    next();
+  } catch {
+    res.status(401).json({ error: 'Invalid token' });
   }
-  return _db;
 }
 
-// Routes
-app.get('/api/availability', (req, res) => {
+// ─── Public Endpoints ────────────────────────────────────────────────────────
+app.post('/api/bookings', async (req, res) => {
   try {
-    const db = getDB();
+    const { name, email, phone, branch, type, date, start_time, end_time, attendees, notes } = req.body;
+    
+    // Check availability (simplified for meeting rooms)
+    if (type === 'meeting') {
+      const q = `?branch=eq.${branch}&type=eq.meeting&date=eq.${date}&status=neq.cancelled`;
+      const bookings = await supabaseRequest('bookings', 'GET', null, q);
+      const conflict = bookings.find(b => {
+        return !(end_time <= b.start_time || start_time >= b.end_time);
+      });
+      if (conflict) return res.status(409).json({ error: 'Time slot occupied' });
+    }
+
+    const result = await supabaseRequest('bookings', 'POST', {
+      name, email, phone, branch, 
+      type: type || 'meeting', 
+      date, start_time, end_time, 
+      attendees: attendees || 1, 
+      notes: notes || ''
+    });
+
+    res.json({ success: true, booking: result[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/support', async (req, res) => {
+  try {
+    const { firstName, lastName, email, phone, location, category, subject, message } = req.body;
+    const result = await supabaseRequest('support_requests', 'POST', {
+      first_name: firstName,
+      last_name: lastName,
+      email, phone, location, category, subject, message
+    });
+    res.json({ success: true, request: result[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/availability', async (req, res) => {
+  try {
     const { branch, date } = req.query;
-    if (!branch || !date) return res.status(400).json({ error: 'Missing' });
-    const booked = db.prepare(`SELECT start_time, end_time FROM bookings WHERE branch = ? AND type = 'meeting' AND date = ? AND status != 'cancelled'`).all(branch, date);
+    const q = `?branch=eq.${branch}&type=eq.meeting&date=eq.${date}&status=neq.cancelled&select=start_time,end_time`;
+    const booked = await supabaseRequest('bookings', 'GET', null, q);
     res.json({ booked });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.post('/api/bookings', (req, res) => {
+// ─── Admin Endpoints ──────────────────────────────────────────────────────────
+app.post('/api/admin/login', async (req, res) => {
   try {
-    const db = getDB();
-    const { name, email, phone, branch, type, date, start_time, end_time, attendees, notes } = req.body;
-    const result = db.prepare(`
-        INSERT INTO bookings (name, email, phone, branch, type, date, start_time, end_time, attendees, notes)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(name, email, phone, branch, type || 'meeting', date, start_time, end_time, attendees || 1, notes || '');
-    res.json({ success: true, id: result.lastInsertRowid });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.post('/api/support', (req, res) => {
-  try {
-      const db = getDB();
-      const { firstName, lastName, email, phone, location, category, subject, message } = req.body;
-      const result = db.prepare(`
-          INSERT INTO support_requests (first_name, last_name, email, phone, location, category, subject, message)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-      `).run(firstName, lastName, email, phone || '', location, category, subject, message);
-      res.json({ success: true, id: result.lastInsertRowid });
-  } catch (err) {
-      res.status(500).json({ error: err.message });
-  }
-});
-
-app.post('/api/admin/login', (req, res) => {
-  try {
-    const db = getDB();
     const { username, password } = req.body;
-    const admin = db.prepare("SELECT * FROM admins WHERE username = ?").get(username);
-    if (!admin || !bcrypt.compareSync(password, admin.password_hash)) return res.status(401).send('Bad');
+    // For serverless, we'll use an env var for the admin password to dodge a DB call if possible, 
+    // or just check a 'admins' table in Supabase.
+    const admins = await supabaseRequest('admins', 'GET', null, `?username=eq.${username}`);
+    const admin = admins[0];
+    
+    if (!admin || !bcrypt.compareSync(password, admin.password_hash)) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
     const token = jwt.sign({ id: admin.id, username: admin.username }, JWT_SECRET, { expiresIn: '8h' });
     res.json({ token });
   } catch (err) {
-    res.status(500).send(err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
 app.get(/^\/dashboard/, (req, res) => res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n🟢 API LIVE ON PORT ${PORT}`);
+  console.log(`🟢 The Circle Serverless API running on ${PORT}`);
 });
 
 module.exports = app;
