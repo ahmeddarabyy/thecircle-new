@@ -17,7 +17,7 @@ const SUPABASE_KEY = process.env.INTERNAL_SYSTEM_KEY;
 // ─── Supabase Helper ────────────────────────────────────────────────────────
 async function supabaseRequest(table, method = 'GET', data = null, query = '') {
   if (!SUPABASE_URL || !SUPABASE_KEY) {
-    throw new Error('Supabase environment variables (INTERNAL_SYSTEM_URL or INTERNAL_SYSTEM_KEY) are missing. Please add them to Vercel Settings.');
+    throw new Error('Supabase environment variables missing. Please check Vercel Settings.');
   }
 
   const url = `${SUPABASE_URL}/rest/v1/${table}${query}`;
@@ -36,21 +36,89 @@ async function supabaseRequest(table, method = 'GET', data = null, query = '') {
   if (!response.ok) {
     const err = await response.text();
     console.error(`Supabase Error [${table}]:`, err);
-    throw new Error(`DB Error (${response.status}): ${err}`);
+    throw new Error(`DB Error (${response.status})`);
   }
   return await response.json();
 }
 
+// ─── Email Setup ──────────────────────────────────────────────────────────────
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || '587'),
+  secure: process.env.SMTP_PORT === '465',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
+  },
+  tls: { rejectUnauthorized: false }
+});
+
+async function sendBookingConfirmation(payload) {
+  const branchAddress = payload.branch === 'kafr-abdo' 
+    ? 'Villa 15, Ali Zou El Fekar st, Kafr Abdo' 
+    : '15 Syria st, 1st Floor, Roushdy';
+  
+  const mailOptions = {
+    from: process.env.SMTP_FROM,
+    to: payload.email,
+    subject: `Your space is ready - The Circle`,
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+        <h2 style="color: #00674F;">Booking Confirmed!</h2>
+        <p>Hi ${payload.name}, thanks for booking with The Circle.</p>
+        <div style="background: #f9f9f9; padding: 15px; border-radius: 8px;">
+          <p><strong>Branch:</strong> ${payload.branch === 'kafr-abdo' ? 'Kafr Abdo' : 'Roushdy'}</p>
+          <p><strong>Address:</strong> ${branchAddress}</p>
+          <p><strong>Date:</strong> ${payload.date}</p>
+          <p><strong>Time:</strong> ${payload.start_time} - ${payload.end_time}</p>
+        </div>
+        <p style="font-size: 12px; color: #666; margin-top: 20px;">If you need to change your booking, please reply to this email.</p>
+      </div>
+    `
+  };
+  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Email failed:', e); }
+}
+
+async function sendTeamNotification(payload) {
+  const mailOptions = {
+    from: process.env.SMTP_FROM,
+    to: 'contact@circleworkspace.com',
+    subject: `🚨 NEW BOOKING: ${payload.name}`,
+    html: `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h3>New Website Booking</h3>
+        <p><strong>Name:</strong> ${payload.name}</p>
+        <p><strong>Email:</strong> ${payload.email}</p>
+        <p><strong>Phone:</strong> ${payload.phone}</p>
+        <p><strong>Branch:</strong> ${payload.branch}</p>
+        <p><strong>Date:</strong> ${payload.date}</p>
+        <p><strong>Time:</strong> ${payload.start_time} - ${payload.end_time}</p>
+      </div>
+    `
+  };
+  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Team email failed:', e); }
+}
+
+async function sendSupportTeamNotification(payload) {
+  const mailOptions = {
+    from: process.env.SMTP_FROM,
+    to: 'contact@circleworkspace.com',
+    subject: `🚨 NEW SUPPORT REQUEST: ${payload.subject}`,
+    html: `
+      <div style="font-family: sans-serif; padding: 20px;">
+        <h3>New Support Request</h3>
+        <p><strong>From:</strong> ${payload.firstName} ${payload.lastName}</p>
+        <p><strong>Subject:</strong> ${payload.subject}</p>
+        <p><strong>Message:</strong> ${payload.message}</p>
+      </div>
+    `
+  };
+  try { await transporter.sendMail(mailOptions); } catch (e) { console.error('Support email failed:', e); }
+}
+
 // ─── Middleware ──────────────────────────────────────────────────────────────
-app.get('/', (req, res) => res.send('The Circle API (Serverless) is Running'));
-app.get('/api/health', (req, res) => res.json({ 
-    status: 'ok', 
-    engine: 'serverless',
-    config: {
-        url: SUPABASE_URL ? 'set' : 'MISSING',
-        key: SUPABASE_KEY ? 'set' : 'MISSING'
-    }
-}));
+app.get('/', (req, res) => res.send('The Circle API is Running'));
+app.get('/api/health', (req, res) => res.json({ status: 'ok', config: { url: !!SUPABASE_URL, key: !!SUPABASE_KEY } }));
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
@@ -91,9 +159,12 @@ app.post('/api/bookings', async (req, res) => {
       notes: notes || ''
     });
 
+    // Send notifications
+    sendBookingConfirmation(req.body);
+    sendTeamNotification(req.body);
+
     res.json({ success: true, booking: result[0] });
   } catch (err) {
-    console.error('SERVER ERROR (bookings):', err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -102,13 +173,11 @@ app.post('/api/support', async (req, res) => {
   try {
     const { firstName, lastName, email, phone, location, category, subject, message } = req.body;
     const result = await supabaseRequest('support_requests', 'POST', {
-      first_name: firstName,
-      last_name: lastName,
-      email, phone, location, category, subject, message
+      first_name: firstName, last_name: lastName, email, phone, location, category, subject, message
     });
+    sendSupportTeamNotification(req.body);
     res.json({ success: true, request: result[0] });
   } catch (err) {
-    console.error('SERVER ERROR (support):', err.message);
     res.status(500).json({ error: err.message });
   }
 });
@@ -130,7 +199,6 @@ app.post('/api/admin/login', async (req, res) => {
     const { username, password } = req.body;
     const admins = await supabaseRequest('admins', 'GET', null, `?username=eq.${username}`);
     const admin = admins[0];
-    
     if (!admin || !bcrypt.compareSync(password, admin.password_hash)) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -145,7 +213,7 @@ app.get(/^\/dashboard/, (req, res) => res.sendFile(path.join(__dirname, 'public'
 
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🟢 The Circle Serverless API running on ${PORT}`);
+    console.log(`🟢 The Circle API running on ${PORT}`);
   });
 }
 
