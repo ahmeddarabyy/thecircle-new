@@ -105,11 +105,16 @@
             gap: 32px;
         }
 
-        .mobile-nav-links a {
+        .mobile-nav-links a:not(.btn) {
             font-size: 1.5rem;
             color: var(--color-dark-grey);
             font-weight: 500;
             text-decoration: none;
+        }
+
+        .mobile-nav-links .btn {
+            color: #fff !important;
+            background-color: #000;
         }
 
         /* Hamburger animation */
