@@ -143,8 +143,10 @@ app.post('/api/admin/login', async (req, res) => {
 
 app.get(/^\/dashboard/, (req, res) => res.sendFile(path.join(__dirname, 'public', 'dashboard.html')));
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🟢 The Circle Serverless API running on ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🟢 The Circle Serverless API running on ${PORT}`);
+  });
+}
 
 module.exports = app;
