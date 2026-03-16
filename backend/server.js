@@ -118,7 +118,16 @@ async function sendSupportTeamNotification(payload) {
 
 // ─── Middleware ──────────────────────────────────────────────────────────────
 app.get('/', (req, res) => res.send('The Circle API is Running'));
-app.get('/api/health', (req, res) => res.json({ status: 'ok', config: { url: !!SUPABASE_URL, key: !!SUPABASE_KEY } }));
+app.get('/api/health', (req, res) => res.json({ 
+    status: 'ok', 
+    supabase: { url: !!SUPABASE_URL, key: !!SUPABASE_KEY },
+    smtp: {
+        host: !!process.env.SMTP_HOST,
+        user: !!process.env.SMTP_USER,
+        pass: !!process.env.SMTP_PASS,
+        from: !!process.env.SMTP_FROM
+    }
+}));
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
