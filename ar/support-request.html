@@ -529,7 +529,7 @@
                     document.getElementById('categoryInput').value = 'general';
                     window.scrollTo({ top: document.getElementById('successMsg').offsetTop - 120, behavior: 'smooth' });
                 } else {
-                    const errData = await response.json().catch(()=>({})); alert('⚠️ خطأ: ' + (errData.error || 'خطأ في السيرفر ' + response.status));
+                    const errorText = await response.text(); alert('⚠️ خطأ (' + response.status + '): ' + errorText.substring(0, 100));
                 }
             } catch (error) {
                 console.error('Error:', error);

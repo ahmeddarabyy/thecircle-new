@@ -1009,9 +1009,7 @@
     </section>
 
     <script>
-        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) 
-            ? `http://${window.location.hostname}:3001/api` 
-            : '/api';
+        const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168.') === 0) ? `http://${window.location.hostname}:3001/api` : window.location.origin + '/api';
         let currentStep = 1;
         const bookingData = {
             branch: null,
@@ -1346,8 +1344,11 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
+                if (!res.ok) {
+                    const errorText = await res.text();
+                    throw new Error(`Server Error (${res.status}): ${errorText.substring(0, 100)}`);
+                }
                 const data = await res.json();
-                if (!res.ok) throw new Error(data.error || 'Booking failed');
                 currentStep = 5;
                 renderStep();
 

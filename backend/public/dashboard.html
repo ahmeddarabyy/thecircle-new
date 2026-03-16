@@ -229,9 +229,7 @@
 </div>
 
 <script>
-const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname.startsWith('192.168.')) 
-            ? `http://${window.location.hostname}:3001/api` 
-            : '/api';
+const API_BASE = (window.location.hostname === 'localhost' || window.location.hostname.indexOf('192.168.') === 0) ? `http://${window.location.hostname}:3001/api` : window.location.origin + '/api';
 let token = localStorage.getItem('tc_token');
 
 // Auto-show dashboard if token exists
