@@ -45,7 +45,7 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "CoworkingSpace",
+      "@type": ["CoworkingSpace", "LocalBusiness"],
       "@id": "https://circleworkspace.com/ar/roushdy-branch.html",
       "name": "ذا سيركل - فرع رشدي",
       "description": "مساحات عمل مشتركة ومكاتب خاصة فاخرة في رشدي، الإسكندرية.",
@@ -61,7 +61,6 @@
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 31.2333, "longitude": 29.9533 },
       "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}],
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "87" },
       "priceRange": "$$"
     },
     {
@@ -70,7 +69,8 @@
       "url": "https://circleworkspace.com/ar/roushdy-branch.html",
       "name": "مكاتب خاصة ومساحة عمل مشتركة في رشدي | ذا سيركل",
       "description": "مساحات عمل مشتركة ومكاتب خاصة للإيجار في شارع سوريا بحي رشدي، الإسكندرية. مساحات مرنة ومكاتب للفرق.",
-      "isPartOf": { "@id": "https://circleworkspace.com/#website" }
+      "isPartOf": { "@id": "https://circleworkspace.com/#website" },
+      "mainEntity": { "@id": "https://circleworkspace.com/#organization" }
     }
   ]
 }

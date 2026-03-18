@@ -150,14 +150,14 @@
         
     </style>
 
-<script type="application/ld+json">
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Organization",
       "@id": "https://circleworkspace.com/#organization",
-      "name": "ذا سيركل مساحات عمل",
+      "name": " ذا سيركل مساحات عمل",
       "url": "https://circleworkspace.com/ar/",
       "logo": "https://circleworkspace.com/assets/logo.png",
       "sameAs": [
@@ -175,7 +175,7 @@
       }
     },
     {
-      "@type": "CoworkingSpace",
+      "@type": ["CoworkingSpace", "LocalBusiness"],
       "@id": "https://circleworkspace.com/ar/kafr-abdo-branch.html",
       "name": "ذا سيركل - فرع كفر عبده",
       "description": "مساحات عمل مشتركة ومكاتب خاصة فاخرة في كفر عبده، الإسكندرية.",
@@ -191,11 +191,11 @@
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 31.2291, "longitude": 29.9575 },
       "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}],
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "87" },
-      "priceRange": "$$"
+      "priceRange": "$$",
+      "brand": { "@id": "https://circleworkspace.com/#organization" }
     },
     {
-      "@type": "CoworkingSpace",
+      "@type": ["CoworkingSpace", "LocalBusiness"],
       "@id": "https://circleworkspace.com/ar/roushdy-branch.html",
       "name": "ذا سيركل - فرع رشدي",
       "description": "مساحات عمل مشتركة ومكاتب خاصة فاخرة في رشدي، الإسكندرية.",
@@ -211,8 +211,8 @@
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 31.2333, "longitude": 29.9533 },
       "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}],
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "87" },
-      "priceRange": "$$"
+      "priceRange": "$$",
+      "brand": { "@id": "https://circleworkspace.com/#organization" }
     },
     {
       "@type": "WebPage",
@@ -220,14 +220,15 @@
       "url": "https://circleworkspace.com/ar/",
       "name": "مكاتب خاصة ومساحات عمل مشتركة | كفر عبده ورشدي | الإسكندرية، مصر | ذا سيركل",
       "description": "مكاتب خاصة مميزة ومساحات عمل مشتركة في فروعنا بكفر عبده ورشدي في الإسكندرية، مصر. نوفر قاعات اجتماعات، مكاتب مخصصة، ومكاتب مفروشة.",
-      "isPartOf": { "@id": "https://circleworkspace.com/#website" }
+      "isPartOf": { "@id": "https://circleworkspace.com/#website" },
+      "mainEntity": { "@id": "https://circleworkspace.com/#organization" }
     },
     {
       "@type": "WebSite",
       "@id": "https://circleworkspace.com/#website",
       "url": "https://circleworkspace.com",
       "name": "The Circle Workspace",
-      "potentialAction": { "@type": "SearchAction", "target": "https://circleworkspace.com/search?q={search_term_string}", "query-input": "required name=search_term_string" }
+      "potentialAction": { "@id": "https://circleworkspace.com/#website", "@type": "SearchAction", "target": "https://circleworkspace.com/search?q={search_term_string}", "query-input": "required name=search_term_string" }
     }
   ]
 }

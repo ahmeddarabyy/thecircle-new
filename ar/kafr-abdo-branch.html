@@ -46,7 +46,7 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "CoworkingSpace",
+      "@type": ["CoworkingSpace", "LocalBusiness"],
       "@id": "https://circleworkspace.com/ar/kafr-abdo-branch.html",
       "name": "ذا سيركل - فرع كفر عبده",
       "description": "مساحات عمل مشتركة ومكاتب خاصة فاخرة في كفر عبده، الإسكندرية.",
@@ -62,7 +62,6 @@
       },
       "geo": { "@type": "GeoCoordinates", "latitude": 31.2291, "longitude": 29.9575 },
       "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "00:00", "closes": "23:59"}],
-      "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "ratingCount": "87" },
       "priceRange": "$$"
     },
     {
@@ -71,7 +70,8 @@
       "url": "https://circleworkspace.com/ar/kafr-abdo-branch.html",
       "name": "مساحات عمل مشتركة ومكاتب في كفر عبده | ذا سيركل",
       "description": "مساحات عمل مميزة ومكاتب إدارية للإيجار في أرقى أحياء الإسكندرية، كفر عبده.",
-      "isPartOf": { "@id": "https://circleworkspace.com/#website" }
+      "isPartOf": { "@id": "https://circleworkspace.com/#website" },
+      "mainEntity": { "@id": "https://circleworkspace.com/#organization" }
     }
   ]
 }
