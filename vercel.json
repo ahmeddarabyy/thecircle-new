@@ -2,17 +2,6 @@
   "version": 2,
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.circleworkspace.com"
-        }
-      ],
-      "destination": "https://circleworkspace.com/$1",
-      "permanent": true
-    },
-    {
       "source": "/pages/booking.html",
       "destination": "/book-a-space.html",
       "permanent": true
