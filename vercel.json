@@ -2,6 +2,11 @@
   "version": 2,
   "redirects": [
     {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/pages/booking.html",
       "destination": "/book-a-space.html",
       "permanent": true
