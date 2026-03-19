@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frequently Asked Questions | The Circle Alexandria</title>
     <meta name="description" content="Answers to common questions about memberships, pricing, and workspace options at The Circle coworking space in Alexandria. Two locations in Roushdy and Kafr Abdo.">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript></noscript>
     <style>
         /* Accordion Script Styles */
         .faq-item.active .faq-answer {
@@ -215,7 +217,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="logo">
-                <img src="assets/logo.png" alt="The Circle Logo">
+                <img src="assets/logo.png" alt="The Circle Logo" width="61" height="61">
             </a>
             <div class="nav-links">
                 <a href="about.html">About Us</a>
@@ -457,7 +459,7 @@
             <div class="footer-col-links">
                 <h4 class="footer-heading">Social</h4>
                 <div class="social-links">
-                    <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank">
+                    <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank" aria-label="Follow us on Facebook">
                         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1V12h3l-1 3h-2v6.8c4.56-.93 8-4.96 8-9.8z"/></svg>
                     </a>
                     <a href="https://www.instagram.com/thecircleworkspace" class="social-icon" target="_blank">
@@ -474,7 +476,7 @@
         </div>
         <div class="container">
             <div class="footer-copyright">
-                <img src="assets/logocircletransparentwhite.png" alt="The Circle" class="footer-logo-tiny">
+                <img src="assets/logocircletransparentwhite.png" alt="The Circle" class="footer-logo-tiny" width="32" height="32">
                 <p>&copy; 2026 The Circle Coworking Space Alexandria. All rights reserved.</p>
             </div>
         </div>

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Schedule a Free Tour | The Circle Alexandria</title>
     <meta name="description" content="Book a free tour of The Circle coworking space in Alexandria. Visit our Kafr Abdo or Roushdy location and find the right workspace for your team.">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript></noscript>
     <style>
         /* ========================
            Tour Form Page Styles
@@ -488,7 +490,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="logo">
-                <img src="assets/logo.png" alt="The Circle Logo">
+                <img src="assets/logo.png" alt="The Circle Logo" width="61" height="61">
             </a>
             <div class="nav-links">
                 <a href="about.html">About Us</a>
