@@ -369,7 +369,7 @@
       "name": "The Circle - Roushdy Branch",
       "description": "Private offices, back offices, and flexible workspaces for teams, remote companies, and back offices in Roushdy, Alexandria.",
       "image": [
-        "https://circleworkspace.com/assets/TheCircleRoushdy1.JPG"
+        "https://circleworkspace.com/assets/TheCircleRoushdy1.webp"
       ],
       "url": "https://circleworkspace.com/roushdy-branch.html",
       "telephone": "+201034708850",
@@ -476,21 +476,15 @@
 </script>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-Y0RBB3J6CW');
-</script>
+
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="/" class="logo">
-                <img src="assets/logo.png" alt="The Circle Logo" width="61" height="61">
+                <img src="assets/logo.png" alt="The Circle Logo" width="120" height="120">
             </a>
             <div class="nav-links">
                 <a href="about.html">About Us</a>
@@ -525,10 +519,10 @@
         </div>
     </div>
 
-    <div class="tour-page">
+    <main class="tour-page">
         <!-- Left atmospheric image panel -->
         <div class="tour-left">
-            <img src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle coworking space interior in Alexandria">
+            <img fetchpriority="high" decoding="async" width="800" height="1200" src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle coworking space interior in Alexandria">
             <div class="tour-left-overlay">
                 <div class="tour-left-copy">
                     <span class="tour-left-eyebrow">The Circle · Alexandria</span>
@@ -556,7 +550,7 @@
                 <div id="formState">
                     <span class="tour-form-eyebrow">Let's get started</span>
                     <h1 class="tour-form-title" style="font-size: clamp(1.8rem, 3.5vw, 2.6rem);">Schedule a Tour</h1>
-                    <p class="tour-form-sub">Visit our workspaces in <a href="kafr-abdo-branch.html" style="color: #00674F; text-decoration: underline;">Kafr Abdo</a> or <a href="roushdy-branch.html" style="color: #00674F; text-decoration: underline;">Roushdy</a>, Alexandria.<br>Fill in your details and a member of our team will reach out to confirm your visit.</p>
+                    <p class="tour-form-sub">Visit our workspaces in <a href="kafr-abdo-branch.html" style="color: #00674F; text-decoration: underline;">Kafr Abdo</a> or <a href="roushdy-branch.html" style="color: #00674F; text-decoration: underline;">Get directions to Roushdy</a>, Alexandria.<br>Fill in your details and a member of our team will reach out to confirm your visit.</p>
 
                     <form id="tourForm" novalidate>
                         <!-- Formspree hidden config -->
@@ -698,5 +692,13 @@
             }, 300);
         }
     </script>
+<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0RBB3J6CW');
+</script>
 </body>
 </html>

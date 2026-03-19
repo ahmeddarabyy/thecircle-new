@@ -565,7 +565,7 @@
       "name": "The Circle - Roushdy Branch",
       "description": "Premium coworking space and private offices in Roushdy, Alexandria.",
       "image": [
-        "https://circleworkspace.com/assets/TheCircleRoushdy1.JPG"
+        "https://circleworkspace.com/assets/TheCircleRoushdy1.webp"
       ],
       "url": "https://circleworkspace.com/roushdy-branch.html",
       "telephone": "+201034708850",
@@ -662,21 +662,15 @@
 
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-Y0RBB3J6CW');
-</script>
+
 </head>
 
 <body>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="https://circleworkspace.com/ar/" class="logo">
-                <img src="../assets/logo.png" alt="The Circle Logo" width="61" height="61">
+                <img src="../assets/logo.png" alt="The Circle Logo" width="120" height="120">
             </a>
             <div class="nav-links">
                 <a href="about.html">من نحن</a>
@@ -712,12 +706,12 @@
         </div>
     </div>
 
-    <div class="booking-page">
+    <main class="booking-page">
         <div class="booking-left" id="heroImageContainer">
-            <img src="../assets/thecircle-kafrabdo-branch.webp"
+            <img fetchpriority="high" decoding="async" width="800" height="1200" src="../assets/thecircle-kafrabdo-branch.webp"
                 alt="Reserve coworking space and meeting rooms at The Circle Alexandria Egypt" class="active-img"
                 id="heroImage">
-            <img src="../assets/thecircle_syriastreet_sharedspaces.webp"
+            <img width="1400" height="1050" src="../assets/thecircle_syriastreet_sharedspaces.webp"
                 alt="Book hot desks and shared workspaces in Roushdy Alexandria" class="hidden" id="heroImageSecondary">
             <div class="booking-left-overlay">
                 <div style="color: #fff;">
@@ -976,7 +970,7 @@
                     اختر بين فيلا <a href="kafr-abdo-branch.html"
                         style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">كفر
                         عبده</a> التاريخية أو مقرنا الرئيسي في <a href="roushdy-branch.html"
-                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">رشدي</a>
+                        style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">Get directions to Roushdy</a>
                     الواقع في شارع سوريا. يوفر كلا الموقعين إنترنت سريع،
                     <a href="meeting-rooms.html"
                         style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">قاعات
@@ -1496,6 +1490,14 @@
     });
     </script>
     
+<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0RBB3J6CW');
+</script>
 </body>
 
 </html>
