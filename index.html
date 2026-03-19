@@ -780,7 +780,7 @@
                         </div>
                     </div>
                     <div
-                        style="font-size: 1.1rem; line-height: 1.7; color: #86868b; font-weight: 300; display: flex; flex-direction: column; justify-content: center;">
+                        style="font-size: 1.1rem; line-height: 1.7; color: #6e6e73; font-weight: 300; display: flex; flex-direction: column; justify-content: center;">
                         <p style="margin-bottom: 24px;">
                             Alexandria is rapidly evolving as a hub for startups, remote teams, and global companies
                             establishing their Egyptian footprint. The Circle provides premium, flexible workspace
@@ -1142,7 +1142,7 @@
     <footer class="footer-main">
         <div class="container footer-main-container">
             <div class="footer-col-brand">
-                <h4 class="footer-heading">Addresses</h4>
+                <h3 class="footer-heading">Addresses</h3>
                 <div class="footer-contact-info">
                     <p style="margin-bottom: 4px;"><strong style="color: #fff; font-weight: 500;">Kafr
                             Abdo:</strong><br>Villa 15, Ali Zou El Fekar st.</p>
@@ -1174,7 +1174,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">Company</h4>
+                <h3 class="footer-heading">Company</h3>
                 <a href="about.html">About Us</a>
                 <a href="locations.html">Locations</a>
                 <a href="faq.html">FAQ</a>
@@ -1184,7 +1184,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">Services</h4>
+                <h3 class="footer-heading">Services</h3>
                 <a href="private-offices.html">Private Offices</a>
                 <a href="private-suites.html">Private Suites</a>
                 <a href="dedicated-desks.html">Dedicated Desks</a>
@@ -1194,7 +1194,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">Social</h4>
+                <h3 class="footer-heading">Social</h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank" aria-label="Follow us on Facebook">
                         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -1232,6 +1232,30 @@
         </div>
     </footer>
 
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('active');
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    });
+    </script>
+    
 </body>
 
 </html>

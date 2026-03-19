@@ -304,7 +304,7 @@
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2h4v20h-4zM10 2h4v20h-4zM4 2h4v20H4z"></path></svg>
                     <h2 class="section-title" style="margin-bottom: 0; font-size: 1.8rem; font-weight: 500;">مساحة المكاتب المخصصة في <span class="text-italic text-emerald">الإسكندرية</span></h2>
                 </div>
-                <div style="font-size: 1.1rem; color: #86868b; line-height: 1.7;">
+                <div style="font-size: 1.1rem; color: #6e6e73; line-height: 1.7;">
                     <p style="margin-bottom: 16px;">
                         تمنح المكاتب المخصصة في ذا سيركل <a href="shared-spaces.html" style="color: #00674F; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">للمستقلين</a> والعاملين عن بعد مساحة عمل دائمة في <a href="about.html" style="color: #00674F; font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); transition: border-color 0.3s;">بيئة عمل احترافية في الإسكندرية</a>. بخلاف المكاتب المشتركة غير الثابتة، يكون مكتبك دائماً محجوزاً لك.
                     </p>
@@ -327,15 +327,15 @@
                 <div style="display: flex; flex-direction: column; gap: 20px;">
                     <div style="background: #fff; padding: 30px; border-radius: var(--radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <h3 style="font-size: 1.15rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px;">ما هو المكتب المخصص؟</h3>
-                        <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">المكتب المخصص هو مساحة عمل ثابتة محجوزة لك كل يوم. يمكنك ترك معداتك والعمل من نفس المكتب كلما قمت بزيارتنا.</p>
+                        <p style="font-size: 1rem; color: #6e6e73; line-height: 1.6; margin: 0;">المكتب المخصص هو مساحة عمل ثابتة محجوزة لك كل يوم. يمكنك ترك معداتك والعمل من نفس المكتب كلما قمت بزيارتنا.</p>
                     </div>
 
                     <div style="background: #fff; padding: 30px; border-radius: var(--radius-lg); box-shadow: 0 4px 15px rgba(0,0,0,0.03);">
                         <h3 style="font-size: 1.15rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px;">أين تقع مكاتبكم المخصصة في الإسكندرية؟</h3>
-                        <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">يوفر            <footer class="footer-main">
+                        <p style="font-size: 1rem; color: #6e6e73; line-height: 1.6; margin: 0;">يوفر            <footer class="footer-main">
         <div class="container footer-main-container">
             <div class="footer-col-brand">
-                <h4 class="footer-heading">العناوين</h4>
+                <h3 class="footer-heading">العناوين</h3>
                 <div class="footer-contact-info">
                     <p style="margin-bottom: 4px;"><strong style="color: #fff; font-weight: 500;">كفر عبده:</strong><br>فيلا ١٥، شارع علي ذو الفقار.</p>
                     <a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank" class="footer-map-link">عرض على الخريطة</a>
@@ -348,7 +348,7 @@
             </div>
             
             <div class="footer-col-links">
-                <h4 class="footer-heading">الشركة</h4>
+                <h3 class="footer-heading">الشركة</h3>
                 <a href="about.html">من نحن</a>
                 <a href="locations.html">الفروع</a>
                 <a href="faq.html">الأسئلة الشائعة</a>
@@ -358,7 +358,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">الخدمات</h4>
+                <h3 class="footer-heading">الخدمات</h3>
                 <a href="private-offices.html">مكاتب خاصة</a>
                 <a href="private-suites.html">أجنحة الشركات</a>
                 <a href="dedicated-desks.html">مكاتب مخصصة</a>
@@ -368,7 +368,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">تواصل معنا</h4>
+                <h3 class="footer-heading">تواصل معنا</h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank" aria-label="Follow us on Facebook">
                         <!-- Facebook Icon -->
@@ -395,5 +395,29 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('active');
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    });
+    </script>
+    
 </body>
 </html>

@@ -169,7 +169,7 @@
 
         .selection-card p {
             font-size: 0.85rem;
-            color: #86868b;
+            color: #6e6e73;
         }
 
         /* Form Controls */
@@ -381,7 +381,7 @@
         .cal-weekdays span {
             font-size: 0.72rem;
             font-weight: 600;
-            color: #86868b;
+            color: #6e6e73;
             padding: 4px 0;
         }
 
@@ -446,7 +446,7 @@
             display: block;
             font-size: 0.78rem;
             font-weight: 500;
-            color: #86868b;
+            color: #6e6e73;
             text-transform: uppercase;
             letter-spacing: 0.08em;
             margin-bottom: 8px;
@@ -834,7 +834,7 @@
                                 <div class="cal-days" id="calDays"></div>
                             </div>
                             <p class="cal-selected-label" id="calSelectedLabel"
-                                style="font-size:0.85rem;color:#86868b;margin-top:8px;">No date selected</p>
+                                style="font-size:0.85rem;color:#6e6e73;margin-top:8px;">No date selected</p>
                         </div>
 
                         <div id="sharedConfig" style="display: none;">
@@ -869,7 +869,7 @@
                                 </div>
                                 <p id="timeError" style="font-size:0.82rem;color:#ef4444;margin-top:8px;display:none;">
                                     End time must be after start time (min. 1 hour)</p>
-                                <p id="availabilityNote" style="font-size:0.82rem;color:#86868b;margin-top:8px;"></p>
+                                <p id="availabilityNote" style="font-size:0.82rem;color:#6e6e73;margin-top:8px;"></p>
                             </div>
                         </div>
 
@@ -918,7 +918,7 @@
                                 </svg>
                             </div>
                             <h2 style="font-weight: 400; margin-bottom: 12px;">Booking Received!</h2>
-                            <p style="color: #86868b; margin-bottom: 40px;">Your booking has been received. Our team
+                            <p style="color: #6e6e73; margin-bottom: 40px;">Your booking has been received. Our team
                                 will confirm within 2 hours.</p>
 
                             <!-- Premium Confirmation Mockup -->
@@ -934,7 +934,7 @@
                                             C</div>
                                         <div style="flex: 1;">
                                             <div
-                                                style="font-size: 0.75rem; color: #86868b; display: flex; justify-content: space-between;">
+                                                style="font-size: 0.75rem; color: #6e6e73; display: flex; justify-content: space-between;">
                                                 <span>From: contact@circleworkspace.com</span>
                                                 <span>Just now</span>
                                             </div>
@@ -948,7 +948,7 @@
                                                 Circle <span id="confBranch">Kafr Abdo</span></strong>.</p>
                                         <div
                                             style="background: #f5f5f7; padding: 14px; border-radius: 12px; margin-bottom: 10px;">
-                                            <div style="font-size: 0.75rem; color: #86868b; margin-bottom: 2px;">
+                                            <div style="font-size: 0.75rem; color: #6e6e73; margin-bottom: 2px;">
                                                 Scheduled For</div>
                                             <div id="confDateTime" style="font-weight: 600; font-size: 0.85rem;">Sunday,
                                                 March 15 • 10:00 AM</div>
@@ -984,7 +984,7 @@
         <div style="max-width: 800px; margin: 0 auto; text-align: left;">
             <h2 class="section-title" style="margin-bottom: 24px;">Coworking Spaces in <span
                     class="text-italic text-emerald">Alexandria</span></h2>
-            <div style="font-size: 1.1rem; color: #86868b; line-height: 1.7; margin-bottom: 64px;">
+            <div style="font-size: 1.1rem; color: #6e6e73; line-height: 1.7; margin-bottom: 64px;">
                 <p style="margin-bottom: 16px;">
                     The Circle offers flexible coworking spaces in Alexandria designed for <a href="back-offices.html"
                         style="color: #00674F; text-decoration: none; border-bottom: 1px solid rgba(0,103,79,0.3); font-weight: 500; transition: border-color 0.3s;">remote
@@ -1017,7 +1017,7 @@
                     <h4
                         style="font-size: 1.1rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">
                         Do I need to book my desk in advance?</h4>
-                    <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">While walk-ins to our
+                    <p style="font-size: 1rem; color: #6e6e73; line-height: 1.6; margin: 0;">While walk-ins to our
                         Alexandria spaces are welcome subject to availability, we highly recommend booking your hot desk
                         online via this page to guarantee your workspace prior to your arrival.</p>
                 </div>
@@ -1026,7 +1026,7 @@
                     <h4
                         style="font-size: 1.1rem; color: var(--color-dark-grey); font-weight: 500; margin-bottom: 12px; letter-spacing: -0.01em;">
                         Are meeting rooms included in shared space day passes?</h4>
-                    <p style="font-size: 1rem; color: #86868b; line-height: 1.6; margin: 0;">Meeting rooms are booked
+                    <p style="font-size: 1rem; color: #6e6e73; line-height: 1.6; margin: 0;">Meeting rooms are booked
                         separately to ensure private, uninterrupted blocks for teams. You can securely reserve hourly
                         slots by choosing "Meeting Room" as your space type in the booking portal above.</p>
                 </div>
@@ -1500,6 +1500,30 @@
             document.getElementById(id).addEventListener('input', validateStep);
         });
     </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('active');
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    });
+    </script>
+    
 </body>
 
 </html>

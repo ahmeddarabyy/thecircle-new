@@ -25,7 +25,7 @@
         .nav-links { margin-left: 0; margin-right: auto; }
         .feature-item { text-align: right; }
         .service-list { padding-right: 20px; list-style-type: disc; }
-        .service-list li { margin-bottom: 12px; font-size: 1.1rem; color: #86868b; }
+        .service-list li { margin-bottom: 12px; font-size: 1.1rem; color: #6e6e73; }
         
         .btn-link .arrow, .link-light .arrow {
             display: inline-block;
@@ -162,10 +162,10 @@
                     
                     <div style="text-align: right;">
                         <h2 class="section-title" style="margin-bottom: 24px; font-size: 2.2rem; font-weight: 600;">العمل من قلب التراث</h2>
-                        <p style="font-size: 1.15rem; color: #86868b; line-height: 1.8; margin-bottom: 24px;">
+                        <p style="font-size: 1.15rem; color: #6e6e73; line-height: 1.8; margin-bottom: 24px;">
                             يقدم فرع كفر عبده تجربة عمل حصرية تجمع بين عراقة المعمار التاريخي لمدينة الإسكندرية وحداثة مساحات العمل. يقع الفرع في فيلا مستقلة تحيط بها حديقة هادئة توفر بيئة عمل منعشة لتخفيف ضغوط يومك بعيداً عن صخب المدينة.
                         </p>
-                        <p style="font-size: 1.15rem; color: #86868b; line-height: 1.8;">
+                        <p style="font-size: 1.15rem; color: #6e6e73; line-height: 1.8;">
                             هذا الفرع مُفضل لرواد الأعمال، التنفيذيين، المستثمرين، وفرق العمل التي تحتاج لتركيز مطلق أو ترغب بامتلاك عنوان مرموق لأعمالهم.
                         </p>
                     </div>
@@ -215,7 +215,7 @@
             <footer class="footer-main">
         <div class="container footer-main-container">
             <div class="footer-col-brand">
-                <h4 class="footer-heading">العناوين</h4>
+                <h3 class="footer-heading">العناوين</h3>
                 <div class="footer-contact-info">
                     <p style="margin-bottom: 4px;"><strong style="color: #fff; font-weight: 500;">كفر عبده:</strong><br>فيلا ١٥، شارع علي ذو الفقار.</p>
                     <a href="https://maps.app.goo.gl/9KmNV6iohWGxGS9T8" target="_blank" class="footer-map-link">عرض على الخريطة</a>
@@ -228,7 +228,7 @@
             </div>
             
             <div class="footer-col-links">
-                <h4 class="footer-heading">الشركة</h4>
+                <h3 class="footer-heading">الشركة</h3>
                 <a href="about.html">من نحن</a>
                 <a href="locations.html">الفروع</a>
                 <a href="faq.html">الأسئلة الشائعة</a>
@@ -238,7 +238,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">الخدمات</h4>
+                <h3 class="footer-heading">الخدمات</h3>
                 <a href="private-offices.html">مكاتب خاصة</a>
                 <a href="private-suites.html">أجنحة الشركات</a>
                 <a href="dedicated-desks.html">مكاتب مخصصة</a>
@@ -248,7 +248,7 @@
             </div>
 
             <div class="footer-col-links">
-                <h4 class="footer-heading">تواصل معنا</h4>
+                <h3 class="footer-heading">تواصل معنا</h3>
                 <div class="social-links">
                     <a href="https://www.facebook.com/thecircleworkspace" class="social-icon" target="_blank" aria-label="Follow us on Facebook">
                         <!-- Facebook Icon -->
@@ -276,5 +276,29 @@
             </div>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    requestAnimationFrame(() => {
+                        entry.target.classList.add('active');
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+    });
+    </script>
+    
 </body>
 </html>
