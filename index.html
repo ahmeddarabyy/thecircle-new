@@ -424,7 +424,9 @@
     <!-- Full stylesheet loads async — doesn't block first paint -->
     <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="styles.css">
+        <link rel="prefetch" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
     </noscript>
 
     
