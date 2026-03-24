@@ -1096,7 +1096,7 @@
 
         // ── Time Picker ───────────────────────────────────────────
         const OPEN_HOUR = 9;   // 9 AM
-        const CLOSE_HOUR = 20; // 8 PM
+        const CLOSE_HOUR = 23; // 11 PM
 
         function to12h(time24) {
             const [h, m] = time24.split(':').map(Number);
@@ -1110,10 +1110,9 @@
             for (let h = OPEN_HOUR; h <= CLOSE_HOUR; h++) {
                 const v1 = `${String(h).padStart(2, '0')}:00`;
                 slots.push({ value: v1, label: to12h(v1) });
-                if (h < CLOSE_HOUR) {
-                    const v2 = `${String(h).padStart(2, '0')}:30`;
-                    slots.push({ value: v2, label: to12h(v2) });
-                }
+                // السماح بنصف الساعة لآخر ساعة أيضاً (مثلاً 23:30)
+                const v2 = `${String(h).padStart(2, '0')}:30`;
+                slots.push({ value: v2, label: to12h(v2) });
             }
             return slots;
         }
