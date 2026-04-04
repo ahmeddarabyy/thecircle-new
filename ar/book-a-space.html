@@ -484,6 +484,71 @@
             cursor: not-allowed;
             text-decoration: line-through;
         }
+
+        @media (max-width: 600px) {
+            .booking-right {
+                padding: 40px 20px;
+            }
+            .booking-title {
+                margin-bottom: 24px;
+                font-size: 1.8rem;
+            }
+            .selection-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            .selection-card {
+                padding: 16px 20px;
+                display: flex;
+                align-items: center;
+                text-align: right;
+                gap: 16px;
+            }
+            .selection-card h3 {
+                font-size: 1rem;
+                margin-bottom: 2px;
+            }
+            .card-icon {
+                margin: 0;
+                width: 40px;
+                height: 40px;
+                flex-shrink: 0;
+            }
+            .form-control {
+                font-size: 16px; /* Prevents auto-zoom on iOS */
+                padding: 14px;
+            }
+            .time-range-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 12px;
+            }
+            .time-range-sep {
+                display: none;
+            }
+            .time-scroll-picker {
+                max-height: 200px;
+                padding: 12px;
+                gap: 8px;
+            }
+            .time-slot-btn {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            .booking-notice {
+                padding: 30px 20px;
+                margin-top: 40px;
+            }
+            .footer-nav {
+                margin-top: 32px;
+                flex-direction: column-reverse;
+                gap: 12px;
+            }
+            .btn-booking {
+                width: 100%;
+                padding: 16px;
+            }
+        }
     </style>
     <link rel="canonical" href="https://circleworkspace.com/ar/book-a-space.html">
     <meta name="robots" content="index, follow">
@@ -694,14 +759,13 @@
                 <a href="insights.html">المدونة</a>
                 <a href="support-request.html">طلب دعم</a>
             </div>
-            <div class="nav-actions" class="desktop-only">
+            <div class="nav-actions desktop-only">
                 <a href="../book-a-space.html" class="lang-toggle" style="margin-left: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">English</a> <a href="book-a-space.html" class="btn btn-nav-cta">احجز مساحتك</a>
             </div>
         
             <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
-                <span></span>
-                <span></span>
-                <span></span>
+                <svg class="menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
         </div>
     </nav>
@@ -1003,7 +1067,7 @@
                         <div style="background: rgba(0, 103, 79, 0.03); padding: 32px; border-radius: 20px; text-align: center; border: 1px solid rgba(0, 103, 79, 0.05); margin-top: 20px;">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="2" style="margin-bottom: 16px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                             <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px;">تصميم فاخر</h3>
-                            <p style="font-size: 0.85rem; color: #6e6e73;">جمالية مستوحاة من آبل</p>
+                            <p style="font-size: 0.85rem; color: #6e6e73;">تصميم عصري وراقي</p>
                         </div>
                     </div>
                 </div>
