@@ -501,6 +501,24 @@
             text-decoration: line-through;
         }
 
+        .booking-feature-outer {
+            padding: 100px 0;
+        }
+
+        .booking-feature-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .booking-feature-glass {
+            padding: 60px;
+            border-radius: var(--radius-xl);
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-premium);
+            background: #ffffff;
+        }
+
         .booking-feature-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -591,6 +609,13 @@
                 padding: 16px;
             }
             /* Feature Cards Mobile */
+            .booking-feature-outer {
+                padding: 40px 0;
+            }
+            .booking-feature-glass {
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
             .booking-feature-section {
                 gap: 40px;
                 margin-bottom: 60px;
@@ -1095,9 +1120,9 @@
     </div>
 
     <!-- Premium Glassmorphic SEO & FAQ Section -->
-    <section class="section-light fade-up" style="padding: 100px 24px;">
-        <div class="container" style="max-width: 1000px; margin: 0 auto; text-align: left;">
-            <div class="glass-effect" style="padding: 60px; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-premium); background: #ffffff;">
+    <section class="booking-feature-outer section-light fade-up">
+        <div class="container booking-feature-container">
+            <div class="booking-feature-glass glass-effect">
                 <div class="booking-feature-section">
                     <div class="booking-feature-intro">
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
