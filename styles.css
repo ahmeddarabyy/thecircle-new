@@ -1241,6 +1241,32 @@ cite {
 }
 
 @media (max-width: 767px) {
+    .navbar {
+        height: 64px;
+        top: 12px;
+        width: 95%;
+    }
+
+    .nav-container {
+        padding: 0 20px;
+    }
+
+    .logo img {
+        width: 48px;
+        height: 48px;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+        width: 40px;
+        height: 40px;
+    }
+
+    .mobile-menu-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+
     .mobile-menu-btn {
         display: flex;
     }

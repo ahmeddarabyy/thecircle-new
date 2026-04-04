@@ -501,6 +501,32 @@
             text-decoration: line-through;
         }
 
+        .booking-feature-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+
+        .booking-feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .booking-feature-card {
+            background: rgba(0, 103, 79, 0.03);
+            padding: 32px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid rgba(0, 103, 79, 0.05);
+        }
+
+        .booking-feature-card.staggered {
+            margin-top: 20px;
+        }
+
         @media (max-width: 600px) {
             .booking-right {
                 padding: 40px 20px;
@@ -563,6 +589,21 @@
             .btn-booking {
                 width: 100%;
                 padding: 16px;
+            }
+            /* Feature Cards Mobile */
+            .booking-feature-section {
+                gap: 40px;
+                margin-bottom: 60px;
+            }
+            .booking-feature-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .booking-feature-card {
+                padding: 24px 20px;
+            }
+            .booking-feature-card.staggered {
+                margin-top: 0;
             }
         }
     </style>
@@ -1057,8 +1098,8 @@
     <section class="section-light fade-up" style="padding: 100px 24px;">
         <div class="container" style="max-width: 1000px; margin: 0 auto; text-align: left;">
             <div class="glass-effect" style="padding: 60px; border-radius: var(--radius-xl); border: 1px solid rgba(0,0,0,0.06); box-shadow: var(--shadow-premium); background: #ffffff;">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 60px; align-items: center; margin-bottom: 80px;">
-                    <div>
+                <div class="booking-feature-section">
+                    <div class="booking-feature-intro">
                         <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;">
                             <div style="width: 40px; height: 1px; background: var(--color-emerald);"></div>
                             <span style="font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-emerald);">Modern Workspace</span>
@@ -1071,23 +1112,23 @@
                             Choose between our historic <a href="kafr-abdo-branch.html" style="color: #00674F; text-decoration: underline; font-weight: 500;">Kafr Abdo</a> villa or our <a href="roushdy-branch.html" style="color: #00674F; text-decoration: underline; font-weight: 500;">Roushdy</a> headquarters. Both locations provide fast internet, professional <a href="meeting-rooms.html" style="color: #00674F; text-decoration: underline; font-weight: 500;">meeting rooms</a>, and comfortable <a href="shared-spaces.html" style="color: #00674F; text-decoration: underline; font-weight: 500;">shared workspaces</a>.
                         </p>
                     </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                        <div style="background: rgba(0, 103, 79, 0.03); padding: 32px; border-radius: 20px; text-align: center; border: 1px solid rgba(0, 103, 79, 0.05);">
+                    <div class="booking-feature-grid">
+                        <div class="booking-feature-card">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="2" style="margin-bottom: 16px;"><path d="M5 12.553L9 16.553L19 6.553"/></svg>
                             <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Fiber Internet</h3>
                             <p style="font-size: 0.85rem; color: #6e6e73;">Ultra-fast connectivity</p>
                         </div>
-                        <div style="background: rgba(0, 103, 79, 0.03); padding: 32px; border-radius: 20px; text-align: center; border: 1px solid rgba(0, 103, 79, 0.05); margin-top: 20px;">
+                        <div class="booking-feature-card staggered">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="2" style="margin-bottom: 16px;"><path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"/><path d="M12 6V12L16 14"/></svg>
                             <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px;">24/7 Access</h3>
                             <p style="font-size: 0.85rem; color: #6e6e73;">Work on your own schedule</p>
                         </div>
-                        <div style="background: rgba(0, 103, 79, 0.03); padding: 32px; border-radius: 20px; text-align: center; border: 1px solid rgba(0, 103, 79, 0.05);">
+                        <div class="booking-feature-card">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="2" style="margin-bottom: 16px;"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
                             <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Community</h3>
                             <p style="font-size: 0.85rem; color: #6e6e73;">Network with professionals</p>
                         </div>
-                        <div style="background: rgba(0, 103, 79, 0.03); padding: 32px; border-radius: 20px; text-align: center; border: 1px solid rgba(0, 103, 79, 0.05); margin-top: 20px;">
+                        <div class="booking-feature-card staggered">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00674F" stroke-width="2" style="margin-bottom: 16px;"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                             <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 8px;">Premium Design</h3>
                             <p style="font-size: 0.85rem; color: #6e6e73;">Modern, minimalist design</p>
