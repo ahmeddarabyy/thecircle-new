@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شراكة العقارات — أجّر عقارك | ذا سيركل الإسكندرية</title>
+    <meta name="description" content="هل تمتلك عقاراً غير مستغل في الإسكندرية؟ انضم لبرنامج الشراكة مع ذا سيركل لتحويله إلى مساحة عمل مشتركة مدارة بالكامل. حقق عائداً شهرياً ثابتاً بدون أي مجهود — نحن نتكفل بكل شيء من التجهيز للتشغيل.">
+    <link rel="preload" href="../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="prefetch" href="../styles.css">
+    <link rel="preload" href="../styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../styles.css"></noscript></noscript>
+    <style>
+        /* ========================
+           Partner Page Styles (RTL Adjusted)
+           ======================== */
+        .partner-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding-top: 80px;
+        }
+
+        @media (min-width: 900px) {
+            .partner-page {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .partner-left {
+            position: relative;
+            min-height: 420px;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        @media (min-width: 900px) {
+            .partner-left {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 80px);
+                min-height: unset;
+            }
+        }
+
+        .partner-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.35;
+        }
+
+        .partner-left-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 56px 48px;
+        }
+
+        .partner-left-copy {
+            color: #fff;
+        }
+
+        .partner-left-eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.05em; /* Reduced for Arabic */
+            margin-bottom: 18px;
+            opacity: 0.6;
+            font-weight: 500;
+            display: block;
+        }
+
+        .partner-left-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 600; /* Arabic fonts usually need a bit more weight here */
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+
+        .partner-left-sub {
+            font-size: 1.05rem;
+            opacity: 0.75;
+            line-height: 1.75;
+            font-weight: 400;
+            max-width: 420px;
+        }
+
+        .partner-benefits {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .partner-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .partner-benefit-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(0, 103, 79, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .partner-benefit-icon svg {
+            color: #4dd6a8;
+        }
+
+        .partner-right {
+            background: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 48px;
+        }
+
+        @media (max-width: 600px) {
+            .partner-right {
+                padding: 48px 24px;
+            }
+            .partner-left-overlay {
+                padding: 40px 24px;
+            }
+        }
+
+        .partner-form-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .partner-form-eyebrow {
+            font-size: 0.85rem;
+            color: #00674F;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .partner-form-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 600;
+            color: var(--color-dark-grey);
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        .partner-form-sub {
+            font-size: 1rem;
+            color: #6e6e73;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-dark-grey);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #e5e5ea;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            color: var(--color-dark-grey);
+            background: #f5f5f7;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: #00674F;
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(0, 103, 79, 0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #aeaeb2;
+        }
+
+        select.form-input {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 18px center; /* RTL adjustment */
+            padding-left: 44px; /* RTL adjustment */
+            padding-right: 20px;
+        }
+
+        .btn-partner-submit {
+            width: 100%;
+            padding: 18px 24px;
+            background: #00674F;
+            color: var(--color-white);
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-partner-submit:hover {
+            background: #005540;
+            transform: translateY(-1px);
+        }
+
+        .btn-partner-submit:active {
+            transform: translateY(0);
+        }
+
+        .required {
+            color: #00674F;
+            margin-right: 2px;
+        }
+
+        .partner-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 103, 79, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .success-icon svg {
+            color: #00674F;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--color-dark-grey);
+            margin-bottom: 14px;
+        }
+
+        .success-body {
+            font-size: 1rem;
+            color: #6e6e73;
+            line-height: 1.65;
+            max-width: 360px;
+            margin: 0 auto 36px;
+        }
+
+        .btn-back-home {
+            display: inline-block;
+            padding: 14px 28px;
+            border: 1px solid #e5e5ea;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-dark-grey);
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-back-home:hover {
+            background: #f5f5f7;
+            border-color: #d1d1d6;
+        }
+
+        .partner-trust {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid #f0f0f2;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .trust-stat {
+            text-align: center;
+        }
+
+        .trust-stat-number {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #00674F;
+            display: block;
+        }
+
+        .trust-stat-label {
+            font-size: 0.75rem;
+            color: #aeaeb2;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+    <link rel="canonical" href="https://circleworkspace.com/ar/partner-with-us.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="شراكة العقارات — أجّر عقارك | ذا سيركل الإسكندرية">
+    <meta property="og:description" content="هل تمتلك عقاراً غير مستغل في الإسكندرية؟ انضم لبرنامج الشراكة مع ذا سيركل لتحويله إلى مساحة عمل مشتركة مدارة بالكامل. حقق عائداً شهرياً ثابتاً بدون أي مجهود.">
+    <meta property="og:url" content="https://circleworkspace.com/ar/partner-with-us.html">
+    <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="ذا سيركل لبيئات العمل">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="شراكة العقارات — أجّر عقارك | ذا سيركل الإسكندرية">
+    <meta name="twitter:description" content="هل تمتلك عقاراً غير مستغل في الإسكندرية؟ انضم لبرنامج الشراكة مع ذا سيركل لتحويله إلى مساحة عمل مشتركة مدارة بالكامل. حقق عائداً شهرياً ثابتاً بدون أي مجهود.">
+    <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta name="twitter:site" content="@circleworkspace">
+    <link rel="alternate" hreflang="ar" href="https://circleworkspace.com/ar/partner-with-us.html">
+    <link rel="alternate" hreflang="en" href="https://circleworkspace.com/partner-with-us.html">
+    <link rel="alternate" hreflang="x-default" href="https://circleworkspace.com/partner-with-us.html">
+
+    <!-- Additional SEO keywords -->
+    <meta name="keywords" content="تأجير عقار الإسكندرية, عائد شهري مصر, إدارة عقارات الإسكندرية, مساحات عمل مشتركة شراكة, دخل من عقار غير مستغل, تأجير فيلا الإسكندرية, عقار تجاري الإسكندرية, شراكة ذا سيركل">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://circleworkspace.com/#organization",
+      "name": "ذا سيركل لبيئات العمل",
+      "url": "https://circleworkspace.com",
+      "logo": "https://circleworkspace.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/thecircleworkspace",
+        "https://www.instagram.com/circleworkspace/",
+        "https://www.linkedin.com/company/circleworkspace",
+        "https://www.tiktok.com/@circleworkspace"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201034708850",
+        "contactType": "خدمة العملاء",
+        "areaServed": "EG",
+        "availableLanguage": ["English", "Arabic"]
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://circleworkspace.com/ar/partner-with-us.html",
+      "url": "https://circleworkspace.com/ar/partner-with-us.html",
+      "name": "شراكة العقارات — أجّر عقارك | ذا سيركل الإسكندرية",
+      "description": "هل تمتلك عقاراً غير مستغل في الإسكندرية؟ انضم لبرنامج الشراكة مع ذا سيركل لتحويله إلى مساحة عمل مشتركة مدارة بالكامل. حقق عائداً شهرياً ثابتاً بدون أي مجهود — نحن نتكفل بكل شيء من التجهيز للتشغيل.",
+      "isPartOf": {
+        "@id": "https://circleworkspace.com/#website"
+      },
+      "about": {
+        "@type": "Service",
+        "name": "برنامج شراكة العقارات",
+        "description": "تقوم ذا سيركل بإدارة العقارات غير المستغلة في الإسكندرية كمساحات عمل مشتركة متميزة، مما يوفر لأصحاب العقارات عائداً شهرياً مضموناً بينما نتولى نحن كل ما يخص التجهيز والتشغيل والإدارة.",
+        "provider": {
+          "@id": "https://circleworkspace.com/#organization"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "الإسكندرية",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "مصر"
+          }
+        },
+        "serviceType": "إدارة العقارات"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "كيف يعمل برنامج شراكة العقارات مع ذا سيركل؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "يقدم أصحاب العقارات عقارهم غير المستغل وتتولى ذا سيركل كل شيء — بدءاً من التجهيزات الداخلية والفرش إلى العمليات اليومية والتسويق وإدارة العملاء. يحصل الملاك على دخل شهري مضمون دون أي تدخل في الإدارة اليومية."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما هي أنواع العقارات التي تقبلها ذا سيركل؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نحن ننظر في الفيلات، الشقق الكبيرة، المساحات التجارية، ووحدات الدور الأرضي في أرقى أحياء الإسكندرية مثل كفر عبده، رشدي، سموحة، جليم، وسان ستيفانو. يفضل أن تكون مساحة العقار أكثر من 100 متر مربع مع إضاءة طبيعية جيدة وسهولة الوصول."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "هل أحتاج إلى الاستثمار في تجهيز العقار؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لا. تتكفل ذا سيركل بكل مصاريف التصميم الداخلي، الأثاث، البنية التحتية، وإعداد التكنولوجيا. نحن نحول عقارك إلى مساحة عمل متميزة على نفقتنا الخاصة، وأنت ببساطة تجمع العائد الشهري."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ما هي المناطق في الإسكندرية التي تتوسعون فيها؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نحن نتوسع بنشاط في جميع أحياء الإسكندرية الراقية — بما في ذلك كفر عبده، رشدي، سموحة، سبورتنج، جليم، سان ستيفانو، لوران، وستانلي. نقوم بتقييم كل عقار على حدة بناءً على الموقع، سهولة الوصول، وإمكانيات السوق."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "الرئيسية",
+          "item": "https://circleworkspace.com/ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "شراكة العقارات",
+          "item": "https://circleworkspace.com/ar/partner-with-us.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://circleworkspace.com/#website",
+      "url": "https://circleworkspace.com",
+      "name": "ذا سيركل لبيئات العمل",
+      "publisher": {
+        "@id": "https://circleworkspace.com/#organization"
+      }
+    }
+  ]
+}
+</script>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="../assets/logo.png" alt="شعار ذا سيركل" width="120" height="120">
+            </a>
+            <div class="nav-links">
+                <a href="about.html">عن سيركل</a>
+                <a href="locations.html">فروعنا</a>
+                <a href="services.html">خدماتنا</a>
+                <a href="gallery.html">المعرض</a>
+                <a href="insights.html">المدونة</a>
+                <a href="partner-with-us.html">شاركنا عقارك</a>
+            </div>
+            <div class="nav-actions" class="desktop-only">
+                <a href="../" class="lang-toggle" style="margin-left: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">English</a> <a href="book-a-space.html" class="btn btn-nav-cta">إحجز مساحتك</a>
+            </div>
+        
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="mobile-nav-links">
+            <a href="about.html">عن سيركل</a>
+            <a href="locations.html">فروعنا</a>
+            <a href="services.html">خدماتنا</a>
+            <a href="gallery.html">المعرض</a>
+            <a href="insights.html">المدونة</a>
+            <a href="partner-with-us.html">شاركنا عقارك</a>
+            <div style="margin-top: 24px;"></div>
+            <a href="../" style="color: #00674F;">English</a>
+            <a href="book-a-space.html" class="btn btn-primary" style="font-size: 1rem; padding: 12px 32px; margin-top: 16px;">إحجز مساحتك</a>
+        </div>
+    </div>
+
+    <main class="partner-page">
+        <!-- Left atmospheric panel -->
+        <div class="partner-left">
+            <img fetchpriority="high" decoding="async" width="800" height="1200" src="../assets/thecircle-kafrabdo-branch.webp" alt="واجهة فيلا مساحة العمل المشتركة ذا سيركل في كفر عبده الإسكندرية">
+            <div class="partner-left-overlay">
+                <div class="partner-left-copy">
+                    <span class="partner-left-eyebrow">برنامج شراكة العقارات</span>
+                    <h2 class="partner-left-title">حوّل عقارك غير المستغل<br>إلى <em style="color: rgba(255,255,255,0.7); font-style: normal;">عائد شهري ثابت</em>.</h2>
+                    <p class="partner-left-sub">نحن ندير كل شيء — من التجهيز والفرش إلى العمليات اليومية وإدارة العملاء. أنت فقط تجمع العوائد.</p>
+
+                    <div class="partner-benefits">
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                            دخل شهري مضمون
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </div>
+                            صفر تكاليف تجهيز من جانبك
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            إدارة عقارية كاملة متضمنة
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            مدعوم بعلامة تجارية موثوقة في الإسكندرية
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="partner-right">
+            <div class="partner-form-container">
+
+                <!-- Form state -->
+                <div id="formState">
+                    <span class="partner-form-eyebrow">شاركنا</span>
+                    <h1 class="partner-form-title">اعرض عقارك</h1>
+                    <p class="partner-form-sub">هل تمتلك فيلا، شقة، أو مساحة تجارية غير مستغلة في الإسكندرية؟ أخبرنا عنها وسيتواصل معك فريق التوسع لدينا خلال 48 ساعة.</p>
+
+                    <form id="partnerForm" novalidate>
+                        <input type="hidden" name="_subject" value="New Property Partnership Inquiry (AR) — The Circle">
+                        <input type="hidden" name="_replyto" id="replyToField" value="">
+
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">الاسم بالكامل <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="fullName" name="name" placeholder="مثال: أحمد حسن" required autocomplete="name">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="phoneNumber">رقم الهاتف <span class="required">*</span></label>
+                                <input class="form-input" type="tel" id="phoneNumber" name="phone" placeholder="+20 10 0000 0000" required autocomplete="tel" dir="ltr" style="text-align: right;">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="emailAddress">البريد الإلكتروني <span class="required">*</span></label>
+                                <input class="form-input" type="email" id="emailAddress" name="email" placeholder="you@email.com" required autocomplete="email" dir="ltr" style="text-align: right;">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="propertyType">نوع العقار <span class="required">*</span></label>
+                                <select class="form-input" id="propertyType" name="property_type" required>
+                                    <option value="" disabled selected>اختر النوع</option>
+                                    <option value="Villa">فيلا</option>
+                                    <option value="Apartment">شقة</option>
+                                    <option value="Commercial Space">مساحة تجارية</option>
+                                    <option value="Ground Floor Unit">وحدة دور أرضي</option>
+                                    <option value="Other">أخرى</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="propertySize">المساحة التقريبية (متر مربع)</label>
+                                <input class="form-input" type="text" id="propertySize" name="property_size" placeholder="مثال: 200">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="propertyLocation">موقع العقار <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="propertyLocation" name="property_location" placeholder="مثال: كفر عبده، رشدي، سموحة..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="additionalNotes">ملاحظات إضافية</label>
+                            <textarea class="form-input form-textarea" id="additionalNotes" name="notes" placeholder="أخبرنا المزيد عن العقار — عدد الأدوار، الحالة الحالية، توافر أماكن لانتظار السيارات، إلخ."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-partner-submit" id="submitBtn">&larr; إرسال تفاصيل العقار</button>
+                    </form>
+
+                    <!-- Trust badges -->
+                    <div class="partner-trust">
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">2</span>
+                            <span class="trust-stat-label">مواقع</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">+97</span>
+                            <span class="trust-stat-label">مراجعات</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">★4.9</span>
+                            <span class="trust-stat-label">تقييم</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">24/7</span>
+                            <span class="trust-stat-label">تشغيل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success state -->
+                <div id="successState" class="partner-success">
+                    <div class="success-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="success-title">تم استلام بيانات العقار.</h2>
+                    <p class="success-body">شكراً لاهتمامك. سيقوم فريق التوسع لدينا بمراجعة تفاصيل عقارك والتواصل معك خلال 48 ساعة لمناقشة الخطوات التالية.</p>
+                    <a href="index.html" class="btn-back-home">العودة للرئيسية &rarr;</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = (
+            window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1' || 
+            window.location.hostname.startsWith('10.') || 
+            window.location.hostname.startsWith('192.168.') || 
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(window.location.hostname)
+        ) ? `http://${window.location.hostname}:3001/api` : '/api';
+
+        const form = document.getElementById('partnerForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name     = document.getElementById('fullName').value.trim();
+            const phone    = document.getElementById('phoneNumber').value.trim();
+            const email    = document.getElementById('emailAddress').value.trim();
+            const propType = document.getElementById('propertyType').value;
+            const location = document.getElementById('propertyLocation').value.trim();
+
+            let hasError = false;
+            const requiredFields = [
+                { el: document.getElementById('fullName'), val: name },
+                { el: document.getElementById('phoneNumber'), val: phone },
+                { el: document.getElementById('emailAddress'), val: email },
+                { el: document.getElementById('propertyType'), val: propType },
+                { el: document.getElementById('propertyLocation'), val: location }
+            ];
+
+            requiredFields.forEach(({el, val}) => {
+                if (!val) {
+                    hasError = true;
+                    el.style.borderColor = '#ff453a';
+                    el.style.boxShadow = '0 0 0 3px rgba(255,69,58,0.1)';
+                    el.addEventListener('input', function() {
+                        if (this.value.trim()) {
+                            this.style.borderColor = '';
+                            this.style.boxShadow = '';
+                        }
+                    }, { once: true });
+                    el.addEventListener('change', function() {
+                        if (this.value) {
+                            this.style.borderColor = '';
+                            this.style.boxShadow = '';
+                        }
+                    }, { once: true });
+                }
+            });
+
+            if (hasError) return;
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال…';
+
+            try {
+                const payload = {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    property_type: propType,
+                    property_size: document.getElementById('propertySize').value.trim(),
+                    property_location: location,
+                    notes: document.getElementById('additionalNotes').value.trim()
+                };
+
+                const response = await fetch(`${API_BASE}/partner`, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json' 
+                    }
+                });
+
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = '← إرسال تفاصيل العقار';
+                alert('حدث خطأ. يرجى مراسلتنا مباشرة على contact@circleworkspace.com');
+            }
+        });
+
+        function showSuccess() {
+            const formState    = document.getElementById('formState');
+            const successState = document.getElementById('successState');
+
+            formState.style.opacity = '0';
+            formState.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                formState.style.display = 'none';
+                successState.style.display = 'block';
+                successState.style.opacity = '0';
+                successState.style.transition = 'opacity 0.4s ease';
+                requestAnimationFrame(() => { successState.style.opacity = '1'; });
+            }, 300);
+        }
+    </script>
+<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0RBB3J6CW');
+</script>
+</body>
+</html>

@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Partner With Us — List Your Alexandria Property | The Circle Workspace</title>
+    <meta name="description" content="Own an idle property in Alexandria? Partner with The Circle to turn it into a managed coworking space. Earn guaranteed monthly income with zero hassle — we handle everything from fit-out to daily operations.">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="prefetch" href="styles.css">
+    <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript></noscript>
+    <style>
+        /* ========================
+           Partner Page Styles
+           ======================== */
+        .partner-page {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr;
+            padding-top: 80px;
+        }
+
+        @media (min-width: 900px) {
+            .partner-page {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Left: Atmospheric panel */
+        .partner-left {
+            position: relative;
+            min-height: 420px;
+            overflow: hidden;
+            background: #0a0a0a;
+        }
+
+        @media (min-width: 900px) {
+            .partner-left {
+                position: sticky;
+                top: 80px;
+                height: calc(100vh - 80px);
+                min-height: unset;
+            }
+        }
+
+        .partner-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            opacity: 0.35;
+        }
+
+        .partner-left-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.2) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 56px 48px;
+        }
+
+        .partner-left-copy {
+            color: #fff;
+        }
+
+        .partner-left-eyebrow {
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            opacity: 0.6;
+            font-weight: 500;
+            display: block;
+        }
+
+        .partner-left-title {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            letter-spacing: -0.035em;
+            line-height: 1.12;
+            margin-bottom: 20px;
+        }
+
+        .partner-left-sub {
+            font-size: 1.05rem;
+            opacity: 0.65;
+            line-height: 1.65;
+            font-weight: 400;
+            max-width: 420px;
+        }
+
+        .partner-benefits {
+            margin-top: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .partner-benefit {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .partner-benefit-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(0, 103, 79, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .partner-benefit-icon svg {
+            color: #4dd6a8;
+        }
+
+        /* Right: Form panel */
+        .partner-right {
+            background: var(--color-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 48px;
+        }
+
+        @media (max-width: 600px) {
+            .partner-right {
+                padding: 48px 24px;
+            }
+            .partner-left-overlay {
+                padding: 40px 24px;
+            }
+        }
+
+        .partner-form-container {
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .partner-form-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #00674F;
+            font-weight: 500;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .partner-form-title {
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            color: var(--color-dark-grey);
+            margin-bottom: 10px;
+            line-height: 1.15;
+        }
+
+        .partner-form-sub {
+            font-size: 1rem;
+            color: #6e6e73;
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 500px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            color: var(--color-dark-grey);
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 1px solid #e5e5ea;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            color: var(--color-dark-grey);
+            background: #f5f5f7;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+            -webkit-appearance: none;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            border-color: #00674F;
+            background: var(--color-white);
+            box-shadow: 0 0 0 3px rgba(0, 103, 79, 0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #aeaeb2;
+        }
+
+        select.form-input {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2386868b' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            padding-right: 44px;
+        }
+
+        .btn-partner-submit {
+            width: 100%;
+            padding: 18px 24px;
+            background: #00674F;
+            color: var(--color-white);
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-family: var(--font-family);
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn-partner-submit:hover {
+            background: #005540;
+            transform: translateY(-1px);
+        }
+
+        .btn-partner-submit:active {
+            transform: translateY(0);
+        }
+
+        .required {
+            color: #00674F;
+            margin-left: 2px;
+        }
+
+        /* Success State */
+        .partner-success {
+            display: none;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(0, 103, 79, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 28px;
+        }
+
+        .success-icon svg {
+            color: #00674F;
+        }
+
+        .success-title {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: -0.03em;
+            color: var(--color-dark-grey);
+            margin-bottom: 14px;
+        }
+
+        .success-body {
+            font-size: 1rem;
+            color: #6e6e73;
+            line-height: 1.65;
+            max-width: 360px;
+            margin: 0 auto 36px;
+        }
+
+        .btn-back-home {
+            display: inline-block;
+            padding: 14px 28px;
+            border: 1px solid #e5e5ea;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--color-dark-grey);
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-back-home:hover {
+            background: #f5f5f7;
+            border-color: #d1d1d6;
+        }
+
+        /* Trust badges */
+        .partner-trust {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid #f0f0f2;
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .trust-stat {
+            text-align: center;
+        }
+
+        .trust-stat-number {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #00674F;
+            display: block;
+            letter-spacing: -0.02em;
+        }
+
+        .trust-stat-label {
+            font-size: 0.75rem;
+            color: #aeaeb2;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+    <link rel="canonical" href="https://circleworkspace.com/partner-with-us.html">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Partner With Us — List Your Property | The Circle Alexandria">
+    <meta property="og:description" content="Own an idle property in Alexandria? Partner with The Circle to turn it into a fully managed coworking space. Earn guaranteed monthly income with zero hassle.">
+    <meta property="og:url" content="https://circleworkspace.com/partner-with-us.html">
+    <meta property="og:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="The Circle Workspace">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Partner With Us — List Your Property | The Circle Alexandria">
+    <meta name="twitter:description" content="Own an idle property in Alexandria? Partner with The Circle — we manage everything, you collect guaranteed monthly returns.">
+    <meta name="twitter:image" content="https://circleworkspace.com/assets/thecircle-kafrabdo-branch.webp">
+    <meta name="twitter:site" content="@circleworkspace">
+    <link rel="alternate" hreflang="en" href="https://circleworkspace.com/partner-with-us.html">
+    <link rel="alternate" hreflang="ar" href="https://circleworkspace.com/ar/partner-with-us.html">
+    <link rel="alternate" hreflang="x-default" href="https://circleworkspace.com/partner-with-us.html">
+
+    <!-- Additional SEO keywords -->
+    <meta name="keywords" content="partner with us Alexandria, rent property Alexandria, property management Alexandria, coworking space partnership, idle property income, list property Alexandria, The Circle partnership Egypt, workspace management Alexandria">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://circleworkspace.com/#organization",
+      "name": "The Circle Workspace",
+      "url": "https://circleworkspace.com",
+      "logo": "https://circleworkspace.com/assets/logo.png",
+      "sameAs": [
+        "https://www.facebook.com/thecircleworkspace",
+        "https://www.instagram.com/circleworkspace/",
+        "https://www.linkedin.com/company/circleworkspace",
+        "https://www.tiktok.com/@circleworkspace"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201034708850",
+        "contactType": "customer service",
+        "areaServed": "EG",
+        "availableLanguage": ["English", "Arabic"]
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://circleworkspace.com/partner-with-us.html",
+      "url": "https://circleworkspace.com/partner-with-us.html",
+      "name": "Partner With Us — List Your Alexandria Property | The Circle Workspace",
+      "description": "Own an idle property in Alexandria? Partner with The Circle to turn it into a fully managed coworking space. Earn guaranteed monthly income with zero hassle — we handle everything from fit-out to daily operations.",
+      "isPartOf": {
+        "@id": "https://circleworkspace.com/#website"
+      },
+      "about": {
+        "@type": "Service",
+        "name": "Property Partnership Program",
+        "description": "The Circle manages idle properties in Alexandria as premium coworking spaces, providing property owners with guaranteed passive income while handling all fit-out, operations, and management.",
+        "provider": {
+          "@id": "https://circleworkspace.com/#organization"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Alexandria",
+          "containedInPlace": {
+            "@type": "Country",
+            "name": "Egypt"
+          }
+        },
+        "serviceType": "Property Management"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does The Circle property partnership work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Property owners provide their idle property and The Circle handles everything — from interior fit-out and furnishing to daily operations, marketing, and client management. Owners receive guaranteed monthly income without any involvement in day-to-day management."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What types of properties does The Circle accept?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We consider villas, large apartments, commercial spaces, and ground-floor units in prime Alexandria neighborhoods including Kafr Abdo, Roushdy, Smouha, Gleem, and San Stefano. Properties should ideally be 100+ sqm with good natural light and accessibility."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to invest in the fit-out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The Circle covers all interior design, furniture, infrastructure, and technology setup. We transform your property into a premium workspace at our own expense, and you simply collect passive income."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas in Alexandria are you expanding to?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We are actively expanding across Alexandria's prime districts — including Kafr Abdo, Roushdy, Smouha, Sporting, Gleem, San Stefano, Louran, and Stanley. We evaluate each property individually for location, accessibility, and market potential."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://circleworkspace.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Partner With Us",
+          "item": "https://circleworkspace.com/partner-with-us.html"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://circleworkspace.com/#website",
+      "url": "https://circleworkspace.com",
+      "name": "The Circle Workspace",
+      "publisher": {
+        "@id": "https://circleworkspace.com/#organization"
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="assets/logo.png" alt="The Circle Logo" width="120" height="120">
+            </a>
+            <div class="nav-links">
+                <a href="about.html">About Us</a>
+                <a href="locations.html">Locations</a>
+                <a href="services.html">Services</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="insights.html">Insights</a>
+                <a href="partner-with-us.html">Partner With Us</a>
+            </div>
+            <div class="nav-actions" class="desktop-only">
+                <a href="ar/" class="lang-toggle" style="margin-right: 20px; font-weight: 500; color: #00674F; text-decoration: none; font-family: system-ui, -apple-system, sans-serif;">عربي</a> <a href="book-a-space.html" class="btn btn-nav-cta">Book a space</a>
+            </div>
+        
+            <button class="mobile-menu-btn" aria-label="Toggle Menu" onclick="document.getElementById('mobile-nav').classList.toggle('active'); this.classList.toggle('active');">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-nav" class="mobile-nav-overlay">
+        <div class="mobile-nav-links">
+            <a href="about.html">About Us</a>
+            <a href="locations.html">Locations</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="insights.html">Insights</a>
+            <a href="partner-with-us.html">Partner With Us</a>
+            <div style="margin-top: 24px;"></div>
+            <a href="ar/" style="color: #00674F;">عربي</a>
+            <a href="book-a-space.html" class="btn btn-primary" style="font-size: 1rem; padding: 12px 32px; margin-top: 16px;">Book a space</a>
+        </div>
+    </div>
+
+    <main class="partner-page">
+        <!-- Left atmospheric panel -->
+        <div class="partner-left">
+            <img fetchpriority="high" decoding="async" width="800" height="1200" src="assets/thecircle-kafrabdo-branch.webp" alt="The Circle coworking space villa exterior in Kafr Abdo Alexandria">
+            <div class="partner-left-overlay">
+                <div class="partner-left-copy">
+                    <span class="partner-left-eyebrow">Property Partnership Program</span>
+                    <h2 class="partner-left-title">Turn your idle property<br>into <em style="color: rgba(255,255,255,0.55);">passive income</em>.</h2>
+                    <p class="partner-left-sub">We manage everything — from fit-out and furnishing to daily operations and client management. You just collect the returns.</p>
+
+                    <div class="partner-benefits">
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            </div>
+                            Guaranteed monthly income
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </div>
+                            Zero fit-out costs on your side
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            Full property management included
+                        </div>
+                        <div class="partner-benefit">
+                            <div class="partner-benefit-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            </div>
+                            Backed by a trusted Alexandria brand
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right form panel -->
+        <div class="partner-right">
+            <div class="partner-form-container">
+
+                <!-- Form state -->
+                <div id="formState">
+                    <span class="partner-form-eyebrow">Partner with us</span>
+                    <h1 class="partner-form-title">List Your Property</h1>
+                    <p class="partner-form-sub">Own an idle villa, apartment, or commercial space in Alexandria? Tell us about it and our expansion team will get back to you within 48 hours.</p>
+
+                    <form id="partnerForm" novalidate>
+                        <!-- Formspree hidden config -->
+                        <input type="hidden" name="_subject" value="New Property Partnership Inquiry — The Circle">
+                        <input type="hidden" name="_replyto" id="replyToField" value="">
+
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="fullName" name="name" placeholder="e.g. Ahmed Hassan" required autocomplete="name">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="phoneNumber">Phone Number <span class="required">*</span></label>
+                                <input class="form-input" type="tel" id="phoneNumber" name="phone" placeholder="+20 10 0000 0000" required autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="emailAddress">Email <span class="required">*</span></label>
+                                <input class="form-input" type="email" id="emailAddress" name="email" placeholder="you@email.com" required autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="propertyType">Property Type <span class="required">*</span></label>
+                                <select class="form-input" id="propertyType" name="property_type" required>
+                                    <option value="" disabled selected>Select type</option>
+                                    <option value="Villa">Villa</option>
+                                    <option value="Apartment">Apartment</option>
+                                    <option value="Commercial Space">Commercial Space</option>
+                                    <option value="Ground Floor Unit">Ground Floor Unit</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="propertySize">Approx. Size (sqm)</label>
+                                <input class="form-input" type="text" id="propertySize" name="property_size" placeholder="e.g. 200">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="propertyLocation">Property Location <span class="required">*</span></label>
+                            <input class="form-input" type="text" id="propertyLocation" name="property_location" placeholder="e.g. Kafr Abdo, Roushdy, Smouha..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="additionalNotes">Additional Notes</label>
+                            <textarea class="form-input form-textarea" id="additionalNotes" name="notes" placeholder="Tell us more about the property — floor count, current condition, parking availability, etc."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-partner-submit" id="submitBtn">Submit Your Property &rarr;</button>
+                    </form>
+
+                    <!-- Trust badges -->
+                    <div class="partner-trust">
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">2</span>
+                            <span class="trust-stat-label">Locations</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">97+</span>
+                            <span class="trust-stat-label">Reviews</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">4.9★</span>
+                            <span class="trust-stat-label">Rating</span>
+                        </div>
+                        <div class="trust-stat">
+                            <span class="trust-stat-number">24/7</span>
+                            <span class="trust-stat-label">Operations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success state -->
+                <div id="successState" class="partner-success">
+                    <div class="success-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <h2 class="success-title">Property received.</h2>
+                    <p class="success-body">Thank you for your interest. Our expansion team will review your property details and contact you within 48 hours to discuss the next steps.</p>
+                    <a href="/" class="btn-back-home">&larr; Back to home</a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const API_BASE = (
+            window.location.hostname === 'localhost' || 
+            window.location.hostname === '127.0.0.1' || 
+            window.location.hostname.startsWith('10.') || 
+            window.location.hostname.startsWith('192.168.') || 
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(window.location.hostname)
+        ) ? `http://${window.location.hostname}:3001/api` : '/api';
+
+        const form = document.getElementById('partnerForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name     = document.getElementById('fullName').value.trim();
+            const phone    = document.getElementById('phoneNumber').value.trim();
+            const email    = document.getElementById('emailAddress').value.trim();
+            const propType = document.getElementById('propertyType').value;
+            const location = document.getElementById('propertyLocation').value.trim();
+
+            // Validate required fields
+            let hasError = false;
+            const requiredFields = [
+                { el: document.getElementById('fullName'), val: name },
+                { el: document.getElementById('phoneNumber'), val: phone },
+                { el: document.getElementById('emailAddress'), val: email },
+                { el: document.getElementById('propertyType'), val: propType },
+                { el: document.getElementById('propertyLocation'), val: location }
+            ];
+
+            requiredFields.forEach(({el, val}) => {
+                if (!val) {
+                    hasError = true;
+                    el.style.borderColor = '#ff453a';
+                    el.style.boxShadow = '0 0 0 3px rgba(255,69,58,0.1)';
+                    el.addEventListener('input', function() {
+                        if (this.value.trim()) {
+                            this.style.borderColor = '';
+                            this.style.boxShadow = '';
+                        }
+                    }, { once: true });
+                    el.addEventListener('change', function() {
+                        if (this.value) {
+                            this.style.borderColor = '';
+                            this.style.boxShadow = '';
+                        }
+                    }, { once: true });
+                }
+            });
+
+            if (hasError) return;
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+
+            try {
+                const payload = {
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    property_type: propType,
+                    property_size: document.getElementById('propertySize').value.trim(),
+                    property_location: location,
+                    notes: document.getElementById('additionalNotes').value.trim()
+                };
+
+                const response = await fetch(`${API_BASE}/partner`, {
+                    method: 'POST',
+                    body: JSON.stringify(payload),
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json' 
+                    }
+                });
+
+                if (response.ok) {
+                    showSuccess();
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Your Property →';
+                alert('Something went wrong. Please email us directly at contact@circleworkspace.com');
+            }
+        });
+
+        function showSuccess() {
+            const formState    = document.getElementById('formState');
+            const successState = document.getElementById('successState');
+
+            formState.style.opacity = '0';
+            formState.style.transition = 'opacity 0.3s ease';
+
+            setTimeout(() => {
+                formState.style.display = 'none';
+                successState.style.display = 'block';
+                successState.style.opacity = '0';
+                successState.style.transition = 'opacity 0.4s ease';
+                requestAnimationFrame(() => { successState.style.opacity = '1'; });
+            }, 300);
+        }
+    </script>
+<script async defer src="https://www.googletagmanager.com/gtag/js?id=G-Y0RBB3J6CW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-Y0RBB3J6CW');
+</script>
+</body>
+</html>

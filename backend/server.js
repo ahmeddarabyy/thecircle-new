@@ -250,6 +250,38 @@ async function sendSupportTeamNotification(payload) {
   }
 }
 
+async function sendPartnerNotification(payload) {
+  const mailOptions = {
+    from: process.env.SMTP_FROM,
+    to: 'contact@circleworkspace.com',
+    subject: `🚨 NEW PROPERTY PARTNERSHIP: ${payload.name} - ${payload.property_location}`,
+    html: `
+      <div style="font-family: -apple-system, sans-serif; padding: 30px; border: 1px solid #F2F2F7; border-radius: 20px; max-width: 500px;">
+        <h2 style="color: #00674F; margin-top: 0;">New Property Partnership Request</h2>
+        <p style="color: #86868b;">A new property partnership request has been received from the website.</p>
+        <div style="background: #F5F5F7; padding: 20px; border-radius: 12px; margin: 20px 0;">
+          <p style="margin: 5px 0;"><strong>Name:</strong> ${payload.name}</p>
+          <p style="margin: 5px 0;"><strong>Phone:</strong> ${payload.phone}</p>
+          <p style="margin: 5px 0;"><strong>Email:</strong> ${payload.email}</p>
+          <p style="margin: 5px 0;"><strong>Property Type:</strong> ${payload.property_type}</p>
+          <p style="margin: 5px 0;"><strong>Approx. Size:</strong> ${payload.property_size || 'N/A'} sqm</p>
+          <p style="margin: 5px 0;"><strong>Location:</strong> ${payload.property_location}</p>
+          <p style="margin: 20px 0 5px 0;"><strong>Additional Notes:</strong></p>
+          <p style="margin: 0; font-style: italic;">"${payload.notes || 'None'}"</p>
+        </div>
+      </div>
+    `
+  };
+  try { 
+    const info = await transporter.sendMail(mailOptions); 
+    console.log('Partner notification sent:', info.messageId);
+    return info;
+  } catch (e) { 
+    console.error('Partner email failed:', e); 
+    throw e;
+  }
+}
+
 // ─── Middleware ──────────────────────────────────────────────────────────────
 app.get('/api', (req, res) => res.send('The Circle API is Running'));
 app.get('/api/health', (req, res) => res.json({ 
@@ -352,6 +384,15 @@ app.post('/api/support', async (req, res) => {
     }
     
     res.json({ success: true, request: result[0] });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/partner', async (req, res) => {
+  try {
+    await sendPartnerNotification(req.body);
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
