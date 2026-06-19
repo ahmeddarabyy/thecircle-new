@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "The Circle Web Application",
   "main": "api/index.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "install-backend": "npm install --prefix backend"
+  },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",

@@ -4,7 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
-require('dotenv').config();
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -251,7 +251,7 @@ async function sendSupportTeamNotification(payload) {
 }
 
 // ─── Middleware ──────────────────────────────────────────────────────────────
-app.get('/', (req, res) => res.send('The Circle API is Running'));
+app.get('/api', (req, res) => res.send('The Circle API is Running'));
 app.get('/api/health', (req, res) => res.json({ 
     status: 'ok', 
     supabase: { url: !!SUPABASE_URL, key: !!SUPABASE_KEY },
@@ -265,6 +265,26 @@ app.get('/api/health', (req, res) => res.json({
 
 app.use(cors({ origin: '*' }));
 app.use(express.json());
+
+// Security middleware to prevent serving backend/private files statically
+app.use((req, res, next) => {
+  const urlPath = req.path.toLowerCase();
+  if (
+    urlPath.startsWith('/backend') ||
+    urlPath.startsWith('/.git') ||
+    urlPath.includes('package.json') ||
+    urlPath.includes('vercel.json') ||
+    urlPath.endsWith('.py') ||
+    urlPath.endsWith('.db') ||
+    urlPath.endsWith('.env')
+  ) {
+    return res.status(403).send('Access Denied');
+  }
+  next();
+});
+
+// Serve frontend static files from the root directory
+app.use(express.static(path.join(__dirname, '..')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Auth middleware
