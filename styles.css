@@ -720,14 +720,19 @@ h1, h2, h3, h4 {
 }
 
 .customer-logo {
-    max-height: 45px;
-    max-width: 160px;
+    height: 50px;
+    width: auto;
+    max-width: 180px;
     object-fit: contain;
     transition: transform 0.3s ease;
 }
 
 .customer-logo:hover {
     transform: scale(1.05);
+}
+
+.customer-logo--lg {
+    height: 90px;
 }
 
 blockquote {
