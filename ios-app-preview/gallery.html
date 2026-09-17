@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Circle — iOS app preview · all screens</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body class="gallery">
+    <header class="gallery-head">
+        <img class="mark" src="../assets/logo.png" alt="The Circle">
+        <h1>The Circle — iOS app preview</h1>
+        <p>What circleworkspace.com looks like rebuilt as a native iPhone app. Every rate, branch
+            address and opening hour below is taken from the existing site and API.</p>
+    </header>
+
+    <main class="gallery-grid" id="grid"></main>
+
+    <script src="screens.js"></script>
+    <script>
+        const order = ['home', 'spaces', 'detail', 'book1', 'book2', 'book3', 'confirm', 'bookings', 'profile', 'homeAr', 'homeDark'];
+        const params = new URLSearchParams(location.search);
+        const only = params.get('screens');
+        const list = only ? only.split(',') : order;
+
+        // ?bare=1 drops the page chrome so a screenshot tool can capture the devices alone.
+        const bare = params.get('bare') === '1';
+        if (bare) {
+            document.body.style.padding = '28px 0';
+            document.querySelector('.gallery-head').remove();
+        }
+
+        document.getElementById('grid').innerHTML = list.map(id => {
+            const s = SCREENS[id];
+            return `<figure class="gallery-item">
+        <div class="device"><div class="island"></div><div class="viewport">${s.render()}</div></div>
+        ${bare ? '' : `<figcaption class="cap"><div class="n">${s.name}</div><div class="d">${s.desc}</div></figcaption>`}
+      </figure>`;
+        }).join('');
+    </script>
+</body>
+
+</html>

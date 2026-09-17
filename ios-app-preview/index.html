@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Circle — iOS app preview</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body class="proto">
+    <div class="proto-copy">
+        <img class="mark" src="../assets/logocircletransparentwhite.png" alt="The Circle">
+        <h1>The Circle, as an iOS app.</h1>
+        <p>A clickable preview of what circleworkspace.com would look like rebuilt as a native
+            iPhone app. Tap the tab bar, walk through a real booking, or switch it to Arabic.</p>
+        <ul>
+            <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 12.6 9.5 17.5 19.5 6.8" />
+                </svg><span>Real rates, branches and opening hours pulled from the site.</span></li>
+            <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 12.6 9.5 17.5 19.5 6.8" />
+                </svg><span>The four-step booking flow, rebuilt with native patterns.</span></li>
+            <li><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4.5 12.6 9.5 17.5 19.5 6.8" />
+                </svg><span>Wallet passes and QR check-in — things a website can't do.</span></li>
+        </ul>
+        <div class="proto-toggles">
+            <button id="toggleDark">Dark mode</button>
+            <button id="toggleAr">العربية</button>
+            <a href="gallery.html" style="text-decoration:none"><button>All screens</button></a>
+        </div>
+    </div>
+
+    <div class="device">
+        <div class="island"></div>
+        <div class="viewport" id="viewport"></div>
+    </div>
+
+    <script src="screens.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
