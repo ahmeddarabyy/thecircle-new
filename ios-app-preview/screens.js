@@ -11,7 +11,8 @@
      - article titles ........... blog-*.html        (<title>)
    ========================================================================== */
 
-const A = '../assets/'; // real photography from the website
+const A = '../assets/'; // original photography from the website
+const P = 'photos/';   // designed campaign shots of the same rooms
 
 /* ── Icons (SF Symbols-alike, 24px stroke) ────────────────────────────── */
 
@@ -171,15 +172,15 @@ function homeScreen({ dark = false, ar = false, branch = 'kafr-abdo' } = {}) {
       </section>
       <div class="carousel">
         <article class="space-card">
-          <img src="${A}private_office_thecircle_SyriaStreet.webp" alt="Private office">
+          <img src="${P}designed-private-office.png" alt="Private office">
           <div class="meta"><div class="t">Private Offices</div><div class="s">Lockable · 2–12 people</div></div>
         </article>
         <article class="space-card">
-          <img src="${A}thecircle_space_kafrabdo1.webp" alt="Shared space">
+          <img src="${P}designed-terrace.png" alt="Shared terrace">
           <div class="meta"><div class="t">Shared Spaces</div><div class="s">EGP 200 day · 100 shift</div></div>
         </article>
         <article class="space-card">
-          <img src="${A}TheCirclePrivateRoomsKafrAbdo.webp" alt="Meeting room">
+          <img src="${P}designed-meeting-room.png" alt="Meeting room">
           <div class="meta"><div class="t">Meeting Rooms</div><div class="s">Hourly, by the slot</div></div>
         </article>
       </div>
@@ -208,7 +209,7 @@ function homeScreen({ dark = false, ar = false, branch = 'kafr-abdo' } = {}) {
         </div>
       </section>
       <div class="insight">
-        <img src="${A}thecircle_space_kafrabdo4.webp" alt="">
+        <img src="${P}designed-dedicated-desk.png" alt="">
         <div>
           <div class="t">Office Space for Rent in Kafr Abdo</div>
           <div class="s">Complete 2026 guide · 6 min read</div>
@@ -266,15 +267,15 @@ function homeScreenAr({ dark = false } = {}) {
       </section>
       <div class="carousel">
         <article class="space-card">
-          <img src="${A}private_office_thecircle_SyriaStreet.webp" alt="">
+          <img src="${P}designed-private-office.png" alt="">
           <div class="meta"><div class="t">مكاتب خاصة</div><div class="s">مغلقة · ٢–١٢ فرد</div></div>
         </article>
         <article class="space-card">
-          <img src="${A}thecircle_space_kafrabdo1.webp" alt="">
+          <img src="${P}designed-terrace.png" alt="">
           <div class="meta"><div class="t">مساحات مشتركة</div><div class="s">٢٠٠ ج.م لليوم</div></div>
         </article>
         <article class="space-card">
-          <img src="${A}TheCirclePrivateRoomsKafrAbdo.webp" alt="">
+          <img src="${P}designed-meeting-room.png" alt="">
           <div class="meta"><div class="t">قاعات اجتماعات</div><div class="s">بالساعة</div></div>
         </article>
       </div>
@@ -305,43 +306,50 @@ const SPACE_LIST = [
         name: 'Private Offices',
         desc: 'Lockable rooms for 2–12, furnished and ready to move into.',
         price: 'Request pricing',
-        img: 'private_office_thecircle_SyriaStreet.webp'
+        img: 'photos/designed-private-office.png',
+        designed: true
     },
     {
         name: 'Private Suites',
         desc: 'Larger corporate suites for whole departments.',
         price: 'Request pricing',
-        img: 'private_suites_thecircle_kafrabdo.webp'
+        img: 'photos/designed-meeting-room.png',
+        designed: true
     },
     {
         name: 'Dedicated Desks',
         desc: 'Your own desk, kept exactly as you left it.',
         price: 'Monthly · request pricing',
-        img: 'dedicated_desk_thecircle_kafrabdo.webp'
+        img: 'photos/designed-dedicated-desk.png',
+        designed: true
     },
     {
         name: 'Shared Spaces',
         desc: 'Hot desks in the open working area.',
         price: 'EGP 200 / day · EGP 100 / shift',
-        img: 'thecircle_syriastreet_sharedspaces.webp'
+        img: 'photos/designed-shared-space.png',
+        designed: true
     },
     {
         name: 'Meeting Rooms',
         desc: 'Book by the hour, 9:00 AM – 11:00 PM.',
         price: 'From EGP 200 / hour',
-        img: 'TheCirclePrivateRoomsKafrAbdo.webp'
+        img: 'photos/designed-meeting-room.png',
+        designed: true
     },
     {
         name: 'Back Offices',
         desc: 'Operations and support teams, staffed and managed.',
         price: 'Request pricing',
-        img: 'thecircle_space_kafrabdo2.webp'
+        img: 'photos/designed-private-office.png',
+        designed: true
     },
     {
         name: 'Virtual Office',
         desc: 'Business address, mail handling and call answering.',
         price: 'Request pricing',
-        img: 'thecircle-kafrabdo-branch.webp'
+        img: 'photos/designed-terrace.png',
+        designed: true
     }
 ];
 
@@ -363,7 +371,7 @@ function spacesScreen() {
       <div class="list" style="padding:2px 0">
         ${SPACE_LIST.map(
             s => `<div class="space-row">
-          <img src="${A}${s.img}" alt="">
+          <img src="${s.img}" alt="">
           <div style="flex:1">
             <div class="t">${s.name}</div>
             <div class="s">${s.desc}</div>
@@ -385,7 +393,7 @@ function detailScreen() {
     <div class="glass-back">${ICON.chevronLeft}</div>
     <div class="body flush">
       <div class="hero">
-        <img src="${A}TheCirclePrivateRoomsKafrAbdo.webp" alt="Meeting room">
+        <img src="${P}designed-meeting-room.png" alt="Meeting room">
         <div class="scrim"></div>
         <div class="caption">
           <h2>Meeting Rooms</h2>
@@ -448,7 +456,7 @@ function bookBranchScreen() {
       <div style="height:18px"></div>
       <button class="choice selected" data-choice="kafr-abdo">
         <span class="check">${ICON.check}</span>
-        <img src="${A}thecircle-kafrabdo-branch.webp" alt="">
+        <img src="${P}designed-terrace.png" alt="">
         <span style="flex:1">
           <span class="t">Kafr Abdo</span>
           <span class="s">Villa 15, Ali Zou El Fekar St<br>Meeting rooms from EGP 250/hr</span>
@@ -456,7 +464,7 @@ function bookBranchScreen() {
       </button>
       <button class="choice" data-choice="roushdy">
         <span class="check">${ICON.check}</span>
-        <img src="${A}TheCircleRoushdy1.webp" alt="">
+        <img src="${P}designed-private-office.png" alt="">
         <span style="flex:1">
           <span class="t">Roushdy</span>
           <span class="s">15 Syria St, 1st Floor<br>Meeting rooms from EGP 200/hr</span>

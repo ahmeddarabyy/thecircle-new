@@ -23,6 +23,8 @@ python3 -m http.server 8080
 | --- | --- |
 | `index.html` | Clickable prototype — tab bar, booking flow, dark mode and Arabic toggles |
 | `gallery.html` | All screens at once. `?screens=home,spaces` picks a subset, `&bare=1` drops the page chrome for screenshots |
+| `photos.html` | Lookbook of the designed campaign photographs |
+| `photos/` | Five restaged photographs of the real Kafr Abdo and Roushdy rooms |
 | `screens.js` | Every screen's markup, shared by both pages |
 | `app.js` | Prototype navigation for `index.html` |
 | `app.css` | The iOS UI kit, using the brand palette from `../styles.css` |
