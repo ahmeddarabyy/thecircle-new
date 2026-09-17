@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Circle — designed photos</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" type="image/png" href="../assets/logo.png">
+    <link rel="stylesheet" href="app.css">
+    <style>
+        .lookbook {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 40px 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .shot {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .shot img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            display: block;
+        }
+
+        .shot .cap {
+            padding: 16px 18px 18px;
+        }
+
+        .shot .n {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        .shot .d {
+            font-size: 13px;
+            color: #6e6e73;
+            margin-top: 4px;
+            line-height: 1.45;
+        }
+
+        .shot.wide {
+            grid-column: 1 / -1;
+        }
+
+        .shot.wide img {
+            aspect-ratio: 16 / 8;
+        }
+    </style>
+</head>
+
+<body class="gallery">
+    <header class="gallery-head">
+        <img class="mark" src="../assets/logo.png" alt="The Circle">
+        <h1>Designed from the real rooms</h1>
+        <p>Campaign-style photographs of Kafr Abdo and Roushdy. Same furniture, floors and light —
+            restaged as the photography an iOS app would actually ship with.</p>
+    </header>
+
+    <section class="lookbook">
+        <figure class="shot wide">
+            <img src="photos/designed-meeting-room.png" alt="Meeting room">
+            <figcaption class="cap">
+                <div class="n">Meeting room · Kafr Abdo</div>
+                <div class="d">The French doors, patterned tiles and oak table from the real room,
+                    shot as a Kinfolk still. This is the space-detail hero in the app.</div>
+            </figcaption>
+        </figure>
+        <figure class="shot">
+            <img src="photos/designed-terrace.png" alt="Terrace">
+            <figcaption class="cap">
+                <div class="n">Terrace · Kafr Abdo</div>
+                <div class="d">The white pergola and rattan chairs, with the bougainvillea the
+                    real terrace is waiting for.</div>
+            </figcaption>
+        </figure>
+        <figure class="shot">
+            <img src="photos/designed-dedicated-desk.png" alt="Dedicated desk">
+            <figcaption class="cap">
+                <div class="n">Dedicated desk · Kafr Abdo</div>
+                <div class="d">The colonial windows and wall-mounted oak desk, without the
+                    plastic wrap on the chair.</div>
+            </figcaption>
+        </figure>
+        <figure class="shot">
+            <img src="photos/designed-private-office.png" alt="Private office">
+            <figcaption class="cap">
+                <div class="n">Private office · Roushdy</div>
+                <div class="d">The L-desk, herringbone parquet and open shutters onto the
+                    street lamp — cleaned up and relit.</div>
+            </figcaption>
+        </figure>
+        <figure class="shot">
+            <img src="photos/designed-shared-space.png" alt="Shared space">
+            <figcaption class="cap">
+                <div class="n">Shared space · Roushdy</div>
+                <div class="d">The facing rows of desks on parquet, with the evening track
+                    lights kept exactly as they are.</div>
+            </figcaption>
+        </figure>
+    </section>
+</body>
+
+</html>
